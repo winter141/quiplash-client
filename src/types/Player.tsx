@@ -2,7 +2,7 @@ type Player = {
     name: string,
     score: number,
     likes: number,
-    imageNum?: number
+    imageNum: number
 }
 
 type PlayerQuestions = {

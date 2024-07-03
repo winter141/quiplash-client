@@ -29,7 +29,7 @@ const Lobby = () => {
 
     useEffect(() => {
         socket.on("user_joined", (data) => {
-            setPlayers(players.concat([{name: data.username, score: 0, likes: 0}]));
+            setPlayers(players.concat([{name: data.username, score: 0, likes: 0, imageNum: data.imageNum}]));
         })
     }, [socket]);
 

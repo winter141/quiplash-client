@@ -1,4 +1,4 @@
-import {Button, Paper} from "@mui/material";
+import {AppBar, Box, Button, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {card} from "../../styling/styles";
 import {io} from "socket.io-client";
@@ -6,22 +6,37 @@ import {PlayerResponse} from "../../types/Player";
 import {UserScenes} from "../../types/Scenes";
 import UserQuestions from "./UserQuestions";
 import UserVote from "./UserVote";
+import MusicOffIcon from "@mui/icons-material/MusicOff";
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import ImageCharacter from "../game/subcomponents/ImageCharacter";
 
 const socket = io("http://localhost:3001").connect();
 
 const UserScreenManager = () => {
     const [questions, setQuestions] = useState<string[]>([]);
+    const [username, setUsername] = useState<string | null>(null);
+    const [roomCode, setRoomCode] = useState<string | null>(null);
+    const [imageNum, setImageNum] = useState<number>(0);
     const [isVIP, setIsVIP] = useState<boolean>(localStorage.getItem("VIP") === "true");
     const [question, setQuestion] = useState("");
     const [responses, setResponses] = useState([]);
     const [currentScene, setCurrentScene] = useState<UserScenes>(UserScenes.INITIAL);
     const [errorFlag, setErrorFlag] = useState(false);
 
-    const username = localStorage.getItem("username");
-    const roomCode = localStorage.getItem("roomCode");
-    if (username === null || roomCode === null) {
-        setErrorFlag(true);
-    }
+    useEffect(() => {
+        const storedUsername = localStorage.getItem("username");
+        const storedRoomCode = localStorage.getItem("roomCode");
+        const storedImageNumString = localStorage.getItem("imageNum");
+
+        if (!storedUsername || !storedRoomCode || !storedImageNumString) {
+            setErrorFlag(true);
+        } else {
+            setUsername(storedUsername);
+            setRoomCode(storedRoomCode);
+            console.log(storedImageNumString);
+            setImageNum(parseInt(storedImageNumString));
+        }
+    }, []); // Runs only once on component mount
 
     useEffect(() => {
         socket.emit("join_specific_room", username);
@@ -91,20 +106,25 @@ const UserScreenManager = () => {
     if (errorFlag) {
         return (
             <Paper elevation={3} style={card}>
-                An Error occurred :(
+                An error occured
             </Paper>
         )
     }
 
-    return (
-        <Paper elevation={3} style={card}>
-            <h1>{username}</h1>
-            {isVIP && currentScene === UserScenes.INITIAL && (
-                <Button variant="contained" onClick={startGame}>Start Game</Button>
-            )}
+    return <React.Fragment>
+        <AppBar position="fixed">
+            <Toolbar>
+                <Typography variant="h6" style={{ flexGrow: 1 }}>
+                    {username}
+                </Typography>
+            </Toolbar>
+        </AppBar>
+        <Box mt={10}>
+            {isVIP && currentScene === UserScenes.INITIAL && <Button variant="contained" onClick={startGame}>Start Game</Button>}
             {showUserScene()}
-        </Paper>
-    );
+        </Box>
+        <ImageCharacter imageNum={imageNum}/>
+    </React.Fragment>;
 }
 
 export default UserScreenManager;

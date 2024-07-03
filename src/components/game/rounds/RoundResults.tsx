@@ -3,7 +3,6 @@ import {ResultsProps} from "../../../types/RoundProps";
 import {Card, CardContent, Paper, Table, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
 import {card} from "../../../styling/styles";
 import {Player} from "../../../types/Player";
-import RoundTimer from "../subcomponents/RoundTimer";
 import ImageCharacter from "../subcomponents/ImageCharacter";
 import '../../../styling/podiumResults.css'
 
@@ -14,22 +13,6 @@ const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime}) => {
             onDone();
         }, 5000);
     }, []);
-
-    const getPlayerRows = () => {
-        const sortedPlayers = players.sort((player1, player2) => player2.score - player1.score);
-        return (
-            sortedPlayers.map((player: Player, index) => (
-                <TableRow>
-                        <TableCell>{index + 1}</TableCell>
-                        {player.imageNum && (
-                            <TableCell><ImageCharacter imageNum={player.imageNum}/></TableCell>
-                        )}
-                        <TableCell>{player.name}</TableCell>
-                        <TableCell>{player.score}</TableCell>
-                </TableRow>
-            ))
-        )
-    }
 
     const getPodium = () => {
         const sortedPlayers = players.sort((player1, player2) => player2.score - player1.score);
