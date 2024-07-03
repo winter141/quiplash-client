@@ -1,4 +1,5 @@
-import {Game, Player, PlayerResponse} from "./Player";
+import {Player} from "./Player";
+import {GameClass} from "./GameClass";
 
 export interface RoundProps {
     players: Player[]
@@ -11,13 +12,13 @@ export interface QuestionsProps extends RoundProps {
 }
 
 export interface AnswerProps extends RoundProps{
-    games: Game[],
+    games: GameClass[],
     votingTime: number,
     maxScore: number,
 }
 
 export interface ThisOrThatProps extends RoundProps {
-    game: Game,
+    game: GameClass,
     votingTime: number
 }
 

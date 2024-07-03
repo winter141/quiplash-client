@@ -7,7 +7,6 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import { GameScenes } from "../../types/Scenes";
 import RoundOne from "./rounds/RoundManager";
 
-
 const GameManager: React.FC = () => {
     const [currentScene, setCurrentScene] = useState<GameScenes>(GameScenes.RULES);
     const audioRef = useRef<HTMLAudioElement>(null);

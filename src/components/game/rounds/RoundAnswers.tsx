@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {AnswerProps} from "../../../types/RoundProps";
 import {ThisOrThat} from "./ThisOrThat";
-import RoundTimer from "../subcomponents/RoundTimer";
-import {io} from "socket.io-client";
 
-const socket = io("http://localhost:3001").connect();
+// const socket = io("http://localhost:3001").connect();
 
 const RoundAnswers: React.FC<AnswerProps> = ({players, onDone, maxScore, votingTime, games}) => {
     const [currentGameIndex, setCurrentGameIndex] = useState(0);

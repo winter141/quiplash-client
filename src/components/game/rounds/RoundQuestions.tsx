@@ -4,14 +4,15 @@ import RoundTimer from "../subcomponents/RoundTimer";
 import {QuestionsProps, RoundProps} from "../../../types/RoundProps";
 import {io} from "socket.io-client";
 import {generateMatchUps, generateRoundOneQuestions} from "../../../gamelogic/questions";
-import {Game, PlayerQuestions, PlayerResponse} from "../../../types/Player";
+import {PlayerQuestions, PlayerResponse} from "../../../types/Player";
 import {card} from "../../../styling/styles";
+import {GameClass} from "../../../types/GameClass";
 
 const socket = io("http://localhost:3001").connect();
 
 const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmount, questionTime}) => {
 
-    const [games, setGames] = useState<Game[]>([]);
+    const [games, setGames] = useState<GameClass[]>([]);
     const username = localStorage.getItem("username");
 
     useEffect(() => {
@@ -21,31 +22,37 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
 
     useEffect(() => {
         const matches = generateMatchUps(players, questionAmount);
-        const playerQuestionsArray: PlayerQuestions[] = generateRoundOneQuestions(matches, players);
+        const [playerQuestionsArray, games]: [PlayerQuestions[], GameClass[]]
+            = generateRoundOneQuestions(matches, players);
+        setGames(games);
         socket.emit("send_round_one_questions", playerQuestionsArray);
-    }, [socket]);
 
-    useEffect(() => {
+
         socket.on("receive_response", (data) => {
             console.log(`received response`);
             console.log(data);
-            const foundGame = games.find(game => game.question === data.question);
-            const playerResponse: PlayerResponse = {username: data.username, response: data.response};
-            if (foundGame) {
-                if (!foundGame.responses.find(response => response.username === username)) {
-                    foundGame.responses.push(playerResponse)
+
+            const updatedGames = games.map(game => {
+                if (game.getQuestion() === data.question) {
+                    const clonedGame = game.cloneGame();
+                    clonedGame.addResponse(data.username, data.response);
+                    return clonedGame;
                 }
-            } else {
-                games.push({ question: data.question, responses: [playerResponse, {username: "temp", response: "temp"}] });
-            }
-            setGames([...games]);
+                return game;
+            });
+            console.log("DSMkfmndsklmfdklsmfs");
+            console.log(updatedGames);
+
+            setGames(updatedGames);
+
         })
+
     }, [socket]);
 
     const handleTimeEnd = () => {
-        localStorage.setItem("games", JSON.stringify(games));
+        localStorage.setItem("games", JSON.stringify(games.map(game => game.getGameJson())));
         console.log("AMOUNT OF GAMES: " + games.length);
-        console.log("games");
+        console.log(games);
         onDone();
     }
 
@@ -62,10 +69,10 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
             </div>
 
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {games.map((game: Game) => (
-                    <ListItem key={game.question}>
-                        {game.question}
-                        {game.responses[0].username}: {game.responses[0].response}
+                {games.map((game: GameClass) => (
+                    <ListItem key={game.getQuestion()}>
+                        {game.getQuestion()}
+                        {game.getPlayerResponses()[0].username}: {game.getPlayerResponses()[0].response}
                     </ListItem>
                 ))}
             </List>

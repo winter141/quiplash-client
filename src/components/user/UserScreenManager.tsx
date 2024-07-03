@@ -56,7 +56,7 @@ const UserScreenManager = () => {
             console.log("Received Vote");
             console.log(data);
             setQuestion(data.game.question);
-            setResponses(data.game.responses.map((r: PlayerResponse) => r.response));
+            setResponses(data.game.playerResponses.map((r: PlayerResponse) => r.response));
             setCurrentScene(UserScenes.VOTING);
         };
 

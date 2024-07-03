@@ -1,8 +1,9 @@
 import {Player, PlayerQuestions} from "../types/Player";
 import questions from '../data/prompts.json';
+import {GameClass} from "../types/GameClass";
 const { ROUND_ONE_PROMPTS } = questions;
 
-const generateMatchUps = (players: Player[], questionAmount: number) => {
+const generateMatchUps = (players: Player[], questionAmount: number): Player[][] => {
     const n = players.length;
     players = shuffleArray(players);
 
@@ -39,7 +40,13 @@ function shuffleArray(array: any[]): any[] {
     return array;
 }
 
-const generateRoundOneQuestions = (matchUps: Player[][], players: Player[]): PlayerQuestions[] => {
+/**
+ * Generate questions to send out to players as well as an Empty games array that can then be added to
+ *
+ * @param matchUps List of Player lists representing the match ups
+ * @param players All Players
+ */
+const generateRoundOneQuestions = (matchUps: Player[][], players: Player[]): [PlayerQuestions[], GameClass[]] => {
     const prompts = shuffleArray(ROUND_ONE_PROMPTS);
     let i = 0;
     let playerQuestions: PlayerQuestions[] = players.map((player: Player) => ({
@@ -47,13 +54,16 @@ const generateRoundOneQuestions = (matchUps: Player[][], players: Player[]): Pla
         questions: []
         }))
 
-    matchUps.forEach((matchUp) => {
-        const question = ROUND_ONE_PROMPTS[i];
+    let games: GameClass[] = [];
+
+    matchUps.forEach((matchUp: Player[]) => {
+        const question = prompts[i];
         playerQuestions = addQuestionToPlayers(playerQuestions, question, matchUp);
+        games.push(new GameClass(question, matchUp.map(player => player.name)));
         i++;
     })
 
-    return playerQuestions;
+    return [playerQuestions, games];
 }
 
 function addQuestionToPlayers(playerQuestions: PlayerQuestions[], question: string, players: Player[]): PlayerQuestions[] {

@@ -18,15 +18,16 @@
     {
       "question": "What's your favorite animal?",
       "responses": [
-        { "username": "Bob", "response": "Cats" },
-        { "username": "Charlie", "response": "Elephants" }
-      ]
+        { "username": "Bob", "response": "Cats", "votes": [] },
+        { "username": "Charlie", "response": "Elephants", "votes": [] }
+      ],
+      "votes": []
     },
     {
       "question": "If you could travel anywhere, where would you go?",
       "responses": [
-        { "username": "Alice", "response": "New Zealand" },
-        { "username": "Bob", "response": "Japan" }
+        { "username": "Alice", "response": "New Zealand", "votes": []},
+        { "username": "Bob", "response": "Japan", "votes": [] }
       ]
     }
   ]

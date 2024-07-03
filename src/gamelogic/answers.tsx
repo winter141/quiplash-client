@@ -1,6 +1,7 @@
-import {Game, Player, PlayerResponse} from "../types/Player";
+import {Player, PlayerResponse} from "../types/Player";
+import {GameClass} from "../types/GameClass";
 
-const getPlayersNotInGame = (game: Game, playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
+const getPlayersNotInGame = (game: GameClass, playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
     // const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);
     // return players.filter(player => (!playersInResponse.includes(player.name)));
 

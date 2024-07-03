@@ -5,23 +5,26 @@ import {card, padding, questionWrapper, votesContainer} from "../../../styling/s
 import {AnimatedChip, AnimatedPaper} from "../../../styling/animations";
 import {io} from "socket.io-client";
 import {getPlayersNotInGame} from "../../../gamelogic/answers";
-import {Game} from "../../../types/Player";
 import RoundTimer from "../subcomponents/RoundTimer";
+import {GameClass} from "../../../types/GameClass";
 
 const socket = io("http://localhost:3001").connect();
 
 const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime }) => {
-    const [gameState, setGameState] = useState(game);
+    const [gameState, setGameState] = useState<GameClass>(game);
     const [isThisResponseShown, setIsThisResponseShown] = useState(false);
     const [isThatResponseShown, setIsThatResponseShown] = useState(false);
     const [isResultsShown, setIsResultsShown] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
 
-    const { question, responses } = game;
+    console.log("GAME: ///");
+    console.log(game);
+
+    const responses = game.getPlayerResponses();
 
     const messages = [
-        question,
+        game.getQuestion(),
         responses[0].response,
         responses[1].response
     ];
@@ -43,17 +46,9 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         })
     }, [socket, receivedUserVotes]);
 
-    const newGameState = (initialGameState: Game, data: any) => {
-        const foundResponse = initialGameState.responses.find(response => response.response === data.response);
-        if (foundResponse) {
-            if (foundResponse.votes) {
-                foundResponse.votes.push(data.voterUsername);
-            } else {
-                foundResponse.votes = [data.voterUsername]
-            }
-            console.log([...receivedUserVotes, data.voterUsername]);
-            setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
-        }
+    const newGameState = (initialGameState: GameClass, data: any) => {
+        initialGameState.addVote(data.voterUsername, data.response);
+        setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
         return initialGameState;
     }
 
@@ -97,7 +92,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     }
 
     const animateVotes = (responseIndex: number) => {
-        const foundVotes = game.responses[responseIndex].votes;
+        const foundVotes = game.getPlayerResponses()[responseIndex].votes;
         if (!foundVotes || foundVotes.length === 0) return null;
         const foundVotesSet = new Set<string>(foundVotes);
         if (!foundVotesSet) return null;
@@ -109,7 +104,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     return (
         <div style={card}>
             <AnimatedPaper elevation={3} style={questionWrapper}>
-                <Typography variant="h5">{question}</Typography>
+                <Typography variant="h5">{game.getQuestion()}</Typography>
             </AnimatedPaper>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
