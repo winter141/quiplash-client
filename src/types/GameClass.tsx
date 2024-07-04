@@ -1,9 +1,10 @@
-import {PlayerQuestions, PlayerResponse} from "./Player";
+import {Player, PlayerResponse, PlayerScoreFromRound} from "./Player";
 
 class GameClass {
     private readonly question: string;
     private readonly playerResponses: PlayerResponse[];
     private readonly DEFAULT_RESPONSE: string = "[NO ANSWER]";
+    private readonly QUIPLASH_BONUS_PERCENT = 0.2;
 
     /**
      * Initialize default Game Object
@@ -70,6 +71,44 @@ class GameClass {
         if (foundPlayerResponse && !foundPlayerResponse.votes.includes(voterUsername)) {
             foundPlayerResponse.votes.push(voterUsername);
         }
+    }
+
+    /**
+     * Calculate scores and add to Players. Returns updated player list and scores for each player for that game.
+     *
+     * @param maxScore Max score for round
+     * @param players Full list of all players
+     */
+    public addScoreToPlayers(maxScore: number, players: Player[]): [Player[] , PlayerScoreFromRound[]] {
+
+        const totalVotes = this.playerResponses
+            .map(playerResponse => playerResponse.votes.length)
+            .reduce((acc, curr) => acc + curr, 0);
+
+        let playerScoresFromRound: PlayerScoreFromRound[] = [];
+
+        for (const playerResponse of this.playerResponses) {
+            const foundPlayer = players.find(player => player.name === playerResponse.username);
+            if (foundPlayer) {
+                let quiplashBonus = 0;
+                const votesForPlayer = playerResponse.votes.length;
+                const scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore);
+
+                if (votesForPlayer > 0 && votesForPlayer === totalVotes) {
+                    quiplashBonus += Math.round(maxScore * this.QUIPLASH_BONUS_PERCENT);
+                }
+
+                foundPlayer.score += scoreFromRound + quiplashBonus;
+                playerScoresFromRound.push({
+                    voterUsernames: playerResponse.votes,
+                    username: foundPlayer.name,
+                    response: playerResponse.response,
+                    scoreFromRound: scoreFromRound,
+                    quiplashBonus: quiplashBonus
+                })
+            }
+        }
+        return [players, playerScoresFromRound];
     }
 
     private findPlayerResponseByUsername(username: string) {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Grid, Typography} from '@mui/material';
+import {Grid, Typography, Badge} from '@mui/material';
 import {ThisOrThatProps} from "../../../types/RoundProps";
 import {card, padding, questionWrapper, votesContainer} from "../../../styling/styles";
 import {AnimatedChip, AnimatedPaper} from "../../../styling/animations";
@@ -7,13 +7,16 @@ import {io} from "socket.io-client";
 import {getPlayersNotInGame} from "../../../gamelogic/answers";
 import RoundTimer from "../subcomponents/RoundTimer";
 import {GameClass} from "../../../types/GameClass";
+import {Player, PlayerScoreFromRound} from "../../../types/Player";
+import {getHexColorFromImageNum} from "../../../gamelogic/characterImages";
 
 const socket = io("http://localhost:3001").connect();
 
-const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime }) => {
+const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime, maxScore }) => {
     const [gameState, setGameState] = useState<GameClass>(game);
     const [isThisResponseShown, setIsThisResponseShown] = useState(false);
     const [isThatResponseShown, setIsThatResponseShown] = useState(false);
+    const [playerScoresFromRound, setPlayerScoresFromRound] = useState<PlayerScoreFromRound[]>([]);
     const [isResultsShown, setIsResultsShown] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
@@ -85,19 +88,25 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     }, []);
 
     const handleTimeEnd = () => {
+        if (isResultsShown) return;
+
+        const [newPlayers, playerScoresFromRound] = game.addScoreToPlayers(maxScore, players);
+        localStorage.setItem("players", JSON.stringify(newPlayers));
+        setPlayerScoresFromRound(playerScoresFromRound);
         setIsResultsShown(true);
         setTimeout(() => {
             onDone();
         }, 5000);
     }
 
-    const animateVotes = (responseIndex: number) => {
-        const foundVotes = game.getPlayerResponses()[responseIndex].votes;
-        if (!foundVotes || foundVotes.length === 0) return null;
-        const foundVotesSet = new Set<string>(foundVotes);
-        if (!foundVotesSet) return null;
+    const animateVotes = (response: string) => {
+        const foundPlayerScoreFromRound = playerScoresFromRound
+            .find(player => player.response === response);
+
+        if (!foundPlayerScoreFromRound) return null;
+
         return (
-            <AnimateVotes usernames={Array.from(foundVotesSet)}/>
+            <AnimateVotes playerScoreFromRound={foundPlayerScoreFromRound} players={players}/>
         );
     }
 
@@ -111,7 +120,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
                     {isThisResponseShown && (
                         <AnimatedPaper elevation={3} style={padding}>
                             <Typography variant="body1">{responses[0].response}</Typography>
-                            {isResultsShown && animateVotes(0)}
+                            {isResultsShown && animateVotes(responses[0].response)}
                         </AnimatedPaper>
                     )}
                 </Grid>
@@ -119,7 +128,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
                     {isThatResponseShown && (
                         <AnimatedPaper elevation={3} style={padding}>
                             <Typography variant="body1">{responses[1].response}</Typography>
-                            {isResultsShown && animateVotes(1)}
+                            {isResultsShown && animateVotes(responses[1].response)}
                         </AnimatedPaper>
                     )}
                 </Grid>
@@ -138,16 +147,48 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 }
 
 interface AnimateVotesProps {
-    usernames: string[];
+    playerScoreFromRound: PlayerScoreFromRound;
+    players: Player[];
 }
 
-const AnimateVotes: React.FC<AnimateVotesProps> = ({ usernames }) => {
+const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, players}) => {
+
+    type ImageNumMap = { [key: string]: number };
+
+    const usernameImageNumMap: ImageNumMap = players.reduce((acc: ImageNumMap, player) => {
+        acc[player.name] = player.imageNum;
+        return acc;
+    }, {});
+
     return (
-        <div style={votesContainer}>
-            {usernames.map((username: string, index: number) => (
-                <AnimatedChip key={index} label={username} size="small" />
-            ))}
-        </div>
+        <React.Fragment>
+            <div style={votesContainer}>
+                {playerScoreFromRound.voterUsernames.map((username: string, index: number) => (
+                        <AnimatedChip key={index}
+                                      label={username}
+                                      size="small"
+                                      sx={{color: getHexColorFromImageNum(usernameImageNumMap[username]),
+                                            fontWeight: "bold"}}
+                        />
+                ))}
+            </div>
+
+            {playerScoreFromRound.scoreFromRound > 0 && (
+                <Typography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</Typography>
+            )}
+            {playerScoreFromRound.quiplashBonus > 0 && (
+                <Typography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.quiplashBonus} QUIPLASH BONUS</Typography>
+            )}
+            <Typography
+                sx={{color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.username]),
+                    fontWeight: "bold",
+                    position: "absolute",
+                    bottom: 3,
+                    right: 10
+            }}>
+                {playerScoreFromRound.username}
+            </Typography>
+        </React.Fragment>
     );
 };
 

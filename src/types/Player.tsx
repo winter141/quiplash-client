@@ -16,4 +16,12 @@ type PlayerResponse = {
     votes: string[] // List of usernames of the votes for this response
 }
 
-export type { Player, PlayerQuestions, PlayerResponse }
+type PlayerScoreFromRound = {
+    voterUsernames: string[],
+    username: string,
+    response: string,
+    scoreFromRound: number,
+    quiplashBonus: number
+}
+
+export type { Player, PlayerQuestions, PlayerResponse, PlayerScoreFromRound }

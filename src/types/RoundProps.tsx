@@ -19,7 +19,8 @@ export interface AnswerProps extends RoundProps{
 
 export interface ThisOrThatProps extends RoundProps {
     game: GameClass,
-    votingTime: number
+    votingTime: number,
+    maxScore: number
 }
 
 export interface ResultsProps extends RoundProps {

@@ -1,9 +1,20 @@
-const getRandomImageNum = () => {
-    return getRandomNumber(2, 10);
+const imageColoursHex = [
+    "FF914D",
+    "00BF63",
+    "FF5757",
+    "A4A4A4",
+    "FFBD59",
+    "545454",
+    "5CE1E6",
+    "FF66C4",
+    "8C52FF"
+]
+
+const getHexColorFromImageNum = (imageNum: number): string => {
+    if (!imageNum || imageNum < 2 || imageNum > 10) {
+        return "black";
+    }
+    return "#" + imageColoursHex[imageNum - 2]
 }
 
-const getRandomNumber = (min: number, max: number): number => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-export { getRandomImageNum }
+export { getHexColorFromImageNum }

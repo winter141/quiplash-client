@@ -11,9 +11,8 @@ import {ThisOrThat} from "./components/game/rounds/ThisOrThat";
 import testingData from './data/testingdata.json';
 import RoundAnswers from "./components/game/rounds/RoundAnswers";
 import Round from './components/game/rounds/RoundManager';
-import UserVote from "./components/user/UserVote";
 import RoundResults from "./components/game/rounds/RoundResults";
-import {convertJsonToGameClasses, GameClass} from "./types/GameClass";
+import {convertJsonToGameClasses} from "./types/GameClass";
 const { PLAYERS, PLAYER_QUESTIONS, GAMES } = testingData;
 
 const baseUrl = '/quiplash-client'
@@ -49,6 +48,7 @@ function App() {
                  onDone={() => {}}
                  players={PLAYERS}
                  votingTime={1}
+                 maxScore={1000}
                 />}/>
 
                 <Route path="/rr" element={<RoundResults

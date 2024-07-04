@@ -21,6 +21,7 @@ const RoundAnswers: React.FC<AnswerProps> = ({players, onDone, maxScore, votingT
                 game={games[currentGameIndex]}
                 players={players}
                 votingTime={votingTime}
+                maxScore={maxScore}
                 onDone={handleGameComplete} />
         </React.Fragment>
     );
