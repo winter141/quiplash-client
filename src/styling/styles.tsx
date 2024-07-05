@@ -13,7 +13,8 @@ const questionWrapper: CSS.Properties ={
 const votesContainer: CSS.Properties = {
     display: "flex",
     flexWrap: "wrap",
-    gap: "8px"
+    gap: "8px",
+    marginBottom: "12px"
 }
 
 const padding: CSS.Properties = {

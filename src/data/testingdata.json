@@ -16,7 +16,7 @@
   ],
   "GAMES": [
     {
-      "question": "What's your favorite animal?",
+      "question": "favorite animal?",
       "responses": [
         { "username": "Bob", "response": "Cats", "votes": [] },
         { "username": "Charlie", "response": "Elephants", "votes": [] }

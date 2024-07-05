@@ -6,9 +6,8 @@ import {PlayerResponse} from "../../types/Player";
 import {UserScenes} from "../../types/Scenes";
 import UserQuestions from "./UserQuestions";
 import UserVote from "./UserVote";
-import MusicOffIcon from "@mui/icons-material/MusicOff";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import ImageCharacter from "../game/subcomponents/ImageCharacter";
+import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 
 const socket = io("http://localhost:3001").connect();
 
@@ -112,9 +111,9 @@ const UserScreenManager = () => {
     }
 
     return <React.Fragment>
-        <AppBar position="fixed">
+        <AppBar position="fixed" sx={{backgroundColor: getHexColorFromImageNum(imageNum)}}>
             <Toolbar>
-                <Typography variant="h6" style={{ flexGrow: 1 }}>
+                <Typography variant="h6" color={getBlackOrWhiteFromImageNum(imageNum)} style={{ flexGrow: 1, }}>
                     {username}
                 </Typography>
             </Toolbar>

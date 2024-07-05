@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import {Grid, Typography, Badge} from '@mui/material';
 import {ThisOrThatProps} from "../../../types/RoundProps";
 import {card, padding, questionWrapper, votesContainer} from "../../../styling/styles";
-import {AnimatedChip, AnimatedPaper} from "../../../styling/animations";
+import {AnimatedPaper} from "../../../styling/animations";
 import {io} from "socket.io-client";
 import {getPlayersNotInGame} from "../../../gamelogic/answers";
 import RoundTimer from "../subcomponents/RoundTimer";
 import {GameClass} from "../../../types/GameClass";
-import {Player, PlayerScoreFromRound} from "../../../types/Player";
-import {getHexColorFromImageNum} from "../../../gamelogic/characterImages";
+import {PlayerScoreFromRound} from "../../../types/Player";
+import AnimateVotes from "../subcomponents/AnimateVotes"
 
 const socket = io("http://localhost:3001").connect();
 
@@ -96,7 +96,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         setIsResultsShown(true);
         setTimeout(() => {
             onDone();
-        }, 5000);
+        }, 6500);
     }
 
     const animateVotes = (response: string) => {
@@ -145,52 +145,5 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         </div>
     )
 }
-
-interface AnimateVotesProps {
-    playerScoreFromRound: PlayerScoreFromRound;
-    players: Player[];
-}
-
-const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, players}) => {
-
-    type ImageNumMap = { [key: string]: number };
-
-    const usernameImageNumMap: ImageNumMap = players.reduce((acc: ImageNumMap, player) => {
-        acc[player.name] = player.imageNum;
-        return acc;
-    }, {});
-
-    return (
-        <React.Fragment>
-            <div style={votesContainer}>
-                {playerScoreFromRound.voterUsernames.map((username: string, index: number) => (
-                        <AnimatedChip key={index}
-                                      label={username}
-                                      size="small"
-                                      sx={{color: getHexColorFromImageNum(usernameImageNumMap[username]),
-                                            fontWeight: "bold"}}
-                        />
-                ))}
-            </div>
-
-            {playerScoreFromRound.scoreFromRound > 0 && (
-                <Typography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</Typography>
-            )}
-            {playerScoreFromRound.quiplashBonus > 0 && (
-                <Typography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.quiplashBonus} QUIPLASH BONUS</Typography>
-            )}
-            <Typography
-                sx={{color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.username]),
-                    fontWeight: "bold",
-                    position: "absolute",
-                    bottom: 3,
-                    right: 10
-            }}>
-                {playerScoreFromRound.username}
-            </Typography>
-        </React.Fragment>
-    );
-};
-
 
 export {ThisOrThat}

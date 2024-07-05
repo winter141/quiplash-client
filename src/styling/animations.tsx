@@ -1,6 +1,6 @@
 import {keyframes} from "@emotion/react";
 import styled from "@emotion/styled";
-import {Chip, Paper} from "@mui/material";
+import {Chip, Paper, Typography} from "@mui/material";
 
 export const fadeIn = keyframes`
   from {
@@ -19,4 +19,8 @@ export const AnimatedPaper = styled(Paper)`
 
 export const AnimatedChip = styled(Chip)`
   animation: ${fadeIn} 0.5s ease-out forwards;
+`;
+
+export const AnimatedTypography = styled(Typography)`
+    animation: ${fadeIn} 0.2s;
 `;
