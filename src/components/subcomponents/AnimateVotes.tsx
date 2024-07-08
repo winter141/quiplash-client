@@ -1,5 +1,5 @@
 import {Player, PlayerScoreFromRound} from "../../types/types/Player";
-import React, {memo, useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {votesContainer} from "../../styling/styles";
 import {AnimatedChip, AnimatedTypography} from "../../styling/animations";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";

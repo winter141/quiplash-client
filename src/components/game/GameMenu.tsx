@@ -1,9 +1,8 @@
-import {Button, Card, List, ListItem, Paper, Stack, TextField} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import {Button, Paper} from "@mui/material";
+import React from "react";
 import {card} from "../../styling/styles";
 import {io} from "socket.io-client";
 import {useNavigate} from "react-router-dom";
-import {generateRoomCode} from "../../gamelogic/roomCode";
 
 // const socket = getSocketConnection();
 

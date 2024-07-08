@@ -66,6 +66,14 @@ const generateRoundOneQuestions = (matchUps: Player[][], players: Player[]): [Pl
     return [playerQuestions, games];
 }
 
+/**
+ * Count all responses (in order to move on to next scene earlier than timer end)
+ * @param games All Games
+ */
+const getAllResponsesCount = (games: GameClass[]) => {
+    return games.reduce((sum, game) => sum + game.getPlayerResponses().length, 0);
+}
+
 function addQuestionToPlayers(playerQuestions: PlayerQuestions[], question: string, players: Player[]): PlayerQuestions[] {
     for (const player of players) {
         playerQuestions.find(item => item.player.name === player.name)?.questions.push(question);
@@ -73,4 +81,4 @@ function addQuestionToPlayers(playerQuestions: PlayerQuestions[], question: stri
     return playerQuestions;
 }
 
-export { generateMatchUps, generateRoundOneQuestions }
+export { generateMatchUps, generateRoundOneQuestions, getAllResponsesCount }

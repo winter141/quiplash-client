@@ -1,5 +1,4 @@
 import React from "react";
-import RoundResults from "../game/rounds/RoundResults";
 import {Avatar} from "@mui/material";
 import {characterImage} from "../../styling/styles";
 

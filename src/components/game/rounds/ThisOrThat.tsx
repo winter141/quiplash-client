@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Grid, Typography} from '@mui/material';
 import {ThisOrThatProps} from "../../../types/props/RoundProps";
 import {card, padding, questionWrapper} from "../../../styling/styles";
@@ -22,6 +22,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     const [isResultsShown, setIsResultsShown] = useState(false);
     const [showTimer, setShowTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
+    const playersVoted = useRef(0);
 
     const responses = game.getPlayerResponses();
 
@@ -35,15 +36,21 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         socket.emit("join_specific_room", localStorage.getItem("roomCode"));
     }, []);
 
-    const newGameState = (initialGameState: GameClass, data: any) => {
+    const addVoteToNewGameState = (initialGameState: GameClass, data: any) => {
+        playersVoted.current++;
         initialGameState.addVote(data.voterUsername, data.response);
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
+
+        if (playersVoted.current >= getPlayersNotInGame(game, responses, players).length) {
+            handleTimeEnd();
+        }
+
         return initialGameState;
     }
 
     useSocketOnHook(socket, "receive_vote", (data) => {
             if (!receivedUserVotes.includes(data.voterUsername)) {
-                setGameState(prevState => newGameState(prevState, data));
+                setGameState(prevState => addVoteToNewGameState(prevState, data));
             }
         },
     );
@@ -66,6 +73,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const handleTimeEnd = () => {
         if (isResultsShown) return;
+        setShowTimer(false);
 
         const [newPlayers, playerScoresFromRound] = game.addScoreToPlayers(maxScore, players);
         localStorage.setItem("players", JSON.stringify(newPlayers));

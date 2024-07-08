@@ -7,7 +7,7 @@ import testingData from '../../../data/testingdata.json';
 import RoundResults from "./RoundResults";
 import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameClass";
 
-const QUESTION_TIME = 8;
+const QUESTION_TIME = 999999999;
 const QUESTION_AMOUNT = 2;
 const MAX_SCORE = 1000;
 const VOTING_TIME = 8;
