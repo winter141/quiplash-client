@@ -1,5 +1,5 @@
-import {Player, PlayerResponse} from "../types/Player";
-import {GameClass} from "../types/GameClass";
+import {Player, PlayerResponse} from "../types/types/Player";
+import {GameClass} from "../types/classes/GameClass";
 
 const getPlayersNotInGame = (game: GameClass, playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
     // const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);

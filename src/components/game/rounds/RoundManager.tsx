@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {RoundProps} from "../../../types/RoundProps";
-import {RoundScenes} from "../../../types/Scenes";
+import React, {useEffect, useState} from 'react';
+import {RoundManagerProps} from "../../../types/props/RoundProps";
+import {RoundScenes} from "../../../types/enums/Scenes";
 import RoundQuestions from "./RoundQuestions";
 import RoundAnswers from "./RoundAnswers";
 import testingData from '../../../data/testingdata.json';
 import RoundResults from "./RoundResults";
-import {convertJsonToGameClasses, GameClass} from "../../../types/GameClass";
-const { PLAYERS, PLAYER_QUESTIONS, GAMES } = testingData;
+import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameClass";
 
 const QUESTION_TIME = 8;
 const QUESTION_AMOUNT = 2;
@@ -14,22 +13,27 @@ const MAX_SCORE = 1000;
 const VOTING_TIME = 8;
 const RESULTS_TIME = 5;
 
-const RoundManager: React.FC<RoundProps> = ({players, onDone}) => {
+const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber}) => {
     const [currentScene, setCurrentScene] = useState<RoundScenes>(RoundScenes.QUESTIONS);
     const [games, setGames] = useState<GameClass[]>([]);
 
+    useEffect(() => {
+        resetRound();
+    }, [roundNumber]);
+
+    const resetRound = () => {
+        setCurrentScene(RoundScenes.QUESTIONS);
+        setGames([]);
+    };
     const handleChangeScene = () => {
         switch (currentScene) {
             case RoundScenes.QUESTIONS:
-                console.log("attempting to switch to games (answers) scene");
                 try {
                     const storedGames: GameClass[] = getGames();
                     setGames(storedGames);
-                    console.log("switching to games (answers) scene");
-                    console.log(getGames());
                     setCurrentScene(RoundScenes.ANSWERS);
                 } catch (e) {
-                    console.log("OH NOOOO: AN ERROR HAPPENED");
+                    console.error("OH NOOOO: AN ERROR HAPPENED");
                     console.error(e);
                 }
                 break;

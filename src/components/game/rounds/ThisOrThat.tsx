@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Grid, Typography, Badge} from '@mui/material';
-import {ThisOrThatProps} from "../../../types/RoundProps";
-import {card, padding, questionWrapper, votesContainer} from "../../../styling/styles";
+import {Grid, Typography} from '@mui/material';
+import {ThisOrThatProps} from "../../../types/props/RoundProps";
+import {card, padding, questionWrapper} from "../../../styling/styles";
 import {AnimatedPaper} from "../../../styling/animations";
-import {io} from "socket.io-client";
 import {getPlayersNotInGame} from "../../../gamelogic/answers";
-import RoundTimer from "../subcomponents/RoundTimer";
-import {GameClass} from "../../../types/GameClass";
-import {PlayerScoreFromRound} from "../../../types/Player";
-import AnimateVotes from "../subcomponents/AnimateVotes"
+import RoundTimer from "../../subcomponents/RoundTimer";
+import {GameClass} from "../../../types/classes/GameClass";
+import {PlayerScoreFromRound} from "../../../types/types/Player";
+import AnimateVotes from "../../subcomponents/AnimateVotes"
+import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
+import {useSpeechSynthesisHook} from "../../../services/speech";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
+const COMPONENT_WAIT = 6500; // How long to wait before component is "done"
 
 const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime, maxScore }) => {
     const [gameState, setGameState] = useState<GameClass>(game);
@@ -21,9 +23,6 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     const [showTimer, setShowTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
 
-    console.log("GAME: ///");
-    console.log(game);
-
     const responses = game.getPlayerResponses();
 
     const messages = [
@@ -32,22 +31,9 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         responses[1].response
     ];
 
-    console.log(gameState);
-    console.log(players);
-
     useEffect(() => {
         socket.emit("join_specific_room", localStorage.getItem("roomCode"));
     }, []);
-
-    useEffect(() => {
-        socket.on("receive_vote", (data) => {
-            console.log("GOT");
-            console.log(receivedUserVotes);
-            if (!receivedUserVotes.includes(data.voterUsername)) {
-                setGameState(prevState => newGameState(prevState, data));
-            }
-        })
-    }, [socket, receivedUserVotes]);
 
     const newGameState = (initialGameState: GameClass, data: any) => {
         initialGameState.addVote(data.voterUsername, data.response);
@@ -55,37 +41,28 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         return initialGameState;
     }
 
-    useEffect(() => {
-        let messageIndex = 0;
-        let isSpeaking = false;
-
-        const speakMessage = () => {
-            if (!isSpeaking && messageIndex < messages.length) {
-                isSpeaking = true;
-                const message = new SpeechSynthesisUtterance(messages[messageIndex]);
-                message.onend = () => {
-                    isSpeaking = false;
-                    if (messageIndex === 1) setIsThisResponseShown(true);
-                    if (messageIndex === 2) setIsThatResponseShown(true);
-                    if (messageIndex < messages.length) {
-                        speakMessage();
-                    } else {
-                        socket.emit("begin_voting", { game: game, players: getPlayersNotInGame(game, responses, players) });
-                        setShowTimer(true);
-                    }
-                };
-                messageIndex += 1;
-
-                window.speechSynthesis.speak(message);
+    useSocketOnHook(socket, "receive_vote", (data) => {
+            if (!receivedUserVotes.includes(data.voterUsername)) {
+                setGameState(prevState => newGameState(prevState, data));
             }
-        };
+        },
+    );
 
-        speakMessage();
+    const onEndSpeech = (messageIndex: number) => {
+        if (messageIndex === 0) setIsThisResponseShown(true);
+        if (messageIndex === 1) setIsThatResponseShown(true);
+    }
 
-        return () => {
-            window.speechSynthesis.cancel();
-        };
-    }, []);
+    const onDoneSpeech = () => {
+        socket.emit("begin_voting", { game: game, players: getPlayersNotInGame(game, responses, players) });
+        setShowTimer(true);
+    }
+
+    useSpeechSynthesisHook(
+        messages,
+        onEndSpeech,
+        onDoneSpeech
+    )
 
     const handleTimeEnd = () => {
         if (isResultsShown) return;
@@ -96,7 +73,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         setIsResultsShown(true);
         setTimeout(() => {
             onDone();
-        }, 6500);
+        }, COMPONENT_WAIT);
     }
 
     const animateVotes = (response: string) => {

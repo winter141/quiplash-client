@@ -1,10 +1,9 @@
-import {Player, PlayerScoreFromRound} from "../../../types/Player";
-import React, {useEffect, useRef, useState} from "react";
-import {votesContainer} from "../../../styling/styles";
-import {AnimatedChip, AnimatedTypography} from "../../../styling/animations";
-import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../../gamelogic/characterImages";
+import {Player, PlayerScoreFromRound} from "../../types/types/Player";
+import React, {memo, useEffect, useRef, useState} from "react";
+import {votesContainer} from "../../styling/styles";
+import {AnimatedChip, AnimatedTypography} from "../../styling/animations";
+import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 import {Typography} from "@mui/material";
-import {getPlayersNotInGame} from "../../../gamelogic/answers";
 
 interface AnimateVotesProps {
     playerScoreFromRound: PlayerScoreFromRound;
@@ -30,9 +29,11 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
             setShowRoundScore(true);
         }, SCORE_TIMEOUT);
 
-        setTimeout(() => {
-            setShowQuiplashBonus(true);
-        }, SCORE_TIMEOUT + QUIPLASH_TIMEOUT);
+        if (playerScoreFromRound.quiplashBonus > 0) {
+            setTimeout(() => {
+                setShowQuiplashBonus(true);
+            }, SCORE_TIMEOUT + QUIPLASH_TIMEOUT);
+        }
     }, []);
 
     return (

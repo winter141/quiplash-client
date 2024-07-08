@@ -1,24 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import {List, ListItem, Paper, Typography} from '@mui/material';
-import RoundTimer from "../subcomponents/RoundTimer";
-import {QuestionsProps, RoundProps} from "../../../types/RoundProps";
-import {io} from "socket.io-client";
+import RoundTimer from "../../subcomponents/RoundTimer";
+import {QuestionsProps} from "../../../types/props/RoundProps";
 import {generateMatchUps, generateRoundOneQuestions} from "../../../gamelogic/questions";
-import {PlayerQuestions, PlayerResponse} from "../../../types/Player";
+import {PlayerQuestions} from "../../../types/types/Player";
 import {card} from "../../../styling/styles";
-import {GameClass} from "../../../types/GameClass";
+import {GameClass} from "../../../types/classes/GameClass";
+import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmount, questionTime}) => {
-
     const [games, setGames] = useState<GameClass[]>([]);
-    const username = localStorage.getItem("username");
 
     useEffect(() => {
         socket.emit("join_specific_room", localStorage.getItem("roomCode"));
-    }, [socket]);
-
+    }, []);
 
     useEffect(() => {
         const matches = generateMatchUps(players, questionAmount);
@@ -26,33 +23,22 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
             = generateRoundOneQuestions(matches, players);
         setGames(games);
         socket.emit("send_round_one_questions", playerQuestionsArray);
-
-
-        socket.on("receive_response", (data) => {
-            console.log(`received response`);
-            console.log(data);
-
-            const updatedGames = games.map(game => {
-                if (game.getQuestion() === data.question) {
-                    const clonedGame = game.cloneGame();
-                    clonedGame.addResponse(data.username, data.response);
-                    return clonedGame;
-                }
-                return game;
-            });
-            console.log("DSMkfmndsklmfdklsmfs");
-            console.log(updatedGames);
-
-            setGames(updatedGames);
-
-        })
-
-    }, [socket]);
+    }, [players, questionAmount]);
+    
+    useSocketOnHook(socket, "receive_response", (data) => {
+        const updatedGames = games.map(game => {
+            if (game.getQuestion() === data.question) {
+                const clonedGame = game.cloneGame();
+                clonedGame.addResponse(data.username, data.response);
+                return clonedGame;
+            }
+            return game;
+        });
+        setGames(updatedGames);
+    })
 
     const handleTimeEnd = () => {
         localStorage.setItem("games", JSON.stringify(games.map(game => game.getGameJson())));
-        console.log("AMOUNT OF GAMES: " + games.length);
-        console.log(games);
         onDone();
     }
 

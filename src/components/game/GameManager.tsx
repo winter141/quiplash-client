@@ -1,11 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {animated, useTransition} from '@react-spring/web';
+import React, {useRef, useState} from 'react';
+import {animated} from '@react-spring/web';
 import GameRules from "./GameRules";
 import {AppBar, Box, IconButton, Toolbar, Typography} from "@mui/material";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import { GameScenes } from "../../types/Scenes";
-import RoundOne from "./rounds/RoundManager";
+import {GameScenes} from "../../types/enums/Scenes";
+import RoundManager from "./rounds/RoundManager";
 
 const GameManager: React.FC = () => {
     const [currentScene, setCurrentScene] = useState<GameScenes>(GameScenes.RULES);
@@ -23,7 +23,7 @@ const GameManager: React.FC = () => {
         if (audioRef.current) {
             if (audioRef.current.paused) {
                 audioRef.current.play().catch(error => {
-                    console.log("Failed to play audio: ", error);
+                    console.error("Failed to play audio: ", error);
                 });
                 setAudioOn(true);
             } else {
@@ -78,19 +78,19 @@ const GameManager: React.FC = () => {
                     } else if (currentScene === GameScenes.ROUND_ONE) {
                         return (
                             <animated.div>
-                                <RoundOne players={players} onDone={handleDone} />
+                                <RoundManager players={players} onDone={handleDone} roundNumber={1} />
                             </animated.div>
                         );
                     } else if (currentScene === GameScenes.ROUND_TWO) {
                         return (
                             <animated.div>
-                                <div>Round Two Placeholder</div>
+                                <RoundManager players={players} onDone={handleDone} roundNumber={2} />
                             </animated.div>
                         );
                     } else if (currentScene === GameScenes.ROUND_THREE) {
                         return (
                             <animated.div>
-                                <div>Round Three Placeholder</div>
+                                <RoundManager players={players} onDone={handleDone} roundNumber={3} />
                             </animated.div>
                         );
                     } else {

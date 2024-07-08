@@ -5,7 +5,7 @@ import {io} from "socket.io-client";
 import {useNavigate} from "react-router-dom";
 import {generateRoomCode} from "../../gamelogic/roomCode";
 
-// const socket = io("http://localhost:3001").connect();
+// const socket = getSocketConnection();
 
 const StartGame = () => {
     const navigate = useNavigate();

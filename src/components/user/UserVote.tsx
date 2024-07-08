@@ -2,9 +2,10 @@ import {Button, Paper, Stack} from "@mui/material";
 import React, {useEffect} from "react";
 import {card} from "../../styling/styles";
 import {io} from "socket.io-client";
-import {UserVoteProps} from "../../types/UserScreenProps";
+import {UserVoteProps} from "../../types/props/UserScreenProps";
+import {getSocketConnection} from "../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const UserVote: React.FC<UserVoteProps> = ({username, roomCode, question, responses, onDone}) => {
     useEffect(() => {
@@ -12,7 +13,6 @@ const UserVote: React.FC<UserVoteProps> = ({username, roomCode, question, respon
     }, [username]);
 
     const submitResponse = (response: string) => {
-        console.log(`response: ${response} submitted`);
         socket.emit("cast_vote", {response: response, voterUsername: username, room: roomCode});
         onDone();
     }

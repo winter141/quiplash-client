@@ -1,26 +1,22 @@
 import {Button, Paper, Stack, TextField} from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {card} from "../../styling/styles";
-import {io} from "socket.io-client";
 import {useNavigate} from "react-router-dom";
+import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const JoinRoom = () => {
     const [username, setUsername] = useState("");
     const [room, setRoom] = useState("");
     const navigate = useNavigate();
 
-    useEffect(() => {
-        socket.on("join_successful", (data) => {
-            const isVIP = data.VIP === true;
-            localStorage.setItem("VIP", isVIP ? "true" : "false");
-            localStorage.setItem("imageNum", data.imageNum);
-            navigate('/user');
-            console.log(`Client received with data: ${data}`);
-            console.log(data);
-        })
-    }, [socket]);
+    useSocketOnHook(socket, "join_successful", (data) => {
+        const isVIP = data.VIP === true;
+        localStorage.setItem("VIP", isVIP ? "true" : "false");
+        localStorage.setItem("imageNum", data.imageNum);
+        navigate('/user');
+    })
 
     const joinGame = () => {
         localStorage.setItem("username", username);
@@ -31,6 +27,7 @@ const JoinRoom = () => {
     const handleUsernameChange = (e: { target: { value: React.SetStateAction<string>; }; }) => { setUsername(e.target.value) }
 
     const handleRoomChange = (e: { target: { value: React.SetStateAction<string>; }; }) => { setRoom(e.target.value) }
+
     return (
         <Paper elevation={3} style={card}>
             <h1>Join Room</h1>

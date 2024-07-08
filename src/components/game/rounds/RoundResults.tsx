@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
-import {ResultsProps} from "../../../types/RoundProps";
+import {ResultsProps} from "../../../types/props/RoundProps";
 import {Card, CardContent, Paper, Table, TableCell, TableContainer, TableRow, Typography} from "@mui/material";
 import {card} from "../../../styling/styles";
-import {Player} from "../../../types/Player";
-import ImageCharacter from "../subcomponents/ImageCharacter";
+import {Player} from "../../../types/types/Player";
+import ImageCharacter from "../../subcomponents/ImageCharacter";
 import '../../../styling/podiumResults.css'
 
 const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime}) => {

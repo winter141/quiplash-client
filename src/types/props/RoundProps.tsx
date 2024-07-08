@@ -1,9 +1,13 @@
-import {Player} from "./Player";
-import {GameClass} from "./GameClass";
+import {Player} from "../types/Player";
+import {GameClass} from "../classes/GameClass";
 
 export interface RoundProps {
     players: Player[]
     onDone: () => void;
+}
+
+export interface RoundManagerProps extends RoundProps {
+    roundNumber: number,
 }
 
 export interface QuestionsProps extends RoundProps {

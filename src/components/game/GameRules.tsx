@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import {animatedText, card, paragraph} from "../../styling/styles";
+import {card, paragraph} from "../../styling/styles";
+import {useSpeechSynthesisHook} from "../../services/speech";
 
 interface GameRulesProps {
     onDone: () => void;
@@ -13,32 +13,11 @@ const GameRules: React.FC<GameRulesProps> = ({ onDone }) => {
         "Lets get started",
     ];
 
-    useEffect(() => {
-        let messageIndex = 0;
-        let isSpeaking = false;
-
-        const speakMessage = () => {
-            if (!isSpeaking && messageIndex < messages.length) {
-                isSpeaking = true;
-                const message = new SpeechSynthesisUtterance(messages[messageIndex]);
-                messageIndex += 1;
-                message.onend = () => {
-                    isSpeaking = false;
-                    speakMessage();
-                };
-                window.speechSynthesis.speak(message);
-            } else if (messageIndex >= messages.length) {
-                onDone();
-            }
-        };
-
-        speakMessage();
-
-        return () => {
-            // Cleanup function to stop speech synthesis if the component unmounts
-            window.speechSynthesis.cancel();
-        };
-    }, []);
+    useSpeechSynthesisHook(
+        messages,
+        () => {},
+        () => {onDone()}
+    )
 
     return (
         <Paper elevation={3} style={card}>

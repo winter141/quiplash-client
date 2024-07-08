@@ -1,11 +1,11 @@
 import {Button, Card, List, ListItem, Paper, Stack, TextField} from "@mui/material";
 import React, {useEffect, useRef, useState} from "react";
 import {card} from "../../styling/styles";
-import {io} from "socket.io-client";
 import {useNavigate} from "react-router-dom";
-import {Player} from "../../types/Player";
+import {Player} from "../../types/types/Player";
+import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const Lobby = () => {
     const [players, setPlayers] = useState<Player[]>([]);
@@ -27,21 +27,14 @@ const Lobby = () => {
         }
     }, [socket]);
 
-    useEffect(() => {
-        socket.on("user_joined", (data) => {
-            setPlayers(players.concat([{name: data.username, score: 0, likes: 0, imageNum: data.imageNum}]));
-        })
-    }, [socket]);
+    useSocketOnHook(socket, "user_joined", (data) => {
+        setPlayers(players.concat([{name: data.username, score: 0, likes: 0, imageNum: data.imageNum}]));
+    })
 
-    useEffect(() => {
-        socket.on("start_game", (data) => {
-            console.log("Receiving start game");
-            console.log("players: ", playersRef.current);
-            localStorage.setItem("players", JSON.stringify(playersRef.current));
-            navigate('/game/play');
-        })
-
-    }, [socket]);
+    useSocketOnHook(socket, "start_game", (data) => {
+        localStorage.setItem("players", JSON.stringify(playersRef.current));
+        navigate('/game/play');
+    })
 
     const displayLobby = () => {
         return (

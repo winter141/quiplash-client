@@ -1,15 +1,15 @@
-import {AppBar, Box, Button, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Paper, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {card} from "../../styling/styles";
-import {io} from "socket.io-client";
-import {PlayerResponse} from "../../types/Player";
-import {UserScenes} from "../../types/Scenes";
+import {PlayerResponse} from "../../types/types/Player";
+import {UserScenes} from "../../types/enums/Scenes";
 import UserQuestions from "./UserQuestions";
 import UserVote from "./UserVote";
-import ImageCharacter from "../game/subcomponents/ImageCharacter";
+import ImageCharacter from "../subcomponents/ImageCharacter";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
+import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const UserScreenManager = () => {
     const [questions, setQuestions] = useState<string[]>([]);
@@ -32,39 +32,24 @@ const UserScreenManager = () => {
         } else {
             setUsername(storedUsername);
             setRoomCode(storedRoomCode);
-            console.log(storedImageNumString);
             setImageNum(parseInt(storedImageNumString));
         }
-    }, []); // Runs only once on component mount
+    }, []);
 
     useEffect(() => {
         socket.emit("join_specific_room", username);
     }, [username]);
 
-    useEffect(() => {
-        socket.on("round_one_questions", (data) => {
-            console.log("Received: ");
-            console.log(data);
-            setQuestions(data);
-            setCurrentScene(UserScenes.QUESTIONS)
-        })
-    }, [socket]);
+    useSocketOnHook(socket, "round_one_questions", (data) => {
+        setQuestions(data);
+        setCurrentScene(UserScenes.QUESTIONS)
+    })
 
-    useEffect(() => {
-        const handleVote = (data: any) => {
-            console.log("Received Vote");
-            console.log(data);
-            setQuestion(data.game.question);
-            setResponses(data.game.playerResponses.map((r: PlayerResponse) => r.response));
-            setCurrentScene(UserScenes.VOTING);
-        };
-
-        socket.on("vote", handleVote);
-
-        return () => {
-            socket.off("vote", handleVote);
-        };
-    }, [socket]);
+    useSocketOnHook(socket, "vote", (data) => {
+        setQuestion(data.game.question);
+        setResponses(data.game.playerResponses.map((r: PlayerResponse) => r.response));
+        setCurrentScene(UserScenes.VOTING);
+    })
 
     const startGame = () => {
         socket.emit("vip_start_game", roomCode);
@@ -105,7 +90,7 @@ const UserScreenManager = () => {
     if (errorFlag) {
         return (
             <Paper elevation={3} style={card}>
-                An error occured
+                An error occurred
             </Paper>
         )
     }

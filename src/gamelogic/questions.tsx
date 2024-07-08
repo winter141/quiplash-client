@@ -1,6 +1,6 @@
-import {Player, PlayerQuestions} from "../types/Player";
+import {Player, PlayerQuestions} from "../types/types/Player";
 import questions from '../data/prompts.json';
-import {GameClass} from "../types/GameClass";
+import {GameClass} from "../types/classes/GameClass";
 const { ROUND_ONE_PROMPTS } = questions;
 
 const generateMatchUps = (players: Player[], questionAmount: number): Player[][] => {

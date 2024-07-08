@@ -1,9 +1,10 @@
 import {Button, Paper, Stack, TextField} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {io} from "socket.io-client";
-import {UserQuestionsProps} from "../../types/UserScreenProps";
+import {UserQuestionsProps} from "../../types/props/UserScreenProps";
+import {getSocketConnection} from "../../services/socket";
 
-const socket = io("http://localhost:3001").connect();
+const socket = getSocketConnection();
 
 const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, questions, onDone}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

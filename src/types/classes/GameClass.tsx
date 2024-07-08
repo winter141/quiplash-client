@@ -1,4 +1,4 @@
-import {Player, PlayerResponse, PlayerScoreFromRound} from "./Player";
+import {Player, PlayerResponse, PlayerScoreFromRound} from "../types/Player";
 
 class GameClass {
     private readonly question: string;
@@ -91,8 +91,12 @@ class GameClass {
             const foundPlayer = players.find(player => player.name === playerResponse.username);
             if (foundPlayer) {
                 let quiplashBonus = 0;
+                let scoreFromRound = 0
+
                 const votesForPlayer = playerResponse.votes.length;
-                const scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore);
+                if (votesForPlayer > 0) {
+                    scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore);
+                }
 
                 if (votesForPlayer > 0 && votesForPlayer === totalVotes) {
                     quiplashBonus += Math.round(maxScore * this.QUIPLASH_BONUS_PERCENT);
