@@ -10,7 +10,7 @@ import {PlayerScoreFromRound} from "../../../types/types/Player";
 import AnimateVotes from "../../subcomponents/AnimateVotes"
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import {useSpeechSynthesisHook} from "../../../services/speech";
-import { roundContext, FINAL_ROUND_NUMBER } from "./RoundManager";
+import { roundContext} from "./RoundManager";
 
 const socket = getSocketConnection();
 const COMPONENT_WAIT = 4000; // How long to wait before component is "done"
@@ -45,7 +45,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
 
         if (playersVoted.current >= getPlayersNotInGame(game, responses, players).length) {
-            if (!context || context.roundNumber !== FINAL_ROUND_NUMBER) {
+            if (!(context && context.isFinalRound)) {
                 const winnerPlayerResponse = game.getWinnerPlayerResponse();
                 addPlayerResponseToLocalStorage(winnerPlayerResponse);
             }

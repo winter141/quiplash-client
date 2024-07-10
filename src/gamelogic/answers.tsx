@@ -20,4 +20,8 @@ const addPlayerResponseToLocalStorage = (playerResponse: PlayerResponse) => {
     localStorage.setItem("playerResponses", JSON.stringify(storedResponses));
 }
 
-export { getPlayersNotInGame, addPlayerResponseToLocalStorage }
+const getBeforeResultsMessages = (roundNumber: number) => {
+    return roundNumber === 4 ? ["Lets see the final results..."] : [""];
+}
+
+export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages }

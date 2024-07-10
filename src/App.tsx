@@ -13,6 +13,7 @@ import RoundAnswers from "./components/game/rounds/RoundAnswers";
 import Round from './components/game/rounds/RoundManager';
 import RoundResults from "./components/game/rounds/RoundResults";
 import {convertJsonToGameClasses} from "./types/classes/GameClass";
+import IntroToScene from "./components/subcomponents/IntroToScene";
 
 const { PLAYERS, PLAYER_QUESTIONS, GAMES } = testingData;
 
@@ -59,6 +60,12 @@ function App() {
                     players={PLAYERS}
                     sceneTime={5}
                 />}/>
+
+                <Route path="/intro" element={<IntroToScene
+                    onDone={() => {}}
+                    messages={["YO yo"]}
+                />}/>
+
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </Router>

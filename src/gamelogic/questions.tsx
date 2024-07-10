@@ -91,4 +91,20 @@ const getBasicPrompts = (): string[] => {
     return shuffleArray(BASIC_PROMPTS);
 }
 
-export { generateMatchUps, generateQuestions, getAllResponsesCount, getBasicPrompts, getFinalRoundPrompts }
+const getBeforeQuestionsMessages = (roundNumber: number): string[] => {
+    switch (roundNumber) {
+        case 1:
+            return ["Let's warmup with Round 1!"]
+        case 2:
+            return ["Time to shine in Round 2", "Points are now doubled!"];
+        case 3:
+            return ["Here comes Round Three"];
+        case 4:
+            return ["And now for the Final showdown!", "Points are now tripled!"]
+        default:
+            return [""];
+    }
+}
+
+export { generateMatchUps, generateQuestions,
+    getAllResponsesCount, getBasicPrompts, getFinalRoundPrompts, getBeforeQuestionsMessages }

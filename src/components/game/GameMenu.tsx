@@ -1,7 +1,6 @@
 import {Button, Paper} from "@mui/material";
 import React from "react";
 import {card} from "../../styling/styles";
-import {io} from "socket.io-client";
 import {useNavigate} from "react-router-dom";
 
 // const socket = getSocketConnection();
@@ -12,6 +11,7 @@ const StartGame = () => {
     const startGame = () => {
         navigate('/game/lobby');
         // localStorage.setItem('roomCode', generateRoomCode())
+        localStorage.clear();
         localStorage.setItem('roomCode', "LUCK")
     }
 

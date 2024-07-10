@@ -1,35 +1,41 @@
-import React, {useEffect, useState, createContext} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import {RoundManagerProps} from "../../../types/props/RoundProps";
-import {GameScenes, RoundScenes} from "../../../types/enums/Scenes";
+import {RoundScenes} from "../../../types/enums/Scenes";
 import RoundQuestions from "./RoundQuestions";
 import RoundAnswers from "./RoundAnswers";
-import testingData from '../../../data/testingdata.json';
 import RoundResults from "./RoundResults";
 import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameClass";
+import IntroToScene from "../../subcomponents/IntroToScene";
+import {getBeforeQuestionsMessages} from "../../../gamelogic/questions";
+import {getBeforeResultsMessages} from "../../../gamelogic/answers";
 
 const QUESTION_TIME = 20;
 const QUESTION_AMOUNT = 2;
 const MAX_SCORE = 1000;
 const VOTING_TIME = 8;
 const RESULTS_TIME = 5;
-export const FINAL_ROUND_NUMBER = 4;
+const FINAL_ROUND_NUMBER = 4;
 
-export const roundContext = createContext<{ roundNumber: number } | null>(null);
+export const roundContext = createContext<{ isFinalRound: boolean } | null>(null);
 
 const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber}) => {
-    const [currentScene, setCurrentScene] = useState<RoundScenes>(RoundScenes.QUESTIONS);
+    const [currentScene, setCurrentScene] = useState<RoundScenes>(RoundScenes.BEFORE_QUESTIONS);
     const [games, setGames] = useState<GameClass[]>([]);
+    const isFinalRound = roundNumber === FINAL_ROUND_NUMBER;
 
     useEffect(() => {
         resetRound();
     }, [roundNumber]);
 
     const resetRound = () => {
-        setCurrentScene(RoundScenes.QUESTIONS);
+        setCurrentScene(RoundScenes.BEFORE_QUESTIONS);
         setGames([]);
     };
     const handleChangeScene = () => {
         switch (currentScene) {
+            case RoundScenes.BEFORE_QUESTIONS:
+                setCurrentScene(RoundScenes.QUESTIONS);
+                break;
             case RoundScenes.QUESTIONS:
                 try {
                     const storedGames: GameClass[] = getGames();
@@ -41,6 +47,9 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                 }
                 break;
             case RoundScenes.ANSWERS:
+                isFinalRound ? setCurrentScene(RoundScenes.BEFORE_RESULTS) : setCurrentScene(RoundScenes.RESULTS);
+                break;
+            case RoundScenes.BEFORE_RESULTS:
                 setCurrentScene(RoundScenes.RESULTS);
                 break;
             case RoundScenes.RESULTS:
@@ -62,6 +71,13 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
 
     const showScene = () => {
         switch (currentScene) {
+            case RoundScenes.BEFORE_QUESTIONS:
+               return (
+                   <IntroToScene
+                   messages={getBeforeQuestionsMessages(roundNumber)}
+                   onDone={handleChangeScene}
+                    />
+               )
             case RoundScenes.QUESTIONS:
                 return (
                     <RoundQuestions
@@ -81,6 +97,13 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                         votingTime={VOTING_TIME}
                     />
                 );
+            case RoundScenes.BEFORE_RESULTS:
+                return (
+                    <IntroToScene
+                        messages={getBeforeResultsMessages(roundNumber)}
+                        onDone={handleChangeScene}
+                    />
+                )
             case RoundScenes.RESULTS:
                 return (
                     <RoundResults
@@ -94,7 +117,7 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
         }
     }
     return (
-        <roundContext.Provider value={{roundNumber}}>
+        <roundContext.Provider value={{isFinalRound}}>
             {showScene()}
         </roundContext.Provider>
     )

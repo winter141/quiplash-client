@@ -13,7 +13,7 @@ import {GameClass} from "../../../types/classes/GameClass";
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import ImageCharacter from "../../subcomponents/ImageCharacter";
 import {useSpeechSynthesisHook} from "../../../services/speech";
-import { FINAL_ROUND_NUMBER, roundContext } from "./RoundManager";
+import { roundContext } from "./RoundManager";
 
 const socket = getSocketConnection();
 
@@ -38,7 +38,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
 
     useEffect(() => {
         const matches = generateMatchUps(players, questionAmount);
-        const prompts = !context || context.roundNumber !== FINAL_ROUND_NUMBER
+        const prompts = !(context && context.isFinalRound)
             ? getBasicPrompts() : getFinalRoundPrompts();
 
         const [playerQuestionsArray, games]: [PlayerQuestions[], GameClass[]]
