@@ -1,54 +1,293 @@
 {
-  "BASIC_PROMPTS": [
-    "What's the worst thing to say when trying to adopt a pet?",
-    "A great place to hide an Easter egg would be...",
-    "The best name for a new cereal brand",
-    "What aliens do with you after abducting you",
-    "A rejected name for a ship in a pirate movie",
-    "What really happened to Amelia Earhart?",
-    "A great bumper sticker for a cat",
-    "The weirdest thing to whisper to a ceramic garden gnome",
-    "What should never be used as a pizza topping",
-    "The worst thing to say during a job interview",
-    "What's the secret to a happy life?",
-    "What the first words spoken on Mars will be",
-    "A slogan for socks",
-    "What's in Bigfoot's grocery cart?",
-    "A terrible name for a 1970s disco band",
-    "Something that would not work well as a dip for tortilla chips",
-    "An item that should never be passed around a dinner table",
-    "A good use for an abandoned shopping mall",
-    "What aliens say about humans when humans aren't around",
-    "A rejected idea for a children's book",
-    "The worst theme for a high school prom",
-    "What dogs think when they see people naked",
-    "A new state law you would like to see",
-    "What dogs do when nobody is looking",
-    "A great name for a fast food restaurant",
-    "A weird thing for a bank to rob",
-    "A new traffic law you would like to see",
-    "The best place to bury hidden treasure",
-    "Something you shouldn't wear to a job interview",
-    "The worst thing to paint on a new baby's nursery wall",
-    "What cats think when they see people naked",
-    "A bad name for a superhero",
-    "The worst way to spend a weekend",
-    "A better name for Canada",
-    "A great thing to yell before jumping out of an airplane",
-    "What Bigfoot does when he thinks nobody is watching",
-    "A rejected flavor of ice cream",
-    "What birds think when they see people naked",
-    "A great thing to have written on your tombstone",
-    "A rejected idea for a toy",
-    "A good way to mess with a cat",
-    "A terrible name for a 1970s disco song",
-    "What you should not do with a potato",
-    "The best thing to eat for breakfast",
-    "A terrible name for a lawyer",
-    "The worst thing to say when pulled over by a police officer",
-    "Something not to put in a piñata",
-    "A rejected name for a college",
-    "What aliens do for fun",
-    "A terrible name for a car"
+  "PROMPTS": [
+    {
+      "prompt": "What's the worst thing to say when trying to adopt a pet?",
+      "safetyQuips": [
+        "I'm just here for the free snacks.",
+        "Do you have a return policy?",
+        "Are they good at filing taxes?"
+      ]
+    },
+    {
+      "prompt": "A great place to hide an Easter egg would be...",
+      "safetyQuips": [
+        "In the neighbor's yard!",
+        "Inside the dog's toy box.",
+        "Next to the open bag of potato chips."
+      ]
+    },
+    {
+      "prompt": "The best name for a new cereal brand",
+      "safetyQuips": [
+        "Sugar Coated Ouchies!",
+        "Marshmallow Meatballs!",
+        "Crunchy Kale Surprise!"
+      ]
+    },
+    {
+      "prompt": "What aliens do with you after abducting you",
+      "safetyQuips": [
+        "Take selfies for their space Instagram.",
+        "Make you their intergalactic hairdresser.",
+        "Ask if you know how to fix their spaceship."
+      ]
+    },
+    {
+      "prompt": "A rejected name for a ship in a pirate movie",
+      "safetyQuips": [
+        "The Soggy Sardine.",
+        "The Wimpy Whale.",
+        "The Plank Plunger."
+      ]
+    },
+    {
+      "prompt": "What really happened to Amelia Earhart?",
+      "safetyQuips": [
+        "She opened a tiki bar in Tahiti.",
+        "She became the world's first time traveler.",
+        "She's been working at a secret NASA facility."
+      ]
+    },
+    {
+      "prompt": "A great bumper sticker for a cat",
+      "safetyQuips": [
+        "I do what I want, when I want.",
+        "My other ride is a laser pointer.",
+        "Cat hair, don't care."
+      ]
+    },
+    {
+      "prompt": "The weirdest thing to whisper to a ceramic garden gnome",
+      "safetyQuips": [
+        "Can you keep a secret?",
+        "Do you believe in magic?",
+        "You're my favorite lawn ornament."
+      ]
+    },
+    {
+      "prompt": "What should never be used as a pizza topping",
+      "safetyQuips": [
+        "Marshmallows and anchovies.",
+        "Lego bricks and hot sauce.",
+        "Jelly beans and sardines."
+      ]
+    },
+    {
+      "prompt": "The worst thing to say during a job interview",
+      "safetyQuips": [
+        "I'm only here for the free snacks.",
+        "What's the company's policy on napping?",
+        "I can't work with people."
+      ]
+    },
+    {
+      "prompt": "What's the secret to a happy life?",
+      "safetyQuips": [
+        "Always have dessert first.",
+        "Naps are mandatory.",
+        "Dance like nobody's watching."
+      ]
+    },
+    {
+      "prompt": "What the first words spoken on Mars will be",
+      "safetyQuips": [
+        "Houston, we have snacks!",
+        "Is this thing on?",
+        "Where's the nearest coffee shop?"
+      ]
+    },
+    {
+      "prompt": "A slogan for socks",
+      "safetyQuips": [
+        "Socks: Where feet find happiness",
+        "Socks: The ultimate foot hug",
+        "Socks: Putting the fun in functional"
+      ]
+    },
+    {
+      "prompt": "What's in Bigfoot's grocery cart?",
+      "safetyQuips": [
+        "Giant bananas and family-sized ice cream",
+        "Hair care products and oversized shoes",
+        "Yeti yogurt and Sasquatch snacks"
+      ]
+    },
+    {
+      "prompt": "A terrible name for a 1970s disco band",
+      "safetyQuips": [
+        "Funky Chicken and the Disco Ducks",
+        "Disco Fever Dream",
+        "Polyester Pandemonium"
+      ]
+    },
+    {
+      "prompt": "Something that would not work well as a dip for tortilla chips",
+      "safetyQuips": [
+        "Motor oil and gravel",
+        "Cat litter and cottage cheese",
+        "Expired milk and expired salsa"
+      ]
+    },
+    {
+      "prompt": "An item that should never be passed around a dinner table",
+      "safetyQuips": [
+        "A live lobster",
+        "A skunk-scented candle",
+        "A whoopee cushion"
+      ]
+    },
+    {
+      "prompt": "A good use for an abandoned shopping mall",
+      "safetyQuips": [
+        "Indoor go-kart racing",
+        "Zombie paintball arena",
+        "Giant indoor water park"
+      ]
+    },
+    {
+      "prompt": "What aliens say about humans when humans aren't around",
+      "safetyQuips": [
+        "They communicate using a primitive language called 'texting'",
+        "Their favorite pastime is taking pictures of their food",
+        "They believe in a creature called the 'Tooth Fairy'"
+      ]
+    },
+    {
+      "prompt": "A rejected idea for a children's book",
+      "safetyQuips": [
+        "The Adventures of Captain Underpants and His Evil Twin",
+        "Goldilocks and the Three Grumpy Cats",
+        "Harry Potter and the Magic Microwave"
+      ]
+    },
+    {
+      "prompt": "The worst theme for a high school prom",
+      "safetyQuips": [
+        "Dress Like Your Math Teacher Night",
+        "Medieval Torture Devices Ball",
+        "50 Shades of Gray (Theme)"
+      ]
+    },
+    {
+      "prompt": "What dogs think when they see people naked",
+      "safetyQuips": [
+        "Humans have really strange fur patterns",
+        "Why don't they have tails?",
+        "Where's their fur?"
+      ]
+    },
+    {
+      "prompt": "A new state law you would like to see",
+      "safetyQuips": [
+        "Mandatory nap time for all",
+        "Free ice cream on Fridays",
+        "Dancing is required at all red lights"
+      ]
+    },
+    {
+      "prompt": "What dogs do when nobody is looking",
+      "safetyQuips": [
+        "Throw secret party",
+        "Practice their howling for America's Got Talent",
+        "Have philosophical discussions with the cat"
+      ]
+    },
+    {
+      "prompt": "A great name for a fast food restaurant",
+      "safetyQuips": [
+        "Grease Lightning Burgers",
+        "Fry Me to the Moon",
+        "Bite Me Burger Shack"
+      ]
+    },
+    {
+      "prompt": "A weird thing for a bank to rob",
+      "safetyQuips": [
+        "Piggy banks of all shapes and sizes",
+        "Tooth Fairy's vault of baby teeth",
+        "The Vault of Forgotten Dreams"
+      ]
+    },
+    {
+      "prompt": "A new traffic law you would like to see",
+      "safetyQuips": [
+        "Honking is only allowed in Morse code",
+        "Drivers must take a nap break every hour",
+        "Bumper cars are now street legal"
+      ]
+    },
+    {
+      "prompt": "The best place to bury hidden treasure",
+      "safetyQuips": [
+        "Under the rainbow",
+        "In the world's largest ball pit",
+        "Inside a volcano"
+      ]
+    },
+    {
+      "prompt": "Something you shouldn't wear to a job interview",
+      "safetyQuips": [
+        "Pajamas and a superhero cape",
+        "A swimsuit and flippers",
+        "A chicken suit"
+      ]
+    },
+    {
+      "prompt": "The worst thing to paint on a new baby's nursery wall",
+      "safetyQuips": [
+        "Giant spiders and creepy crawlies",
+        "Clowns with big red noses",
+        "Full-sized T-Rex"
+      ]
+    },
+    {
+      "prompt": "What cats think when they see people naked",
+      "safetyQuips": [
+        "Humans have really strange fur patterns",
+        "Why don't they have tails?",
+        "Where's their fur?"
+      ]
+    },
+    {
+      "prompt": "A bad name for a superhero",
+      "safetyQuips": [
+        "Captain Clueless",
+        "The Forgetful Fly",
+        "The Invisible Ear"
+      ]
+    },
+    {
+      "prompt": "The worst way to spend a weekend",
+      "safetyQuips": [
+        "Cleaning out the attic",
+        "Counting all the grains of sand at the beach",
+        "Listening to elevator music for 48 hours straight"
+      ]
+    },
+    {
+      "prompt": "A better name for Canada",
+      "safetyQuips": [
+        "Moose Land",
+        "Maple Leaf Paradise",
+        "The Great White North"
+      ]
+    },
+    {
+      "prompt": "A great thing to yell before jumping out of an airplane",
+      "safetyQuips": [
+        "Cowabunga!",
+        "For the potatoes!",
+        "Incoming!"
+      ]
+    },
+    {
+      "prompt": "What Bigfoot does when he thinks nobody is watching",
+      "safetyQuips": [
+        "Practices his dance moves",
+        "Hides all the hairbrushes",
+        "Starts his own YouTube channel"
+      ]
+    }
   ]
 }
+

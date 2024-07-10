@@ -1,7 +1,7 @@
 import {Player, PlayerQuestions, PlayerResponse} from "../types/types/Player";
 import questions from '../data/prompts.json';
 import {GameClass} from "../types/classes/GameClass";
-const { BASIC_PROMPTS } = questions;
+const { PROMPTS } = questions;
 
 const generateMatchUps = (players: Player[], questionAmount: number): Player[][] => {
     const n = players.length;
@@ -32,7 +32,7 @@ const generateMatchUps = (players: Player[], questionAmount: number): Player[][]
     return matchUps;
 }
 
-function shuffleArray(array: any[]): any[] {
+const shuffleArray = (array: any[]): any[] => {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -88,7 +88,7 @@ const getFinalRoundPrompts = (): string[] => {
 }
 
 const getBasicPrompts = (): string[] => {
-    return shuffleArray(BASIC_PROMPTS);
+    return shuffleArray(PROMPTS.map(prompt => prompt.prompt));
 }
 
 const getBeforeQuestionsMessages = (roundNumber: number): string[] => {

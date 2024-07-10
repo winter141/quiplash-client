@@ -10,7 +10,7 @@ interface GameRulesProps {
 const GameRules: React.FC<GameRulesProps> = ({ onDone }) => {
     const messages = [
         "Welcome to Quiplash!",
-        "Lets get started",
+        "Toggle background music by clicking on the music icon in the top right",
     ];
 
     useSpeechSynthesisHook(

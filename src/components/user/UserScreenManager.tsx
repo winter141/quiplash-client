@@ -108,7 +108,9 @@ const UserScreenManager = () => {
             {isVIP && currentScene === UserScenes.INITIAL && <Button variant="contained" onClick={startGame}>Start Game</Button>}
             {showUserScene()}
         </Box>
-        <ImageCharacter imageNum={imageNum}/>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+            <ImageCharacter imageNum={imageNum}/>
+        </div>
     </React.Fragment>;
 }
 
