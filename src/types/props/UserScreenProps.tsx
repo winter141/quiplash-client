@@ -13,5 +13,6 @@ export interface UserVoteProps extends UserProps {
 }
 
 export interface UserQuestionsProps extends UserProps {
+    imageNum: number,
     questions: string[]
 }

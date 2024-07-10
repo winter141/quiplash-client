@@ -68,6 +68,7 @@ const UserScreenManager = () => {
                     <UserQuestions
                      username={username ? username : ""}
                      roomCode={roomCode ? roomCode : ""}
+                     imageNum={imageNum ? imageNum : 0}
                      questions={questions}
                      onDone={() => {setCurrentScene(UserScenes.WAITING)}}
                     />

@@ -46,6 +46,9 @@ const GameManager: React.FC = () => {
                 setCurrentScene(GameScenes.ROUND_THREE);
                 break;
             case GameScenes.ROUND_THREE:
+                setCurrentScene(GameScenes.FINAL_ROUND); // or another end state
+                break;
+            case GameScenes.FINAL_ROUND:
                 setCurrentScene(GameScenes.RULES); // or another end state
                 break;
             default:
@@ -54,59 +57,56 @@ const GameManager: React.FC = () => {
         }
     };
 
+    const showScene = () => {
+        let sceneElement;
+
+        switch (currentScene) {
+            case GameScenes.RULES:
+                sceneElement = <GameRules onDone={handleDone}/>
+                break;
+            case GameScenes.ROUND_ONE:
+                sceneElement = <RoundManager players={players} onDone={handleDone} roundNumber={1}/>
+                break;
+            case GameScenes.ROUND_TWO:
+                sceneElement = <RoundManager players={players} onDone={handleDone} roundNumber={2}/>
+                break;
+            case GameScenes.ROUND_THREE:
+                sceneElement = <RoundManager players={players} onDone={handleDone} roundNumber={3}/>
+                break;
+            case GameScenes.FINAL_ROUND:
+                sceneElement = <RoundManager players={players} onDone={handleDone} roundNumber={4}/>
+                break;
+            default:
+                sceneElement = <div>Unknown Scene</div>
+        }
+        return (
+            <animated.div>
+                {sceneElement}
+            </animated.div>
+        )
+    }
+
     return (
         <div>
             <AppBar position="fixed">
                 <Toolbar>
                     <Typography variant="h6" style={{ flexGrow: 1 }}>
-                        {currentScene}
-                    </Typography>
-                    <IconButton edge="end" color="inherit" onClick={toggleAudio}>
-                        {audioOn ? <MusicOffIcon /> : <MusicNoteIcon />}
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <div></div>
-            <Box mt={10}>
-                {(() => {
-                    if (currentScene === GameScenes.RULES) {
-                        return (
-                            <animated.div>
-                                <GameRules onDone={handleDone} />
-                            </animated.div>
-                        );
-                    } else if (currentScene === GameScenes.ROUND_ONE) {
-                        return (
-                            <animated.div>
-                                <RoundManager players={players} onDone={handleDone} roundNumber={1} />
-                            </animated.div>
-                        );
-                    } else if (currentScene === GameScenes.ROUND_TWO) {
-                        return (
-                            <animated.div>
-                                <RoundManager players={players} onDone={handleDone} roundNumber={2} />
-                            </animated.div>
-                        );
-                    } else if (currentScene === GameScenes.ROUND_THREE) {
-                        return (
-                            <animated.div>
-                                <RoundManager players={players} onDone={handleDone} roundNumber={3} />
-                            </animated.div>
-                        );
-                    } else {
-                        return (
-                            <animated.div>
-                                <div>Unknown Scene</div>
-                            </animated.div>
-                        );
-                    }
-                })()}
-            </Box>
-            <audio ref={audioRef} loop>
-                <source src={`${process.env.PUBLIC_URL}/background_music.mp3`} type="audio/mpeg"/>
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+                            {currentScene}
+                        </Typography>
+                        <IconButton edge="end" color="inherit" onClick={toggleAudio}>
+                            {audioOn ? <MusicOffIcon /> : <MusicNoteIcon />}
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <div></div>
+                <Box mt={10}>
+                    {showScene()}
+                </Box>
+                <audio ref={audioRef} loop>
+                    <source src={`${process.env.PUBLIC_URL}/background_music.mp3`} type="audio/mpeg"/>
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
     );
 };
 

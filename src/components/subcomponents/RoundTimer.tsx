@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {Box, CircularProgress, Typography} from "@mui/material";
 
 interface RoundTimerProps {
-    top: number;
-    left: number;
     initialTime: number;
     onTimeEnd: () => void;
+    sx?: any;
+
 }
-const RoundTimer: React.FC<RoundTimerProps> = ({ top, left, initialTime, onTimeEnd }) => {
+const RoundTimer: React.FC<RoundTimerProps> = ({ initialTime, onTimeEnd, sx }) => {
     const [timeLeft, setTimeLeft] = useState(initialTime);
 
     useEffect(() => {
@@ -24,8 +24,7 @@ const RoundTimer: React.FC<RoundTimerProps> = ({ top, left, initialTime, onTimeE
     return (
         <Box
             position="relative"
-            top={top}
-            left={left}
+            sx={sx} // Apply sx prop here
             display="inline-flex"
             alignItems="center"
         >

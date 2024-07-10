@@ -1,18 +1,19 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {Grid, Typography} from '@mui/material';
 import {ThisOrThatProps} from "../../../types/props/RoundProps";
 import {card, padding, questionWrapper} from "../../../styling/styles";
 import {AnimatedPaper} from "../../../styling/animations";
-import {getPlayersNotInGame} from "../../../gamelogic/answers";
+import {addPlayerResponseToLocalStorage, getPlayersNotInGame} from "../../../gamelogic/answers";
 import RoundTimer from "../../subcomponents/RoundTimer";
 import {GameClass} from "../../../types/classes/GameClass";
 import {PlayerScoreFromRound} from "../../../types/types/Player";
 import AnimateVotes from "../../subcomponents/AnimateVotes"
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import {useSpeechSynthesisHook} from "../../../services/speech";
+import { roundContext, FINAL_ROUND_NUMBER } from "./RoundManager";
 
 const socket = getSocketConnection();
-const COMPONENT_WAIT = 6500; // How long to wait before component is "done"
+const COMPONENT_WAIT = 4000; // How long to wait before component is "done"
 
 const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime, maxScore }) => {
     const [gameState, setGameState] = useState<GameClass>(game);
@@ -23,6 +24,8 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     const [showTimer, setShowTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
     const playersVoted = useRef(0);
+
+    const context = useContext(roundContext);
 
     const responses = game.getPlayerResponses();
 
@@ -42,6 +45,10 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
 
         if (playersVoted.current >= getPlayersNotInGame(game, responses, players).length) {
+            if (!context || context.roundNumber !== FINAL_ROUND_NUMBER) {
+                const winnerPlayerResponse = game.getWinnerPlayerResponse();
+                addPlayerResponseToLocalStorage(winnerPlayerResponse);
+            }
             handleTimeEnd();
         }
 
@@ -121,10 +128,9 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
             {showTimer && (
                 <RoundTimer
-                    top={16}
-                    left={16}
                     initialTime={votingTime}
                     onTimeEnd={handleTimeEnd}
+                    sx={{top:16}}
                 />
             )}
         </div>

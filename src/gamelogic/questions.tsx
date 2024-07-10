@@ -1,7 +1,7 @@
-import {Player, PlayerQuestions} from "../types/types/Player";
+import {Player, PlayerQuestions, PlayerResponse} from "../types/types/Player";
 import questions from '../data/prompts.json';
 import {GameClass} from "../types/classes/GameClass";
-const { ROUND_ONE_PROMPTS } = questions;
+const { BASIC_PROMPTS } = questions;
 
 const generateMatchUps = (players: Player[], questionAmount: number): Player[][] => {
     const n = players.length;
@@ -46,8 +46,7 @@ function shuffleArray(array: any[]): any[] {
  * @param matchUps List of Player lists representing the match ups
  * @param players All Players
  */
-const generateRoundOneQuestions = (matchUps: Player[][], players: Player[]): [PlayerQuestions[], GameClass[]] => {
-    const prompts = shuffleArray(ROUND_ONE_PROMPTS);
+const generateQuestions = (matchUps: Player[][], players: Player[], prompts: string[]): [PlayerQuestions[], GameClass[]] => {
     let i = 0;
     let playerQuestions: PlayerQuestions[] = players.map((player: Player) => ({
         player: player,
@@ -81,4 +80,15 @@ function addQuestionToPlayers(playerQuestions: PlayerQuestions[], question: stri
     return playerQuestions;
 }
 
-export { generateMatchUps, generateRoundOneQuestions, getAllResponsesCount }
+const getFinalRoundPrompts = (): string[] => {
+    const storedResponses = localStorage.getItem("playerResponses");
+    const playerResponses: PlayerResponse[] = storedResponses ? JSON.parse(storedResponses) : []
+    return playerResponses.map((playerResponse) =>
+        playerResponse.response + " is the answer, what is the question?");
+}
+
+const getBasicPrompts = (): string[] => {
+    return shuffleArray(BASIC_PROMPTS);
+}
+
+export { generateMatchUps, generateQuestions, getAllResponsesCount, getBasicPrompts, getFinalRoundPrompts }

@@ -8,4 +8,16 @@ const getPlayersNotInGame = (game: GameClass, playerResponses: PlayerResponse[],
     return players; // temporary testing
 }
 
-export { getPlayersNotInGame }
+/**
+ * Add a Player Response to local storage.
+ * This is used in the final round ie: Write question given response
+ * @param playerResponse Single Player Response
+ */
+const addPlayerResponseToLocalStorage = (playerResponse: PlayerResponse) => {
+    const storedResponsesRaw = localStorage.getItem("playerResponses");
+    const storedResponses = storedResponsesRaw ? JSON.parse(storedResponsesRaw) : [];
+    if (!storedResponses.includes(playerResponse)) storedResponses.push(playerResponse)
+    localStorage.setItem("playerResponses", JSON.stringify(storedResponses));
+}
+
+export { getPlayersNotInGame, addPlayerResponseToLocalStorage }

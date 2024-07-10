@@ -115,6 +115,15 @@ class GameClass {
         return [players, playerScoresFromRound];
     }
 
+    /**
+     * Get player response with most votes
+     */
+    public getWinnerPlayerResponse() {
+        return this.playerResponses.sort((a, b): number => {
+            return b.votes.length - a.votes.length;
+        })[0];
+    }
+
     private findPlayerResponseByUsername(username: string) {
         return this.playerResponses.find(response => response.username === username);
     }

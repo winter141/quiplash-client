@@ -3,9 +3,14 @@ import {useEffect} from "react";
 const useSpeechSynthesisHook = (
     messages: string[],
     onEndCallBack: (messageIndex: number) => void,
-    onDoneCallback: () => void
+    onDoneCallback: () => void,
+    ...awaitingDependencies: boolean[]
 ): void => {
     useEffect(  () => {
+        if (awaitingDependencies.some(dependency => !dependency)) {
+            return;
+        }
+
         function speakMessage(messageIndex: number) {
             if (messageIndex >= messages.length) {
                 onDoneCallback();
@@ -25,8 +30,7 @@ const useSpeechSynthesisHook = (
         return () => {
             window.speechSynthesis.cancel();
         };
-    }, []);
+    }, [...awaitingDependencies]);
 };
-
 
 export {useSpeechSynthesisHook}

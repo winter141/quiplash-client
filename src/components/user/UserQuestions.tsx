@@ -1,12 +1,11 @@
 import {Button, Paper, Stack, TextField} from "@mui/material";
-import React, {useEffect, useState} from "react";
-import {io} from "socket.io-client";
+import React, {useContext, useEffect, useState} from "react";
 import {UserQuestionsProps} from "../../types/props/UserScreenProps";
 import {getSocketConnection} from "../../services/socket";
 
 const socket = getSocketConnection();
 
-const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, questions, onDone}) => {
+const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageNum, questions, onDone}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [response, setResponse] = useState("");
 
@@ -15,13 +14,19 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, questi
     }, [username]);
 
     const submitQuestion = () => {
+        let allSubmitted = false;
+        if (currentQuestionIndex >= questions.length - 1) allSubmitted = true;
+
         socket.emit("submit_response", {
             username: username,
             room: roomCode,
+            imageNum: imageNum,
             question: questions[currentQuestionIndex],
             response: response,
+            allSubmitted: allSubmitted
         })
-        if (currentQuestionIndex >= questions.length - 1) {
+
+        if (allSubmitted) {
             onDone();
         } else {
             setCurrentQuestionIndex(currentQuestionIndex + 1);

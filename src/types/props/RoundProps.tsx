@@ -7,7 +7,7 @@ export interface RoundProps {
 }
 
 export interface RoundManagerProps extends RoundProps {
-    roundNumber: number,
+    roundNumber: number
 }
 
 export interface QuestionsProps extends RoundProps {
