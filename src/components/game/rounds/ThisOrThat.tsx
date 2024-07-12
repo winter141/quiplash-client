@@ -97,6 +97,8 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
         if (!foundPlayerScoreFromRound) return null;
 
+        console.log(foundPlayerScoreFromRound);
+
         return (
             <AnimateVotes playerScoreFromRound={foundPlayerScoreFromRound} players={players}/>
         );

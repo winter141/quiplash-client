@@ -16,7 +16,7 @@ const UserScreenManager = () => {
     const [username, setUsername] = useState<string | null>(null);
     const [roomCode, setRoomCode] = useState<string | null>(null);
     const [imageNum, setImageNum] = useState<number>(0);
-    const [isVIP, setIsVIP] = useState<boolean>(localStorage.getItem("VIP") === "true");
+    const [isVIP, setIsVIP] = useState<boolean>(false);
     const [question, setQuestion] = useState("");
     const [responses, setResponses] = useState([]);
     const [currentScene, setCurrentScene] = useState<UserScenes>(UserScenes.INITIAL);
@@ -33,12 +33,13 @@ const UserScreenManager = () => {
             setUsername(storedUsername);
             setRoomCode(storedRoomCode);
             setImageNum(parseInt(storedImageNumString));
+            if (storedUsername) socket.emit("join_specific_room", storedUsername);
         }
     }, []);
 
-    useEffect(() => {
-        socket.emit("join_specific_room", username);
-    }, [username]);
+    useSocketOnHook(socket, "vip_ready", () => {
+        setIsVIP(true);
+    })
 
     useSocketOnHook(socket, "round_one_questions", (data) => {
         setQuestions(data);

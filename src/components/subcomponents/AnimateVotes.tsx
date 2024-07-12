@@ -1,7 +1,7 @@
 import {Player, PlayerScoreFromRound} from "../../types/types/Player";
 import React, {useEffect, useState} from "react";
 import {votesContainer} from "../../styling/styles";
-import {AnimatedChip, AnimatedTypography} from "../../styling/animations";
+import {AnimatedChip, AnimatedDiv, AnimatedTypography} from "../../styling/animations";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 import {Typography} from "@mui/material";
 import ConstructionIcon from '@mui/icons-material/Construction';
@@ -9,7 +9,7 @@ import ConstructionIcon from '@mui/icons-material/Construction';
 interface AnimateVotesProps {
     playerScoreFromRound: PlayerScoreFromRound;
     players: Player[];
-};
+}
 
 const SCORE_TIMEOUT = 1000;
 const QUIPLASH_TIMEOUT = 1000;
@@ -35,7 +35,7 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
                 setShowQuiplashBonus(true);
             }, SCORE_TIMEOUT + QUIPLASH_TIMEOUT);
         }
-    }, []);
+    }, [playerScoreFromRound.quiplashBonus]);
 
     return (
         <React.Fragment>
@@ -52,10 +52,10 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
             </div>
 
             {playerScoreFromRound.playerResponse.safetyQuip && (
-                <AnimatedTypography sx={{fontWeight: "bold", color: "orange"}}>
+                <AnimatedDiv style={{fontWeight: "bold", color: "orange"}}>
                     <Typography>SAFETY QUIPPED</Typography>
                     <ConstructionIcon/>
-                </AnimatedTypography>
+                </AnimatedDiv>
             )}
             {playerScoreFromRound.scoreFromRound > 0 && showRoundScore && (
                 <AnimatedTypography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</AnimatedTypography>

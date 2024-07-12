@@ -5,10 +5,8 @@ const { PROMPTS } = questions;
 
 
 const getPlayersNotInGame = (game: GameClass, playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
-    // const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);
-    // return players.filter(player => (!playersInResponse.includes(player.name)));
-
-    return players; // temporary testing
+    const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);
+    return players.filter(player => (!playersInResponse.includes(player.name)));
 }
 
 /**

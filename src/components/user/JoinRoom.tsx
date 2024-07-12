@@ -1,4 +1,4 @@
-import {Button, Paper, Stack, TextField} from "@mui/material";
+import {Button, Paper, Stack, TextField, Typography} from "@mui/material";
 import React, {useState} from "react";
 import {card} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
@@ -9,16 +9,28 @@ const socket = getSocketConnection();
 const JoinRoom = () => {
     const [username, setUsername] = useState("");
     const [room, setRoom] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
+    useSocketOnHook(socket, "join_fail", (message) => {
+        setErrorMessage(message);
+    })
+
     useSocketOnHook(socket, "join_successful", (data) => {
-        const isVIP = data.VIP === true;
-        localStorage.setItem("VIP", isVIP ? "true" : "false");
+        localStorage.setItem("VIP", data.VIP ? "true" : "false");
         localStorage.setItem("imageNum", data.imageNum);
         navigate('/user');
     })
 
     const joinGame = () => {
+        if (username.length === 0) {
+            setErrorMessage("Please enter a name");
+            return;
+        }
+        if (room.length === 0) {
+            setErrorMessage("Please enter a room code");
+            return;
+        }
         localStorage.setItem("username", username);
         localStorage.setItem("roomCode", room);
         if (room !== "") socket.emit("join_room", { room: room, username: username });
@@ -42,6 +54,7 @@ const JoinRoom = () => {
                 />
                 <Button variant="contained" onClick={joinGame}>Join</Button>
             </Stack>
+            <Typography sx={{color: "red"}}>{errorMessage}</Typography>
         </Paper>
     );
 }

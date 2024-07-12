@@ -19,7 +19,9 @@ const RoundAnswers: React.FC<AnswerProps> = ({players, onDone, maxScore, votingT
                 players={players}
                 votingTime={votingTime}
                 maxScore={maxScore}
-                onDone={handleGameComplete} />
+                onDone={handleGameComplete}
+                key={currentGameIndex}
+            />
     );
 }
 

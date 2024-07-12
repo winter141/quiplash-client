@@ -24,3 +24,7 @@ export const AnimatedChip = styled(Chip)`
 export const AnimatedTypography = styled(Typography)`
     animation: ${fadeIn} 0.2s;
 `;
+
+export const AnimatedDiv = styled('div')`
+    animation: ${fadeIn} 0.2s;
+`;

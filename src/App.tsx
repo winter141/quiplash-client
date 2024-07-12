@@ -44,7 +44,7 @@ function App() {
                     maxScore={1000}
                     onDone={() => {}}
                     players={PLAYERS}
-                    votingTime={20}/>}
+                    votingTime={3}/>}
                 />
 
                 <Route path="/tot" element={<ThisOrThat

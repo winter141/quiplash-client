@@ -12,8 +12,8 @@ const IntroToScene: React.FC<IntroToSceneProps> = ({messages, onDone}) => {
     useSpeechSynthesisHook(messages, ()=>{}, onDone)
     return (
         <Paper elevation={3} style={card}>
-            {messages.map(message => (
-                <Typography>
+            {messages.map((message, index) => (
+                <Typography key={index}>
                     {message}
                 </Typography>
             ))}

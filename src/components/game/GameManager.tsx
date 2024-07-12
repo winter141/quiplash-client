@@ -11,6 +11,7 @@ const GameManager: React.FC = () => {
     const [currentScene, setCurrentScene] = useState<GameScenes>(GameScenes.RULES);
     const audioRef = useRef<HTMLAudioElement>(null);
     const [audioOn, setAudioOn] = useState(false);
+    if (audioRef.current) audioRef.current.volume = 0.25;
 
     const storedPlayers = localStorage.getItem('players');
     if (!storedPlayers) {
