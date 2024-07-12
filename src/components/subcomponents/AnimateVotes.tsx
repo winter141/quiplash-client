@@ -4,6 +4,7 @@ import {votesContainer} from "../../styling/styles";
 import {AnimatedChip, AnimatedTypography} from "../../styling/animations";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 import {Typography} from "@mui/material";
+import ConstructionIcon from '@mui/icons-material/Construction';
 
 interface AnimateVotesProps {
     playerScoreFromRound: PlayerScoreFromRound;
@@ -39,7 +40,7 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
     return (
         <React.Fragment>
             <div style={votesContainer}>
-                {playerScoreFromRound.voterUsernames.map((username: string, index: number) => (
+                {playerScoreFromRound.playerResponse.votes.map((username: string, index: number) => (
                     <AnimatedChip key={index}
                                   label={username}
                                   size="medium"
@@ -50,6 +51,12 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
                 ))}
             </div>
 
+            {playerScoreFromRound.playerResponse.safetyQuip && (
+                <AnimatedTypography sx={{fontWeight: "bold", color: "orange"}}>
+                    <Typography>SAFETY QUIPPED</Typography>
+                    <ConstructionIcon/>
+                </AnimatedTypography>
+            )}
             {playerScoreFromRound.scoreFromRound > 0 && showRoundScore && (
                 <AnimatedTypography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</AnimatedTypography>
             )}
@@ -57,13 +64,13 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
                 <AnimatedTypography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.quiplashBonus} QUIPLASH BONUS</AnimatedTypography>
             )}
             <Typography
-                sx={{color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.username]),
+                sx={{color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.playerResponse.username]),
                     fontWeight: "bold",
                     position: "absolute",
                     bottom: 3,
                     right: 10
                 }}>
-                {playerScoreFromRound.username}
+                {playerScoreFromRound.playerResponse.username}
             </Typography>
         </React.Fragment>
     );

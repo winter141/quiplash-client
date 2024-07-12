@@ -1,8 +1,10 @@
-import {Button, Paper, Stack, TextField, Typography} from "@mui/material";
-import React, {useContext, useEffect, useState} from "react";
+import {Button, Stack, TextField, Typography} from "@mui/material";
+import React, {useEffect, useState} from "react";
 import {UserQuestionsProps} from "../../types/props/UserScreenProps";
 import {getSocketConnection} from "../../services/socket";
 import {getSafetyQuipResponse} from "../../gamelogic/answers";
+import ConstructionIcon from "@mui/icons-material/Construction";
+import SendIcon from '@mui/icons-material/Send';
 
 const socket = getSocketConnection();
 
@@ -16,10 +18,10 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
     }, [username]);
 
     const submitSafetyQuip = () => {
-        return submitQuestion(getSafetyQuipResponse(questions[currentQuestionIndex]));
+        return submitQuestion(getSafetyQuipResponse(questions[currentQuestionIndex]), true);
     }
 
-    const submitQuestion = (responseParam: string) => {
+    const submitQuestion = (responseParam: string, safetyQuip: boolean) => {
         if (responseParam.length === 0) {
             setResponseError("You need to enter something! Or click safety quip");
             return;
@@ -35,6 +37,7 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
             imageNum: imageNum,
             question: questions[currentQuestionIndex],
             response: responseParam,
+            safetyQuip: safetyQuip,
             allSubmitted: allSubmitted
         })
 
@@ -62,12 +65,20 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
                             value={response}
                         />
                         <Typography sx={{color: "red"}}>{responseError}</Typography>
-                        <Button variant="contained" color="primary" onClick={() => {submitQuestion(response)}}>
-                            Submit
+                        <Button variant="contained" color="inherit" onClick={() => {
+                            submitQuestion(response, false)
+                        }}>
+                            <span style={{display: "flex"}}>
+                                <Typography sx={{marginRight: "3px"}}>SEND</Typography>
+                                <SendIcon/>
+                            </span>
                         </Button>
                         <Button variant="contained" color={"warning"} sx={{color: "black", fontWeight: "bold"}}
                                 onClick={submitSafetyQuip}>
-                            Use Safety Quip
+                            <span style={{display: "flex"}}>
+                                <Typography sx={{marginRight: "3px"}}>Use Safety Quip</Typography>
+                                <ConstructionIcon/>
+                            </span>
                         </Button>
                     </Stack>
                 </div>

@@ -2,7 +2,7 @@ import {io} from "socket.io-client";
 import { Socket } from 'socket.io-client';
 import {useEffect} from "react";
 
-const socketEndpoint = "http://localhost:3001";
+const socketEndpoint = process.env.REACT_APP_SOCKET_SERVER || "http://localhost:3001";
 
 const getSocketConnection = () => {
     return io(socketEndpoint).connect();

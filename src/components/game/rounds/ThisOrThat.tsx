@@ -93,7 +93,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const animateVotes = (response: string) => {
         const foundPlayerScoreFromRound = playerScoresFromRound
-            .find(player => player.response === response);
+            .find(player => player.playerResponse.response === response);
 
         if (!foundPlayerScoreFromRound) return null;
 

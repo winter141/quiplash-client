@@ -8,6 +8,7 @@ import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameCl
 import IntroToScene from "../../subcomponents/IntroToScene";
 import {getBeforeQuestionsMessages} from "../../../gamelogic/questions";
 import {getBeforeResultsMessages} from "../../../gamelogic/answers";
+import {getResultMessages} from "../../../gamelogic/results";
 
 const QUESTION_TIME = 20;
 const QUESTION_AMOUNT = 2;
@@ -110,6 +111,7 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                         players={players}
                         onDone={handleChangeScene}
                         sceneTime={RESULTS_TIME}
+                        messages={getResultMessages(players, roundNumber)}
                     />
                 );
             default:

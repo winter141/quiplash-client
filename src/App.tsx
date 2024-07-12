@@ -59,6 +59,7 @@ function App() {
                     onDone={() => {}}
                     players={PLAYERS}
                     sceneTime={5}
+                    messages={["whaba daaba doo"]}
                 />}/>
 
                 <Route path="/intro" element={<IntroToScene

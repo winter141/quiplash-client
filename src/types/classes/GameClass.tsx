@@ -22,7 +22,9 @@ class GameClass {
                 this.playerResponses.push({
                     username: player,
                     response: this.DEFAULT_RESPONSE,
-                    votes: []})
+                    votes: [],
+                    safetyQuip: false
+                })
             }
         }
     }
@@ -59,11 +61,15 @@ class GameClass {
      * Add response, ensuring it is unique.
      * @param username
      * @param response
+     * @param safetyQuip if safety quip was used
      */
-    public addResponse(username: string, response: string) {
+    public addResponse(username: string, response: string, safetyQuip: boolean) {
         response = this.getUniqueResponse(response);
         const foundPlayerResponse = this.findPlayerResponseByUsername(username);
-        if (foundPlayerResponse) foundPlayerResponse.response = response;
+        if (foundPlayerResponse) {
+            foundPlayerResponse.response = response;
+            foundPlayerResponse.safetyQuip = safetyQuip;
+        }
     }
 
     public addVote(voterUsername: string, response: string) {
@@ -91,22 +97,21 @@ class GameClass {
             const foundPlayer = players.find(player => player.name === playerResponse.username);
             if (foundPlayer) {
                 let quiplashBonus = 0;
-                let scoreFromRound = 0
+                let scoreFromRound = 0;
+                const safetyQuipMultiplier = playerResponse.safetyQuip ? 0.5 : 1;
 
                 const votesForPlayer = playerResponse.votes.length;
                 if (votesForPlayer > 0) {
-                    scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore);
+                    scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore * safetyQuipMultiplier);
                 }
 
                 if (votesForPlayer > 0 && votesForPlayer === totalVotes) {
-                    quiplashBonus += Math.round(maxScore * this.QUIPLASH_BONUS_PERCENT);
+                    quiplashBonus += Math.round(maxScore * this.QUIPLASH_BONUS_PERCENT * safetyQuipMultiplier);
                 }
 
                 foundPlayer.score += scoreFromRound + quiplashBonus;
                 playerScoresFromRound.push({
-                    voterUsernames: playerResponse.votes,
-                    username: foundPlayer.name,
-                    response: playerResponse.response,
+                    playerResponse: playerResponse,
                     scoreFromRound: scoreFromRound,
                     quiplashBonus: quiplashBonus
                 })

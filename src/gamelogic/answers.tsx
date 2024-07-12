@@ -33,4 +33,4 @@ const getSafetyQuipResponse = (question: string): string => {
     return safetyQuips[Math.floor(Math.random() * safetyQuips.length)];
 }
 
-export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse }
+export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse}

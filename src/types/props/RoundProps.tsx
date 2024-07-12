@@ -28,5 +28,6 @@ export interface ThisOrThatProps extends RoundProps {
 }
 
 export interface ResultsProps extends RoundProps {
-    sceneTime: number
+    sceneTime: number,
+    messages: string[]
 }

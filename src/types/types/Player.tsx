@@ -13,13 +13,12 @@ type PlayerQuestions = {
 type PlayerResponse = {
     username: string,
     response: string,
-    votes: string[] // List of usernames of the votes for this response
+    votes: string[], // List of usernames of the votes for this response,
+    safetyQuip: boolean
 }
 
 type PlayerScoreFromRound = {
-    voterUsernames: string[],
-    username: string,
-    response: string,
+    playerResponse: PlayerResponse,
     scoreFromRound: number,
     quiplashBonus: number
 }

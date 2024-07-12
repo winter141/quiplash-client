@@ -61,7 +61,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
             if (game.getQuestion() === data.question) {
                 playersSubmittedResponseCount.current++;
                 const clonedGame = game.cloneGame();
-                clonedGame.addResponse(data.username, data.response);
+                clonedGame.addResponse(data.username, data.response, data.safetyQuip);
 
                 if (allResponsesCount.current <= playersSubmittedResponseCount.current) {
                     handleTimeEnd();
