@@ -3,7 +3,7 @@
     {
       "prompt": "What's the worst thing to say when trying to adopt a pet?",
       "safetyQuips": [
-        "I'm just here for the free snacks.",
+        "I'm just here for the free snacks",
         "Do you have a return policy?",
         "Are they good at filing taxes?"
       ]
@@ -12,48 +12,48 @@
       "prompt": "A great place to hide an Easter egg would be...",
       "safetyQuips": [
         "In the neighbor's yard!",
-        "Inside the dog's toy box.",
-        "Next to the open bag of potato chips."
+        "Inside the dog's toy box",
+        "Next to the open bag of potato chips"
       ]
     },
     {
       "prompt": "The best name for a new cereal brand",
       "safetyQuips": [
-        "Sugar Coated Ouchies!",
-        "Marshmallow Meatballs!",
-        "Crunchy Kale Surprise!"
+        "Sugar Coated Ouchies",
+        "Marshmallow Meatballs",
+        "Crunchy Kale Surprise"
       ]
     },
     {
       "prompt": "What aliens do with you after abducting you",
       "safetyQuips": [
-        "Take selfies for their space Instagram.",
-        "Make you their intergalactic hairdresser.",
-        "Ask if you know how to fix their spaceship."
+        "Take selfies for their space Instagram",
+        "Make you their intergalactic hairdresser",
+        "Ask if you know how to fix their spaceship"
       ]
     },
     {
       "prompt": "A rejected name for a ship in a pirate movie",
       "safetyQuips": [
-        "The Soggy Sardine.",
-        "The Wimpy Whale.",
-        "The Plank Plunger."
+        "The Soggy Sardine",
+        "The Wimpy Whale",
+        "The Plank Plunger"
       ]
     },
     {
       "prompt": "What really happened to Amelia Earhart?",
       "safetyQuips": [
-        "She opened a tiki bar in Tahiti.",
-        "She became the world's first time traveler.",
-        "She's been working at a secret NASA facility."
+        "She opened a tiki bar in Tahiti",
+        "She became the world's first time traveler",
+        "She's been working at a secret NASA facility"
       ]
     },
     {
       "prompt": "A great bumper sticker for a cat",
       "safetyQuips": [
-        "I do what I want, when I want.",
-        "My other ride is a laser pointer.",
-        "Cat hair, don't care."
+        "I do what I want, when I want",
+        "My other ride is a laser pointer",
+        "Cat hair, don't care"
       ]
     },
     {
@@ -61,31 +61,31 @@
       "safetyQuips": [
         "Can you keep a secret?",
         "Do you believe in magic?",
-        "You're my favorite lawn ornament."
+        "You're my favorite lawn ornament"
       ]
     },
     {
       "prompt": "What should never be used as a pizza topping",
       "safetyQuips": [
-        "Marshmallows and anchovies.",
-        "Lego bricks and hot sauce.",
-        "Jelly beans and sardines."
+        "Marshmallows and anchovies",
+        "Lego bricks and hot sauce",
+        "Jelly beans and sardines"
       ]
     },
     {
       "prompt": "The worst thing to say during a job interview",
       "safetyQuips": [
-        "I'm only here for the free snacks.",
+        "I'm only here for the free snacks",
         "What's the company's policy on napping?",
-        "I can't work with people."
+        "I can't work with people"
       ]
     },
     {
       "prompt": "What's the secret to a happy life?",
       "safetyQuips": [
-        "Always have dessert first.",
-        "Naps are mandatory.",
-        "Dance like nobody's watching."
+        "Always have dessert first",
+        "Naps are mandatory",
+        "Dance like nobody's watching"
       ]
     },
     {
@@ -288,6 +288,27 @@
         "Starts his own YouTube channel"
       ]
     }
+  ],
+  "FINAL_ROUND_SAFETY_QUIPS": [
+    "What does the fox say?",
+    "A weird excuse for being late:",
+    "What Liam does when no one is looking:",
+    "A weird thing to dream about:",
+    "If you could have any superpower, what would it be?",
+    "A strange talent you wish you had:",
+    "The last thing you Googled:",
+    "A food combination that shouldn't work but does:",
+    "What's the first thing you would buy if you won the lottery?",
+    "A hobby you secretly enjoy:",
+    "The weirdest thing you've ever seen someone do in public:",
+    "If you could live in any fictional world, where would it be?",
+    "The worst movie you've ever seen:",
+    "An unusual phobia you have:",
+    "A bizarre invention that should exist:",
+    "The strangest thing you've ever eaten:",
+    "A song that always gets stuck in your head:",
+    "What's the most embarrassing thing you've ever done?",
+    "A conspiracy theory you secretly believe in:"
   ]
 }
 

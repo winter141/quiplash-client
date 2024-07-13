@@ -1,7 +1,7 @@
 import {Button, Stack, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {UserQuestionsProps} from "../../types/props/UserScreenProps";
-import {getSocketConnection} from "../../services/socket";
+import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 import {getSafetyQuipResponse} from "../../gamelogic/answers";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import SendIcon from '@mui/icons-material/Send';
@@ -14,8 +14,12 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
     const [responseError, setResponseError] = useState("");
 
     useEffect(() => {
-        socket.emit("join_specific_room", username);
-    }, [username]);
+        socket.emit("join_specific_rooms", [username, roomCode + "users"]);
+    }, [roomCode, username]);
+
+    useSocketOnHook(socket, "receive_time_end", ()=> {
+        onDone();
+    });
 
     const submitSafetyQuip = () => {
         return submitQuestion(getSafetyQuipResponse(questions[currentQuestionIndex]), true);

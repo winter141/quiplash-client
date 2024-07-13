@@ -3,14 +3,18 @@ import React, {useEffect} from "react";
 import {card} from "../../styling/styles";
 import {io} from "socket.io-client";
 import {UserVoteProps} from "../../types/props/UserScreenProps";
-import {getSocketConnection} from "../../services/socket";
+import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 
 const socket = getSocketConnection();
 
 const UserVote: React.FC<UserVoteProps> = ({username, roomCode, question, responses, onDone}) => {
     useEffect(() => {
-        socket.emit("join_specific_room", username);
-    }, [username]);
+        socket.emit("join_specific_rooms", [username, roomCode + "users"]);
+    }, [roomCode, username]);
+
+    useSocketOnHook(socket, "receive_time_end", ()=> {
+        onDone();
+    });
 
     const submitResponse = (response: string) => {
         socket.emit("cast_vote", {response: response, voterUsername: username, room: roomCode});

@@ -1,10 +1,8 @@
 import {Player, PlayerResponse} from "../types/types/Player";
-import {GameClass} from "../types/classes/GameClass";
 import questions from "../data/prompts.json";
-const { PROMPTS } = questions;
+const { PROMPTS, FINAL_ROUND_SAFETY_QUIPS } = questions;
 
-
-const getPlayersNotInGame = (game: GameClass, playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
+const getPlayersNotInGame = (playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
     const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);
     return players.filter(player => (!playersInResponse.includes(player.name)));
 }
@@ -27,7 +25,7 @@ const getBeforeResultsMessages = (roundNumber: number) => {
 
 const getSafetyQuipResponse = (question: string): string => {
     const prompt = PROMPTS.find(prompt => prompt.prompt === question);
-    const safetyQuips =  prompt ? prompt.safetyQuips : ["What does the fox say?", "Whoop dee doo", "Apple"];
+    const safetyQuips =  prompt ? prompt.safetyQuips : FINAL_ROUND_SAFETY_QUIPS;
     return safetyQuips[Math.floor(Math.random() * safetyQuips.length)];
 }
 

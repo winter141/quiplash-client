@@ -44,7 +44,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         initialGameState.addVote(data.voterUsername, data.response);
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
 
-        if (playersVoted.current >= getPlayersNotInGame(game, responses, players).length) {
+        if (playersVoted.current >= getPlayersNotInGame(responses, players).length) {
             if (!(context && context.isFinalRound)) {
                 const winnerPlayerResponse = game.getWinnerPlayerResponse();
                 addPlayerResponseToLocalStorage(winnerPlayerResponse);
@@ -68,7 +68,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     }
 
     const onDoneSpeech = () => {
-        socket.emit("begin_voting", { game: game, players: getPlayersNotInGame(game, responses, players) });
+        socket.emit("begin_voting", { game: game, players: getPlayersNotInGame(responses, players) });
         setShowTimer(true);
     }
 
@@ -132,7 +132,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
                 <RoundTimer
                     initialTime={votingTime}
                     onTimeEnd={handleTimeEnd}
-                    sx={{top:16}}
+                    sx={{top: 16}}
                 />
             )}
         </div>

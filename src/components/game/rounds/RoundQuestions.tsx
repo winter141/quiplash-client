@@ -46,7 +46,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
 
         allResponsesCount.current = getAllResponsesCount(games);
         setGames(games);
-        socket.emit("send_round_one_questions", playerQuestionsArray);
+        socket.emit("send_round_questions", playerQuestionsArray);
     }, [players, questionAmount]);
     
     useSocketOnHook(socket, "receive_response", (data) => {
@@ -77,6 +77,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
     useSpeechSynthesisHook(onDoneMessages, ()=> {}, onDone, triggerSpeech.current)
 
     const handleTimeEnd = () => {
+        socket.emit("time_end", localStorage.getItem("roomCode"));
         localStorage.setItem("games", JSON.stringify(games.map(game => game.getGameJson())));
         setShowTimer(false);
         setTimerText(onDoneMessages[0])

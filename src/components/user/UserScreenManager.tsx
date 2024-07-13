@@ -41,7 +41,7 @@ const UserScreenManager = () => {
         setIsVIP(true);
     })
 
-    useSocketOnHook(socket, "round_one_questions", (data) => {
+    useSocketOnHook(socket, "round_questions", (data) => {
         setQuestions(data);
         setCurrentScene(UserScenes.QUESTIONS)
     })

@@ -50,7 +50,9 @@ class GameClass {
     }
 
     public getPlayerResponses() {
-        return this.playerResponses;
+        return this.playerResponses
+            .sort((a, b) =>
+                a.username.localeCompare(b.username));
     }
 
     public cloneGame() {
