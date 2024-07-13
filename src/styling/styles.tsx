@@ -5,6 +5,12 @@ const card: CSS.Properties = {
     margin: "20px",
 }
 
+const colorCard: CSS.Properties = {
+    padding: "10px",
+    margin: "20px",
+    backgroundColor: "#FBE590"
+}
+
 const questionWrapper: CSS.Properties ={
     padding: '20px',
     marginBottom: '20px'
@@ -36,4 +42,9 @@ const characterImage: CSS.Properties = {
     height: "7rem"
 }
 
-export {card, animatedText, paragraph, questionWrapper, votesContainer, padding, characterImage };
+const titleImage: CSS.Properties = {
+    width: "30rem",
+    height: "30rem",
+}
+
+export {card, colorCard, animatedText, paragraph, questionWrapper, votesContainer, padding, characterImage, titleImage };

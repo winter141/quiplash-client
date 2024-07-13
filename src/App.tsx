@@ -59,12 +59,15 @@ function App() {
                     onDone={() => {}}
                     players={PLAYERS}
                     sceneTime={5}
-                    messages={["whaba daaba doo"]}
+                    messages={["whaba daaba dub doo", "Congrats champ!"]}
                 />}/>
 
                 <Route path="/intro" element={<IntroToScene
                     onDone={() => {}}
-                    messages={["YO yo"]}
+                    speechMessages={["YO yo", "Yo?"]}
+/*
+                    imageTitle={"round1"}
+*/
                 />}/>
 
                 <Route path="*" element={<NotFound/>}/>

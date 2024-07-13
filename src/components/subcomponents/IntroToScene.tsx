@@ -1,22 +1,26 @@
 import React from "react";
 import {Paper, Typography} from "@mui/material";
 import {useSpeechSynthesisHook} from "../../services/speech";
-import {card} from "../../styling/styles";
+import {card, colorCard} from "../../styling/styles";
+import TitleImage from "./TitleImage";
 
 interface IntroToSceneProps {
-    messages: string[];
+    speechMessages: string[];
+    imageTitle?: string;
     onDone: () => void;
 }
 
-const IntroToScene: React.FC<IntroToSceneProps> = ({messages, onDone}) => {
-    useSpeechSynthesisHook(messages, ()=>{}, onDone)
+const IntroToScene: React.FC<IntroToSceneProps> = ({speechMessages, imageTitle, onDone}) => {
+    useSpeechSynthesisHook(speechMessages, ()=>{}, onDone)
     return (
-        <Paper elevation={3} style={card}>
-            {messages.map((message, index) => (
-                <Typography key={index}>
-                    {message}
-                </Typography>
-            ))}
+        <Paper elevation={10} style={imageTitle ? colorCard : card}>
+            {imageTitle ? (
+                <TitleImage titleName={imageTitle}/>
+            ) : (
+                speechMessages.map((message, index) => (
+                    <Typography variant="h4" sx={{padding: "12px"}}>{message}</Typography>
+                ))
+            )}
         </Paper>
     )
 }

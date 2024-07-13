@@ -19,8 +19,7 @@ const getResultMessages = (players: Player[], roundNumber: number) => {
             return ['Keep your laughing hat on!', lastPlaceMessage1];
         case 4:
             return [
-                players.length > 2 ? "Third" : "",
-                "Second", "First",
+                "", "Third", "", "Second", "", "First, Congrats Champ",
                 players.length > 3 ? "      and the rest of ya" : "",
                 "Thanks for playing!"]
         default:

@@ -29,4 +29,10 @@ const getSafetyQuipResponse = (question: string): string => {
     return safetyQuips[Math.floor(Math.random() * safetyQuips.length)];
 }
 
-export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse}
+const getRoundMultiplier = (roundNumber: number): number => {
+    if (roundNumber === 1) return 1;
+    return roundNumber < 4 ? 2 : 3;
+}
+
+export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse,
+    getRoundMultiplier}

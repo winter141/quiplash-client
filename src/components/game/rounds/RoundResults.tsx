@@ -8,6 +8,7 @@ import '../../../styling/podiumResults.css'
 import {roundContext} from "./RoundManager";
 import {useSpeechSynthesisHook} from "../../../services/speech";
 import {useNavigate} from "react-router-dom";
+import {AnimatedDivGrow, AnimatedDivSwing} from "../../../styling/animations";
 
 const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messages}) => {
     const context = useContext(roundContext);
@@ -39,25 +40,31 @@ const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messa
         return (
             <div className="podium">
                 {topThree.length > 1 && showPlayer(2) && (
-                    <div className="podium-item second">
-                        <ImageCharacter imageNum={topThree[1]?.imageNum}/>
-                        <div className="player-name">{topThree[1]?.name}</div>
-                        <div className="player-score">{topThree[1]?.score}</div>
-                    </div>
+                    <AnimatedDivGrow>
+                        <div className="podium-item second">
+                            <ImageCharacter imageNum={topThree[1]?.imageNum}/>
+                            <div className="player-name">{topThree[1]?.name}</div>
+                            <div className="player-score">{topThree[1]?.score}</div>
+                        </div>
+                    </AnimatedDivGrow>
                 )}
                 {topThree.length > 0 && showPlayer(1) && (
-                    <div className="podium-item first">
-                        <ImageCharacter imageNum={topThree[0]?.imageNum}/>
-                        <div className="player-name">{topThree[0]?.name}</div>
-                        <div className="player-score">{topThree[0]?.score}</div>
-                    </div>
+                    <AnimatedDivGrow>
+                        <div className="podium-item first">
+                            <ImageCharacter imageNum={topThree[0]?.imageNum}/>
+                            <div className="player-name">{topThree[0]?.name}</div>
+                            <div className="player-score">{topThree[0]?.score}</div>
+                        </div>
+                    </AnimatedDivGrow>
                 )}
                 {topThree.length > 2 && showPlayer(3) && (
-                    <div className="podium-item third">
-                        <ImageCharacter imageNum={topThree[2]?.imageNum}/>
-                        <div className="player-name">{topThree[2]?.name}</div>
-                        <div className="player-score">{topThree[2]?.score}</div>
-                    </div>
+                    <AnimatedDivGrow>
+                        <div className="podium-item third">
+                            <ImageCharacter imageNum={topThree[2]?.imageNum}/>
+                            <div className="player-name">{topThree[2]?.name}</div>
+                            <div className="player-score">{topThree[2]?.score}</div>
+                        </div>
+                    </AnimatedDivGrow>
                 )}
             </div>
         );
@@ -65,16 +72,18 @@ const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messa
 
     const playerCard = (player: Player, index: number) => {
         return (
-            <Card className="player-card">
-                <CardContent>
-                    <div className="image-wrapper">
-                        <ImageCharacter imageNum={player.imageNum}/>
-                    </div>
-                    <Typography variant="h6" component="div">{player.name}</Typography>
-                    <Typography variant="body2" color="text.secondary">{player.score}</Typography>
-                    <Typography sx={{fontWeight: 'bold'}}>{index + 4}</Typography>
-                </CardContent>
-            </Card>
+            <AnimatedDivSwing>
+                <Card className="player-card">
+                    <CardContent>
+                        <div className="image-wrapper">
+                            <ImageCharacter imageNum={player.imageNum}/>
+                        </div>
+                        <Typography variant="h6" component="div">{player.name}</Typography>
+                        <Typography variant="body2" color="text.secondary">{player.score}</Typography>
+                        <Typography sx={{fontWeight: 'bold'}}>{index + 4}</Typography>
+                    </CardContent>
+                </Card>
+            </AnimatedDivSwing>
         )
     }
 

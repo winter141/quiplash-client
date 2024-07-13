@@ -1,6 +1,6 @@
 import React from 'react';
-import { Paper } from '@mui/material';
-import {card, paragraph} from "../../styling/styles";
+import { Paper, Typography } from '@mui/material';
+import {card, colorCard, paragraph} from "../../styling/styles";
 import {useSpeechSynthesisHook} from "../../services/speech";
 
 interface GameRulesProps {
@@ -20,9 +20,9 @@ const GameRules: React.FC<GameRulesProps> = ({ onDone }) => {
     )
 
     return (
-        <Paper elevation={3} style={card}>
+        <Paper elevation={3} style={colorCard}>
             {messages.map((message, index) => (
-                <p key={index} style={paragraph}>{message}</p>
+                <Typography key={index} variant="h3" style={paragraph}>{message}</Typography>
             ))}
         </Paper>
     );

@@ -7,7 +7,7 @@ import RoundResults from "./RoundResults";
 import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameClass";
 import IntroToScene from "../../subcomponents/IntroToScene";
 import {getBeforeQuestionsMessages} from "../../../gamelogic/questions";
-import {getBeforeResultsMessages} from "../../../gamelogic/answers";
+import {getBeforeResultsMessages, getRoundMultiplier} from "../../../gamelogic/answers";
 import {getResultMessages} from "../../../gamelogic/results";
 
 const QUESTION_TIME = 20;
@@ -23,6 +23,8 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
     const [currentScene, setCurrentScene] = useState<RoundScenes>(RoundScenes.BEFORE_QUESTIONS);
     const [games, setGames] = useState<GameClass[]>([]);
     const isFinalRound = roundNumber === FINAL_ROUND_NUMBER;
+
+    const roundMultiplier = getRoundMultiplier(roundNumber);
 
     useEffect(() => {
         resetRound();
@@ -43,7 +45,7 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                     setGames(storedGames);
                     setCurrentScene(RoundScenes.ANSWERS);
                 } catch (e) {
-                    console.error("OH NOOOO: AN ERROR HAPPENED");
+                    console.error("OH NO: AN ERROR HAPPENED");
                     console.error(e);
                 }
                 break;
@@ -75,7 +77,8 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
             case RoundScenes.BEFORE_QUESTIONS:
                return (
                    <IntroToScene
-                   messages={getBeforeQuestionsMessages(roundNumber)}
+                   speechMessages={getBeforeQuestionsMessages(roundNumber)}
+                   imageTitle={"round" + roundNumber}
                    onDone={handleChangeScene}
                     />
                )
@@ -94,14 +97,14 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                         games={games}
                         players={players}
                         onDone={handleChangeScene}
-                        maxScore={MAX_SCORE}
+                        maxScore={MAX_SCORE * roundMultiplier}
                         votingTime={VOTING_TIME}
                     />
                 );
             case RoundScenes.BEFORE_RESULTS:
                 return (
                     <IntroToScene
-                        messages={getBeforeResultsMessages(roundNumber)}
+                        speechMessages={getBeforeResultsMessages(roundNumber)}
                         onDone={handleChangeScene}
                     />
                 )

@@ -1,13 +1,13 @@
 {
   "PLAYERS": [
     { "name": "Alice", "score": 1000, "likes": 50, "imageNum": 10 },
-    { "name": "Bob", "score": 90, "likes": 30, "imageNum": 5 },
+    { "name": "Bob", "score": 1000.5, "likes": 30, "imageNum": 5 },
     { "name": "Charlie", "score": 50, "likes": 70, "imageNum": 2 },
     { "name": "Stevo", "score": 995, "likes": 50, "imageNum": 3 },
     { "name": "Jimmy", "score": 990, "likes": 30, "imageNum": 4 },
     { "name": "Tim", "score": 999, "likes": 70, "imageNum": 7 },
-    { "name": "Steve", "score": 991, "likes": 50, "imageNum": 6 },
-    { "name": "Stevenson", "score": 120, "likes": 50, "imageNum": 9 }
+    { "name": "Steve", "score": 1001, "likes": 50, "imageNum": 6 },
+    { "name": "Stevenson", "score": 1500, "likes": 50, "imageNum": 9 }
   ],
   "PLAYER_QUESTIONS": [
     { "player": { "name": "Alice", "score": 120, "likes": 50 }, "questions": ["What's your favorite color?", "Do you like pizza?"] },
