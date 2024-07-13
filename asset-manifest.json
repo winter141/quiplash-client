@@ -1,24 +1,30 @@
 {
   "files": {
     "main.css": "/quiplash-client/static/css/main.2c438408.css",
-    "main.js": "/quiplash-client/static/js/main.3766e396.js",
+    "main.js": "/quiplash-client/static/js/main.d7fb6622.js",
     "static/js/453.4507ac20.chunk.js": "/quiplash-client/static/js/453.4507ac20.chunk.js",
-    "static/media/4.png": "/quiplash-client/static/media/4.8ce581433c33ae6f9037.png",
-    "static/media/6.png": "/quiplash-client/static/media/6.e205090bfed32b1736bc.png",
-    "static/media/9.png": "/quiplash-client/static/media/9.0ca9f7ec9026d03df982.png",
-    "static/media/10.png": "/quiplash-client/static/media/10.c2529872427c8a6b9a76.png",
-    "static/media/2.png": "/quiplash-client/static/media/2.e35df47d2c51ab696d6f.png",
-    "static/media/8.png": "/quiplash-client/static/media/8.15c6bd73bfb101a4477d.png",
-    "static/media/3.png": "/quiplash-client/static/media/3.55678d1d0126a06d7022.png",
-    "static/media/7.png": "/quiplash-client/static/media/7.1e4ceb5b1ecce650eced.png",
-    "static/media/5.png": "/quiplash-client/static/media/5.074d712627394de2964e.png",
+    "static/media/partypack1.png": "/quiplash-client/static/media/partypack1.38529f786a87d63d4533.png",
+    "static/media/lashquip.png": "/quiplash-client/static/media/lashquip.35897928ce727d9f324e.png",
+    "static/media/round2.png": "/quiplash-client/static/media/round2.243a6be674b65e8722ec.png",
+    "static/media/round4.png": "/quiplash-client/static/media/round4.c90ed81f32522f955d50.png",
+    "static/media/round3.png": "/quiplash-client/static/media/round3.7fa4019dda26d373e40a.png",
+    "static/media/round1.png": "/quiplash-client/static/media/round1.3cc5c779f0a27a604fda.png",
+    "static/media/4.png": "/quiplash-client/static/media/4.f4f9f3d01c3babb0c7b2.png",
+    "static/media/6.png": "/quiplash-client/static/media/6.53b59404a557e845a717.png",
+    "static/media/10.png": "/quiplash-client/static/media/10.d5a215ffd584557577c4.png",
+    "static/media/2.png": "/quiplash-client/static/media/2.49d90ad07b78313414b1.png",
+    "static/media/9.png": "/quiplash-client/static/media/9.981f1d7b9e17b18103d3.png",
+    "static/media/8.png": "/quiplash-client/static/media/8.78084edad8fe00b395a9.png",
+    "static/media/3.png": "/quiplash-client/static/media/3.97233df2af65a2e683e8.png",
+    "static/media/5.png": "/quiplash-client/static/media/5.89efa577c1e08d7189e6.png",
+    "static/media/7.png": "/quiplash-client/static/media/7.c3fddda0a9311b71a1cd.png",
     "index.html": "/quiplash-client/index.html",
     "main.2c438408.css.map": "/quiplash-client/static/css/main.2c438408.css.map",
-    "main.3766e396.js.map": "/quiplash-client/static/js/main.3766e396.js.map",
+    "main.d7fb6622.js.map": "/quiplash-client/static/js/main.d7fb6622.js.map",
     "453.4507ac20.chunk.js.map": "/quiplash-client/static/js/453.4507ac20.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2c438408.css",
-    "static/js/main.3766e396.js"
+    "static/js/main.d7fb6622.js"
   ]
 }
