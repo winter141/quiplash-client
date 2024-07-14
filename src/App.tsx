@@ -58,7 +58,10 @@ function App() {
                     onDone={() => {}}
                     players={PLAYERS}
                     sceneTime={5}
-                    messages={["whaba daaba dub doo", "Congrats champ!"]}
+                    messages={[
+                        "", "Third", "Second", "", "First, Congrats Champ",
+                        "      and the rest of ya",
+                        "Thanks for playing!"]}
                 />}/>
 
                 <Route path="/intro" element={<IntroToScene

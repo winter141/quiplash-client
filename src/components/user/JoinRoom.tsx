@@ -34,12 +34,21 @@ const JoinRoom = () => {
         }
         localStorage.setItem("username", username);
         localStorage.setItem("roomCode", room);
-        if (room !== "") socket.emit("join_room", { room: room, username: username });
+        if (room !== "") {
+            socket.emit("join_room", {
+                room: room.toUpperCase(),
+                username: username.toUpperCase()
+            });
+        }
     }
 
-    const handleUsernameChange = (e: { target: { value: React.SetStateAction<string>; }; }) => { setUsername(e.target.value) }
+    const handleUsernameChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setUsername((e.target.value as string).toUpperCase());
+    }
 
-    const handleRoomChange = (e: { target: { value: React.SetStateAction<string>; }; }) => { setRoom(e.target.value) }
+    const handleRoomChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setRoom((e.target.value as string).toUpperCase())
+    }
 
     return (
         <>
@@ -48,10 +57,12 @@ const JoinRoom = () => {
                 <Stack spacing={2} sx={{p: 2}}>
                     <TextField
                         label="Room Code"
+                        value={room}
                         onChange={handleRoomChange}
                     />
                     <TextField
                         label="Username"
+                        value={username}
                         onChange={handleUsernameChange}
                     />
                     <Button variant="contained" onClick={joinGame}>Join</Button>
