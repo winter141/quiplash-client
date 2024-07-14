@@ -1,15 +1,16 @@
-import {Button, Paper, Grid, List, ListItem, ListItemText, Typography} from "@mui/material";
+import {Button, Paper, Grid, List, ListItem, Typography} from "@mui/material";
 import React, {useState} from "react";
 import {colorCard} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 import TitleImage from "../subcomponents/TitleImage";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const socket = getSocketConnection();
 
 const StartGame = () => {
     const [imageTitle, setImageTitle] = useState("partypack1");
-    const [gameColor, setGameColor] = useState("black");
+    const [gameSelected, setGameSelected] = useState(false);
     const navigate = useNavigate();
 
     useSocketOnHook(socket, "init_game_room_success", (roomCode) => {
@@ -24,12 +25,12 @@ const StartGame = () => {
 
     const onGameHoverOn = () => {
         setImageTitle("lashquip");
-        setGameColor("white");
+        setGameSelected(true);
     }
 
     const onGameHoverOff = () => {
         setImageTitle("partypack1");
-        setGameColor("black");
+        setGameSelected(false);
     }
 
     return (
@@ -40,17 +41,19 @@ const StartGame = () => {
                         <List sx={{marginLeft: "30px"}}>
                             <ListItem key={1}>
                                 <Button
+                                    sx={{color: gameSelected ? "darkgrey" : "black"}}
                                     onClick={startGame}
                                     onMouseEnter={onGameHoverOn}
                                     onMouseLeave={onGameHoverOff}
                                 >
-                                    <Typography variant="h4" sx={{color: gameColor}}>LashQuip</Typography>
+                                    <Typography variant="h4">LashQuip</Typography>
+                                    <PlayArrowIcon sx={{paddingLeft: "3px"}}/>
                                 </Button>
                             </ListItem>
                         </List>
                     </Grid>
                     <Grid item xs={9}>
-                        <TitleImage titleName={imageTitle} sx={{marginLeft: "10rem", padding:"2.5rem"}}/>
+                        <TitleImage titleName={imageTitle} sx={{marginLeft: "10rem", padding:"2.5rem"}} key={imageTitle}/>
                     </Grid>
                 </Grid>
             </Paper>

@@ -8,6 +8,7 @@ import UserVote from "./UserVote";
 import ImageCharacter from "../subcomponents/ImageCharacter";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
+import {useNavigate} from "react-router-dom";
 
 const socket = getSocketConnection();
 
@@ -16,11 +17,12 @@ const UserScreenManager = () => {
     const [username, setUsername] = useState<string | null>(null);
     const [roomCode, setRoomCode] = useState<string | null>(null);
     const [imageNum, setImageNum] = useState<number>(0);
-    const [isVIP, setIsVIP] = useState<boolean>(false);
+    const [isVIPReady, setIsVIPReady] = useState<boolean>(false);
     const [question, setQuestion] = useState("");
     const [responses, setResponses] = useState([]);
     const [currentScene, setCurrentScene] = useState<UserScenes>(UserScenes.INITIAL);
     const [errorFlag, setErrorFlag] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const storedUsername = localStorage.getItem("username");
@@ -34,11 +36,12 @@ const UserScreenManager = () => {
             setRoomCode(storedRoomCode);
             setImageNum(parseInt(storedImageNumString));
             if (storedUsername) socket.emit("join_specific_room", storedUsername);
+            if (storedRoomCode) socket.emit("join_specific_room" , storedRoomCode + "users");
         }
     }, []);
 
     useSocketOnHook(socket, "vip_ready", () => {
-        setIsVIP(true);
+        setIsVIPReady(true);
     })
 
     useSocketOnHook(socket, "round_questions", (data) => {
@@ -52,16 +55,36 @@ const UserScreenManager = () => {
         setCurrentScene(UserScenes.VOTING);
     })
 
+    useSocketOnHook(socket, "end_game", () => {
+        setCurrentScene(UserScenes.DONE);
+    })
+
     const startGame = () => {
         socket.emit("vip_start_game", roomCode);
         localStorage.removeItem("VIP");
-        setIsVIP(false);
+        setIsVIPReady(false);
     }
 
     const showUserScene = () => {
         switch (currentScene) {
             case UserScenes.INITIAL:
-                return null;
+                const isVip = localStorage.getItem("VIP") === "true";
+                console.log(isVIPReady);
+                return (
+                    <>
+                        {isVip && (
+                            <>
+                                <Typography>You are the VIP!</Typography>
+                                <Typography>You can start the game once at least three players have joined</Typography>
+                            </>
+                            )}
+                        <Typography>Awaiting players...</Typography>
+                        {isVIPReady && (
+                        <Button variant="contained" onClick={startGame}>Start Game</Button>
+                        )}
+                    </>
+
+                )
             case UserScenes.WAITING:
                 return null;
             case UserScenes.QUESTIONS:
@@ -83,6 +106,13 @@ const UserScreenManager = () => {
                      responses={responses}
                      onDone={() => {setCurrentScene(UserScenes.WAITING)}}
                     />
+                )
+            case UserScenes.DONE:
+                return (
+                    <>
+                        <Typography>Thanks for playing!</Typography>
+                        <Button variant="contained" onClick={() => {navigate('/join')}}>Back to Join</Button>
+                    </>
                 )
             default:
                 return null;
@@ -106,7 +136,6 @@ const UserScreenManager = () => {
             </Toolbar>
         </AppBar>
         <Box mt={10}>
-            {isVIP && currentScene === UserScenes.INITIAL && <Button variant="contained" onClick={startGame}>Start Game</Button>}
             {showUserScene()}
         </Box>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

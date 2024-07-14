@@ -1,24 +1,38 @@
 import React, {useRef, useState} from 'react';
 import {animated} from '@react-spring/web';
-import GameRules from "./GameRules";
-import {AppBar, Box, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, CardMedia, IconButton, Toolbar} from "@mui/material";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import {GameScenes} from "../../types/enums/Scenes";
 import RoundManager from "./rounds/RoundManager";
+import IntroToScene from "../subcomponents/IntroToScene";
+import {useNavigate} from "react-router-dom";
+import {getSocketConnection} from "../../services/socket";
+
+const GAME_RULES_MESSAGES = ["Welcome to LashQuip!", "Toggle background music by clicking on the music icon in the top right"]
+
+const socket = getSocketConnection();
+
 
 const GameManager: React.FC = () => {
     const [currentScene, setCurrentScene] = useState<GameScenes>(GameScenes.RULES);
     const audioRef = useRef<HTMLAudioElement>(null);
     const [audioOn, setAudioOn] = useState(false);
+    const navigate = useNavigate();
     if (audioRef.current) audioRef.current.volume = 0.25;
 
     const storedPlayers = localStorage.getItem('players');
     if (!storedPlayers) {
-        console.error("NO PLAYERS: HANDLE ERROR");
+        console.error("NO PLAYERS: ERROR");
         return (<div>NO PLAYERS: HANDLE ERROR</div>);
     }
     const players = JSON.parse(storedPlayers);
+
+    const roomCode = localStorage.getItem("roomCode");
+    if (!roomCode) {
+        console.error("NO ROOM CODE: ERROR");
+        return (<div>NO ROOM CODE: ERROR</div>);
+    }
 
     const toggleAudio = () => {
         if (audioRef.current) {
@@ -47,10 +61,11 @@ const GameManager: React.FC = () => {
                 setCurrentScene(GameScenes.ROUND_THREE);
                 break;
             case GameScenes.ROUND_THREE:
-                setCurrentScene(GameScenes.FINAL_ROUND); // or another end state
+                setCurrentScene(GameScenes.FINAL_ROUND);
                 break;
             case GameScenes.FINAL_ROUND:
-                setCurrentScene(GameScenes.RULES); // or another end state
+                navigate('/game/menu');
+                socket.emit("end_game", roomCode);
                 break;
             default:
                 setCurrentScene(GameScenes.RULES);
@@ -63,7 +78,9 @@ const GameManager: React.FC = () => {
 
         switch (currentScene) {
             case GameScenes.RULES:
-                sceneElement = <GameRules onDone={handleDone}/>
+                sceneElement = <IntroToScene
+                    speechMessages={GAME_RULES_MESSAGES}
+                    onDone={handleDone}/>
                 break;
             case GameScenes.ROUND_ONE:
                 sceneElement = <RoundManager players={players} onDone={handleDone} roundNumber={1}/>
@@ -89,25 +106,30 @@ const GameManager: React.FC = () => {
 
     return (
         <div>
-            <AppBar position="fixed">
-                <Toolbar>
-                    <Typography variant="h6" style={{ flexGrow: 1 }}>
-                            {currentScene}
-                        </Typography>
-                        <IconButton edge="end" color="inherit" onClick={toggleAudio}>
-                            {audioOn ? <MusicOffIcon /> : <MusicNoteIcon />}
+            <AppBar position="fixed" sx={{backgroundColor: "#FBE590"}}>
+
+                <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <CardMedia
+                        component="img"
+                        src={require(`../../images/titles/lashquiptitle.png`)}
+                        alt="image not found"
+                        sx={{width: "10rem"}}
+                    />
+                    <Box sx={{ marginLeft: "auto" }}>
+                        <IconButton edge="end" sx={{color: "black"}} onClick={toggleAudio}>
+                            {audioOn ? <MusicNoteIcon /> : <MusicOffIcon />}
                         </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <div></div>
-                <Box mt={10}>
-                    {showScene()}
-                </Box>
-                <audio ref={audioRef} loop>
-                    <source src={`${process.env.PUBLIC_URL}/background_music.mp3`} type="audio/mpeg"/>
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            <Box mt={13}>
+                {showScene()}
+            </Box>
+            <audio ref={audioRef} loop>
+                <source src={`${process.env.PUBLIC_URL}/background_music.mp3`} type="audio/mpeg"/>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     );
 };
 

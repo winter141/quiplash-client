@@ -13,15 +13,15 @@ interface IntroToSceneProps {
 const IntroToScene: React.FC<IntroToSceneProps> = ({speechMessages, imageTitle, onDone}) => {
     useSpeechSynthesisHook(speechMessages, ()=>{}, onDone)
     return (
-        <Paper elevation={10} style={imageTitle ? colorCard : card}>
+        <>
             {imageTitle ? (
                 <TitleImage titleName={imageTitle}/>
             ) : (
                 speechMessages.map((message, index) => (
-                    <Typography variant="h4" sx={{padding: "12px"}}>{message}</Typography>
+                    <Typography variant="h6" sx={{padding: "12px"}}>{message}</Typography>
                 ))
             )}
-        </Paper>
+        </>
     )
 }
 

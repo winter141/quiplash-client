@@ -1,24 +1,25 @@
 import React from "react";
 import {Paper} from "@mui/material";
 import {titleImage} from "../../styling/styles";
-import {AnimatedDivTop} from "../../styling/animations";
+import {AnimatedDivTitleImage} from "../../styling/animations";
+import CSS from "csstype";
 
 interface TitleImageProps {
     titleName: string,
-    sx?: any
+    sx?: any,
+    style?: CSS.Properties
 }
-const TitleImage: React.FC<TitleImageProps> = ({ titleName, sx }) => {
+const TitleImage: React.FC<TitleImageProps> = ({ titleName, sx, style }) => {
     return (
-        <AnimatedDivTop style={sx}>
+        <AnimatedDivTitleImage style={sx}>
             <Paper
                 elevation={12}
                 component="img"
                 src={require(`../../images/titles/${titleName}.png`)}
                 alt="image not found"
-                style={titleImage}
-                key={titleName}
+                style={style ? style : titleImage}
             />
-        </AnimatedDivTop>
+        </AnimatedDivTitleImage>
     )
 }
 

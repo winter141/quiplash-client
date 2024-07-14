@@ -20,7 +20,6 @@ const { PLAYERS, PLAYER_QUESTIONS, GAMES } = testingData;
 const baseUrl = '/quiplash-client'
 
 function App() {
-
     return (
     <div className="App">
         <Router basename={baseUrl}>
@@ -65,9 +64,7 @@ function App() {
                 <Route path="/intro" element={<IntroToScene
                     onDone={() => {}}
                     speechMessages={["YO yo", "Yo?"]}
-/*
                     imageTitle={"round1"}
-*/
                 />}/>
 
                 <Route path="*" element={<NotFound/>}/>

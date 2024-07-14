@@ -18,7 +18,8 @@ enum UserScenes {
     INITIAL,
     WAITING,
     QUESTIONS,
-    VOTING
+    VOTING,
+    DONE
 }
 
 export { GameScenes, RoundScenes, UserScenes }

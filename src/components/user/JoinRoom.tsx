@@ -1,8 +1,9 @@
 import {Button, Paper, Stack, TextField, Typography} from "@mui/material";
 import React, {useState} from "react";
-import {card} from "../../styling/styles";
+import {card, smallTitleImage} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
+import TitleImage from "../subcomponents/TitleImage";
 
 const socket = getSocketConnection();
 
@@ -41,22 +42,26 @@ const JoinRoom = () => {
     const handleRoomChange = (e: { target: { value: React.SetStateAction<string>; }; }) => { setRoom(e.target.value) }
 
     return (
-        <Paper elevation={3} style={card}>
-            <h1>Join Room</h1>
-            <Stack spacing={2} sx={{p: 2}}>
-                <TextField
-                    label="Room Code"
-                    onChange={handleRoomChange}
-                />
-                <TextField
-                    label="Username"
-                    onChange={handleUsernameChange}
-                />
-                <Button variant="contained" onClick={joinGame}>Join</Button>
-            </Stack>
-            <Typography sx={{color: "red"}}>{errorMessage}</Typography>
-        </Paper>
-    );
+        <>
+            <Paper elevation={3} style={card}>
+                <h1>Join Room</h1>
+                <Stack spacing={2} sx={{p: 2}}>
+                    <TextField
+                        label="Room Code"
+                        onChange={handleRoomChange}
+                    />
+                    <TextField
+                        label="Username"
+                        onChange={handleUsernameChange}
+                    />
+                    <Button variant="contained" onClick={joinGame}>Join</Button>
+                </Stack>
+                <Typography sx={{color: "red"}}>{errorMessage}</Typography>
+            </Paper>
+            <TitleImage titleName={"partypack1"} style={smallTitleImage}/>
+        </>
+
+);
 }
 
 export default JoinRoom;

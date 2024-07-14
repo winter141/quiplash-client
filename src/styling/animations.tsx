@@ -37,6 +37,16 @@ export const grow = keyframes`
   }
 `;
 
+export const expand = keyframes`
+  from {
+    transform: scale(0);
+
+  }
+  to {
+      transform: scaleY(1);
+  }
+`;
+
 export const swing = keyframes`
     from {
         transform: translateX(800px);
@@ -62,8 +72,8 @@ export const AnimatedDiv = styled('div')`
     animation: ${fadeInFromTop} 0.2s;
 `;
 
-export const AnimatedDivTop = styled('div')`
-    animation: ${fadeInFromBottom} 0.8s;
+export const AnimatedDivTitleImage = styled('div')`
+    animation: ${expand} 0.6s;
 `;
 
 export const AnimatedDivGrow = styled('div')`

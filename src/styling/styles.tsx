@@ -11,6 +11,15 @@ const colorCard: CSS.Properties = {
     backgroundColor: "#FBE590"
 }
 
+const cardLobby: CSS.Properties = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: "10px",
+    margin: "0 auto",
+    marginBottom: "20px"
+};
+
 const questionWrapper: CSS.Properties ={
     padding: '20px',
     marginBottom: '20px'
@@ -47,4 +56,10 @@ const titleImage: CSS.Properties = {
     height: "30rem",
 }
 
-export {card, colorCard, animatedText, paragraph, questionWrapper, votesContainer, padding, characterImage, titleImage };
+const smallTitleImage: CSS.Properties = {
+    width: "15rem",
+    height: "15rem",
+}
+
+export {card, colorCard,cardLobby, animatedText, paragraph, questionWrapper, votesContainer,
+    padding, characterImage, titleImage, smallTitleImage };
