@@ -80,6 +80,8 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const handleTimeEnd = () => {
         if (isResultsShown) return;
+        socket.emit("time_end", localStorage.getItem("roomCode"));
+
         setShowTimer(false);
 
         const [newPlayers, playerScoresFromRound] = game.addScoreToPlayers(maxScore, players);

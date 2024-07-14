@@ -36,8 +36,8 @@ const JoinRoom = () => {
         localStorage.setItem("roomCode", room);
         if (room !== "") {
             socket.emit("join_room", {
-                room: room.toUpperCase(),
-                username: username.toUpperCase()
+                room: room,
+                username: username
             });
         }
     }

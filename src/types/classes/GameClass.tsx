@@ -5,6 +5,9 @@ class GameClass {
     private readonly playerResponses: PlayerResponse[];
     private readonly DEFAULT_RESPONSE: string = "[NO ANSWER]";
     private readonly QUIPLASH_BONUS_PERCENT = 0.2;
+    private readonly SAFETY_QUIP_PERCENT = 0.5;
+    private readonly NO_ANSWER_PERCENT = 0.25;
+
 
     /**
      * Initialize default Game Object
@@ -100,14 +103,15 @@ class GameClass {
             if (foundPlayer) {
                 let quiplashBonus = 0;
                 let scoreFromRound = 0;
-                const safetyQuipMultiplier = playerResponse.safetyQuip ? 0.5 : 1;
+                const safetyQuipMultiplier = playerResponse.safetyQuip ? this.SAFETY_QUIP_PERCENT : 1;
+                const noAnswerMultiplier = playerResponse.response === this.DEFAULT_RESPONSE ? this.NO_ANSWER_PERCENT : 1;
 
                 const votesForPlayer = playerResponse.votes.length;
                 if (votesForPlayer > 0) {
-                    scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore * safetyQuipMultiplier);
+                    scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore * safetyQuipMultiplier * noAnswerMultiplier);
                 }
 
-                if (votesForPlayer > 0 && votesForPlayer === totalVotes) {
+                if (votesForPlayer > 0 && votesForPlayer === totalVotes && noAnswerMultiplier === 1) {
                     quiplashBonus += Math.round(maxScore * this.QUIPLASH_BONUS_PERCENT * safetyQuipMultiplier);
                 }
 

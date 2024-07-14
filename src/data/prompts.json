@@ -1,314 +1,564 @@
 {
   "PROMPTS": [
     {
-      "prompt": "What's the worst thing to say when trying to adopt a pet?",
+      "prompt": "WHAT'S THE WORST THING TO SAY WHEN TRYING TO ADOPT A PET?",
       "safetyQuips": [
-        "I'm just here for the free snacks",
-        "Do you have a return policy?",
-        "Are they good at filing taxes?"
+        "I'M JUST HERE FOR THE FREE SNACKS",
+        "DO YOU HAVE A RETURN POLICY?",
+        "ARE THEY GOOD AT FILING TAXES?",
+        "I'M ALLERGIC TO CATS, BUT I WANT ONE ANYWAY",
+        "DOES IT COME WITH A WARRANTY?",
+        "I HOPE IT DOESN'T BARK TOO LOUD",
+        "CAN I GET ONE THAT DOESN'T POOP?",
+        "WILL IT MATCH MY COUCH?",
+        "I JUST NEED A COMPANION FOR MY OTHER PET SNAKE",
+        "HOW LONG BEFORE I CAN SELL IT?"
       ]
     },
     {
-      "prompt": "A great place to hide an Easter egg would be...",
+      "prompt": "A GREAT PLACE TO HIDE AN EASTER EGG WOULD BE...",
       "safetyQuips": [
-        "In the neighbor's yard!",
-        "Inside the dog's toy box",
-        "Next to the open bag of potato chips"
+        "IN THE NEIGHBOR'S YARD!",
+        "INSIDE THE DOG'S TOY BOX",
+        "NEXT TO THE OPEN BAG OF POTATO CHIPS",
+        "IN THE BIRD'S NEST",
+        "INSIDE THE LAWN MOWER",
+        "UNDER THE GARDEN GNOME",
+        "IN THE MAILBOX",
+        "INSIDE A POTTED PLANT",
+        "IN THE BBQ GRILL",
+        "UNDER THE WELCOME MAT"
       ]
     },
     {
-      "prompt": "The best name for a new cereal brand",
+      "prompt": "THE BEST NAME FOR A NEW CEREAL BRAND",
       "safetyQuips": [
-        "Sugar Coated Ouchies",
-        "Marshmallow Meatballs",
-        "Crunchy Kale Surprise"
+        "SUGAR COATED OUCHIES",
+        "MARSHMALLOW MEATBALLS",
+        "CRUNCHY KALE SURPRISE",
+        "FROSTED FIBER FLAKES",
+        "CHOCOLATE CHAOS CRUNCH",
+        "HONEY HURRICANES",
+        "PEANUT BUTTER PUNCH",
+        "CINNAMON SWIRL SENSATION",
+        "BERRY BLAST BOMBS",
+        "VANILLA VORTEX VIBES"
       ]
     },
     {
-      "prompt": "What aliens do with you after abducting you",
+      "prompt": "WHAT ALIENS DO WITH YOU AFTER ABDUCTING YOU",
       "safetyQuips": [
-        "Take selfies for their space Instagram",
-        "Make you their intergalactic hairdresser",
-        "Ask if you know how to fix their spaceship"
+        "TAKE SELFIES FOR THEIR SPACE INSTAGRAM",
+        "MAKE YOU THEIR INTERGALACTIC HAIRDRESSER",
+        "ASK IF YOU KNOW HOW TO FIX THEIR SPACESHIP",
+        "GIVE YOU A TOUR OF THE MILKY WAY",
+        "MAKE YOU THEIR INTERGALACTIC DJ",
+        "ASK YOU TO TEACH THEM HOW TO DAB",
+        "SHOW YOU THEIR ALIEN PETS",
+        "ASK FOR EARTH RECIPES",
+        "GIVE YOU AN ALIEN MAKEOVER",
+        "MAKE YOU HOST AN INTERGALACTIC TALK SHOW"
       ]
     },
     {
-      "prompt": "A rejected name for a ship in a pirate movie",
+      "prompt": "A REJECTED NAME FOR A SHIP IN A PIRATE MOVIE",
       "safetyQuips": [
-        "The Soggy Sardine",
-        "The Wimpy Whale",
-        "The Plank Plunger"
+        "THE SOGGY SARDINE",
+        "THE WIMPY WHALE",
+        "PLANK PLUNGER",
+        "THE SLIPPERY SQUID",
+        "THE DRUNKEN DOLPHIN",
+        "LEAKY LADY",
+        "THE FLOPPY FISH",
+        "THE RUSTY RUDDER",
+        "SEAWEED SLOUCH",
+        "THE BARNACLE BOAT"
       ]
     },
     {
-      "prompt": "What really happened to Amelia Earhart?",
+      "prompt": "WHAT REALLY HAPPENED TO AMELIA EARHART?",
       "safetyQuips": [
-        "She opened a tiki bar in Tahiti",
-        "She became the world's first time traveler",
-        "She's been working at a secret NASA facility"
+        "SHE OPENED A TIKI BAR IN TAHITI",
+        "SHE BECAME THE WORLD'S FIRST TIME TRAVELER",
+        "SHE'S BEEN WORKING AT A SECRET NASA FACILITY",
+        "SHE BECAME A MERMAID",
+        "SHE JOINED A SECRET SOCIETY",
+        "SHE'S LIVING ON MARS",
+        "SHE'S RUNNING A DETECTIVE AGENCY",
+        "SHE'S HIDING IN PLAIN SIGHT",
+        "SHE BECAME A SPY",
+        "SHE'S A GHOST PILOT NOW"
       ]
     },
     {
-      "prompt": "A great bumper sticker for a cat",
+      "prompt": "A GREAT BUMPER STICKER FOR A CAT",
       "safetyQuips": [
-        "I do what I want, when I want",
-        "My other ride is a laser pointer",
-        "Cat hair, don't care"
+        "I DO WHAT I WANT, WHEN I WANT",
+        "MY OTHER RIDE IS A LASER POINTER",
+        "CAT HAIR, DON'T CARE",
+        "I'M THE BOSS, DEAL WITH IT",
+        "I CLAW MY OWN WAY",
+        "PURRFECTION IS MY GOAL",
+        "CATS RULE, DOGS DROOL",
+        "I'M NOT A PET, I'M FAMILY",
+        "SCRATCH HAPPENS",
+        "CATITUDE ON BOARD"
       ]
     },
     {
-      "prompt": "The weirdest thing to whisper to a ceramic garden gnome",
+      "prompt": "THE WEIRDEST THING TO WHISPER TO A CERAMIC GARDEN GNOME",
       "safetyQuips": [
-        "Can you keep a secret?",
-        "Do you believe in magic?",
-        "You're my favorite lawn ornament"
+        "CAN YOU KEEP A SECRET?",
+        "DO YOU BELIEVE IN MAGIC?",
+        "YOU'RE MY FAVORITE LAWN ORNAMENT",
+        "I KNOW WHERE THE TREASURE IS BURIED",
+        "DO YOU EVER FEEL ALIVE?",
+        "I SEE YOU WHEN YOU MOVE",
+        "WHAT DO YOU DO AT NIGHT?",
+        "I TRUST YOU WITH MY SECRETS",
+        "WILL YOU PROTECT MY GARDEN?",
+        "DO YOU TALK TO THE FAIRIES?"
       ]
     },
     {
-      "prompt": "What should never be used as a pizza topping",
+      "prompt": "WHAT SHOULD NEVER BE USED AS A PIZZA TOPPING",
       "safetyQuips": [
-        "Marshmallows and anchovies",
-        "Lego bricks and hot sauce",
-        "Jelly beans and sardines"
+        "MARSHMALLOWS AND ANCHOVIES",
+        "LEGO BRICKS AND HOT SAUCE",
+        "JELLY BEANS AND SARDINES",
+        "CHOCOLATE AND ONIONS",
+        "ICE CREAM AND KETCHUP",
+        "COTTON CANDY AND PICKLES",
+        "TOOTHPASTE AND ORANGES",
+        "GUMMY BEARS AND FISH",
+        "PEANUT BUTTER AND PEPPERS",
+        "POP ROCKS AND BROCCOLI"
       ]
     },
     {
-      "prompt": "The worst thing to say during a job interview",
+      "prompt": "THE WORST THING TO SAY DURING A JOB INTERVIEW",
       "safetyQuips": [
-        "I'm only here for the free snacks",
-        "What's the company's policy on napping?",
-        "I can't work with people"
+        "I'M ONLY HERE FOR THE FREE SNACKS",
+        "WHAT'S THE COMPANY'S POLICY ON NAPPING?",
+        "I CAN'T WORK WITH PEOPLE",
+        "HOW MUCH PAID TIME OFF DO I GET?",
+        "I'VE NEVER ACTUALLY DONE THIS BEFORE",
+        "I WAS FIRED FROM MY LAST JOB",
+        "I DON'T REALLY LIKE TO WORK",
+        "I DON'T BELIEVE IN ALARMS",
+        "I'M HERE TO STEAL YOUR JOB",
+        "I HATE DRESS CODES"
       ]
     },
     {
-      "prompt": "What's the secret to a happy life?",
+      "prompt": "WHAT'S THE SECRET TO A HAPPY LIFE?",
       "safetyQuips": [
-        "Always have dessert first",
-        "Naps are mandatory",
-        "Dance like nobody's watching"
+        "ALWAYS HAVE DESSERT FIRST",
+        "NAPS ARE MANDATORY",
+        "DANCE LIKE NOBODY'S WATCHING",
+        "NEVER GROW UP",
+        "CHOCOLATE EVERY DAY",
+        "LAUGHTER IS THE BEST MEDICINE",
+        "FOLLOW YOUR DREAMS",
+        "LOVE UNCONDITIONALLY",
+        "TRAVEL OFTEN",
+        "LIVE IN THE MOMENT"
       ]
     },
     {
-      "prompt": "What the first words spoken on Mars will be",
+      "prompt": "WHAT THE FIRST WORDS SPOKEN ON MARS WILL BE",
       "safetyQuips": [
-        "Houston, we have snacks!",
-        "Is this thing on?",
-        "Where's the nearest coffee shop?"
+        "HOUSTON, WE HAVE SNACKS!",
+        "IS THIS THING ON?",
+        "WHERE'S THE NEAREST COFFEE SHOP?",
+        "LOOKS LIKE RED DUST FOR MILES",
+        "ANYONE GOT A MAP?",
+        "FIRST!",
+        "I CLAIM THIS PLANET FOR EARTH",
+        "IS THERE WIFI HERE?",
+        "DOES THIS SUIT MAKE ME LOOK FAT?",
+        "I HOPE THERE'S MARTIANS"
       ]
     },
     {
-      "prompt": "A slogan for socks",
+      "prompt": "A SLOGAN FOR SOCKS",
       "safetyQuips": [
-        "Socks: Where feet find happiness",
-        "Socks: The ultimate foot hug",
-        "Socks: Putting the fun in functional"
+        "SOCKS: WHERE FEET FIND HAPPINESS",
+        "THE ULTIMATE FOOT HUG",
+        "PUTTING THE FUN IN FUNCTIONAL",
+        "BECAUSE FEET DESERVE BETTER",
+        "STEP INTO COMFORT",
+        "YOUR FEET'S BEST FRIEND",
+        "KEEPING TOES COZY",
+        "WALK ON THE WILD SIDE",
+        "WHERE STYLE MEETS COMFORT",
+        "FOR HAPPY FEET"
       ]
     },
     {
-      "prompt": "What's in Bigfoot's grocery cart?",
+      "prompt": "WHAT'S IN BIGFOOT'S GROCERY CART?",
       "safetyQuips": [
-        "Giant bananas and family-sized ice cream",
-        "Hair care products and oversized shoes",
-        "Yeti yogurt and Sasquatch snacks"
+        "GIANT BANANAS AND FAMILY-SIZED ICE CREAM",
+        "HAIR CARE PRODUCTS AND OVERSIZED SHOES",
+        "YETI YOGURT AND SASQUATCH SNACKS",
+        "MEGA PROTEIN BARS",
+        "JUMBO SIZED PIZZA",
+        "GALLONS OF MILK",
+        "FAMILY PACK OF BURGERS",
+        "GIANT TUB OF PEANUT BUTTER",
+        "ENORMOUS BAG OF CHIPS",
+        "MASSIVE JAR OF PICKLES"
       ]
     },
     {
-      "prompt": "A terrible name for a 1970s disco band",
+      "prompt": "A TERRIBLE NAME FOR A 1970S DISCO BAND",
       "safetyQuips": [
-        "Funky Chicken and the Disco Ducks",
-        "Disco Fever Dream",
-        "Polyester Pandemonium"
+        "FUNKY CHICKEN AND THE DISCO DUCKS",
+        "DISCO FEVER DREAM",
+        "POLYESTER PANDEMONIUM",
+        "THE GROOVY GEEKS",
+        "BOOGIE WOOGIE BUSTERS",
+        "THE SPARKLY SENSATIONS",
+        "THE PLATFORM SHOE POSSE",
+        "THE BELL-BOTTOM BLUES",
+        "THE SPINNING SPARKLERS",
+        "GLITTER GANG"
       ]
     },
     {
-      "prompt": "Something that would not work well as a dip for tortilla chips",
+      "prompt": "SOMETHING THAT WOULD NOT WORK WELL AS A DIP FOR TORTILLA CHIPS",
       "safetyQuips": [
-        "Motor oil and gravel",
-        "Cat litter and cottage cheese",
-        "Expired milk and expired salsa"
+        "MOTOR OIL AND GRAVEL",
+        "CAT LITTER AND COTTAGE CHEESE",
+        "EXPIRED MILK AND EXPIRED SALSA",
+        "MAYONNAISE AND JELLY",
+        "KETCHUP AND CHOCOLATE",
+        "SOAP AND VINEGAR",
+        "PEANUT BUTTER AND FISH",
+        "HOT SAUCE AND HONEY",
+        "GARLIC AND CUSTARD",
+        "SARDINES AND MAPLE SYRUP"
       ]
     },
     {
-      "prompt": "An item that should never be passed around a dinner table",
+      "prompt": "AN ITEM THAT SHOULD NEVER BE PASSED AROUND A DINNER TABLE",
       "safetyQuips": [
-        "A live lobster",
-        "A skunk-scented candle",
-        "A whoopee cushion"
+        "A LIVE LOBSTER",
+        "A SKUNK-SCENTED CANDLE",
+        "A WHOOPEE CUSHION",
+        "DIRTY SOCKS",
+        "A BAG OF SPIDERS",
+        "SMELLY FISH",
+        "RAW MEAT",
+        "A USED TISSUE",
+        "A WET TOWEL",
+        "A STINK BOMB"
       ]
     },
     {
-      "prompt": "A good use for an abandoned shopping mall",
+      "prompt": "A GOOD USE FOR AN ABANDONED SHOPPING MALL",
       "safetyQuips": [
-        "Indoor go-kart racing",
-        "Zombie paintball arena",
-        "Giant indoor water park"
+        "INDOOR GO-KART RACING",
+        "ZOMBIE PAINTBALL ARENA",
+        "GIANT INDOOR WATER PARK",
+        "TRAMPOLINE WORLD",
+        "LIVING HISTORY MUSEUM",
+        "ESCAPE ROOM MEGA PLEX",
+        "ROLLER SKATING RINK",
+        "INDOOR FARMERS MARKET",
+        "NINJA WARRIOR TRAINING GROUND",
+        "GIANT INDOOR ARCADE"
       ]
     },
     {
-      "prompt": "What aliens say about humans when humans aren't around",
+      "prompt": "WHAT ALIENS SAY ABOUT HUMANS WHEN HUMANS AREN'T AROUND",
       "safetyQuips": [
-        "They communicate using a primitive language called 'texting'",
-        "Their favorite pastime is taking pictures of their food",
-        "They believe in a creature called the 'Tooth Fairy'"
+        "THEY COMMUNICATE USING A PRIMITIVE LANGUAGE CALLED 'TEXTING'",
+        "THEIR FAVORITE PASTIME IS TAKING PICTURES OF THEIR FOOD",
+        "THEY BELIEVE IN A CREATURE CALLED THE 'TOOTH FAIRY'",
+        "THEY HAVE STRANGE RITUALS LIKE 'DANCING'",
+        "THEIR TECHNOLOGY IS SO OUTDATED",
+        "THEY EAT SOME WEIRD STUFF",
+        "THEY SLEEP FOR ALMOST HALF THEIR LIVES",
+        "THEY WEAR FUNNY CLOTHES",
+        "THEY HAVE A THING CALLED 'MONEY'",
+        "THEY THINK THEY ARE THE ONLY INTELLIGENT LIFE FORMS"
       ]
     },
     {
-      "prompt": "A rejected idea for a children's book",
+      "prompt": "A REJECTED IDEA FOR A CHILDREN'S BOOK",
       "safetyQuips": [
-        "The Adventures of Captain Underpants and His Evil Twin",
-        "Goldilocks and the Three Grumpy Cats",
-        "Harry Potter and the Magic Microwave"
+        "THE ADVENTURES OF CAPTAIN UNDERPANTS AND HIS EVIL TWIN",
+        "GOLDILOCKS AND THE THREE GRUMPY CATS",
+        "HARRY POTTER AND THE MAGIC MICROWAVE",
+        "CINDERELLA AND THE SEVEN ZOMBIES",
+        "THE UGLY DUCKLING TURNS EVIL",
+        "THE BOY WHO CRIED WOLF TOO MANY TIMES",
+        "SNOW WHITE AND THE SEVEN VAMPIRES",
+        "THE LITTLE MERMAID JOINS THE PIRATES",
+        "THE THREE LITTLE PIGS AND THE BIG BAD WOLF",
+        "JACK AND THE BEANSTALK MEET ALIENS"
       ]
     },
     {
-      "prompt": "The worst theme for a high school prom",
+      "prompt": "THE WORST THEME FOR A HIGH SCHOOL PROM",
       "safetyQuips": [
-        "Dress Like Your Math Teacher Night",
-        "Medieval Torture Devices Ball",
-        "50 Shades of Gray (Theme)"
+        "DRESS LIKE YOUR MATH TEACHER NIGHT",
+        "MEDIEVAL TORTURE DEVICES BALL",
+        "50 SHADES OF GRAY (THEME)",
+        "CLOWNS AND CIRCUS FREAKS",
+        "HORROR MOVIE NIGHT",
+        "UNDER THE SEWERS",
+        "ZOMBIE APOCALYPSE",
+        "HOSPITAL NIGHTMARE",
+        "BUGS AND INSECTS",
+        "ALIEN INVASION"
       ]
     },
     {
-      "prompt": "What dogs think when they see people naked",
+      "prompt": "WHAT DOGS THINK WHEN THEY SEE PEOPLE NAKED",
       "safetyQuips": [
-        "Humans have really strange fur patterns",
-        "Why don't they have tails?",
-        "Where's their fur?"
+        "HUMANS HAVE REALLY STRANGE FUR PATTERNS",
+        "WHY DON'T THEY HAVE TAILS?",
+        "WHERE'S THEIR FUR?",
+        "I HOPE THEY DON'T CATCH A COLD",
+        "WHY DO THEY KEEP SHEDDING?",
+        "WHY DO THEY LOOK SO WEIRD?",
+        "DO THEY NEED A FLEA BATH?",
+        "MAYBE THEY'RE TRYING TO BE LIKE ME",
+        "I BET THEY'RE COLD",
+        "THEY MUST BE CRAZY"
       ]
     },
     {
-      "prompt": "A new state law you would like to see",
+      "prompt": "A NEW STATE LAW YOU WOULD LIKE TO SEE",
       "safetyQuips": [
-        "Mandatory nap time for all",
-        "Free ice cream on Fridays",
-        "Dancing is required at all red lights"
+        "MANDATORY NAP TIME FOR ALL",
+        "FREE ICE CREAM ON FRIDAYS",
+        "DANCING IS REQUIRED AT ALL RED LIGHTS",
+        "UNLIMITED VACATION DAYS",
+        "FREE PIZZA ON WEDNESDAYS",
+        "NO WORK ON YOUR BIRTHDAY",
+        "PET FRIENDLY WORKPLACES",
+        "FREE COFFEE FOR EVERYONE",
+        "MANDATORY LAUGHING SESSIONS",
+        "FREE PUBLIC TRANSPORT"
       ]
     },
     {
-      "prompt": "What dogs do when nobody is looking",
+      "prompt": "WHAT DOGS DO WHEN NOBODY IS LOOKING",
       "safetyQuips": [
-        "Throw secret party",
-        "Practice their howling for America's Got Talent",
-        "Have philosophical discussions with the cat"
+        "THROW SECRET PARTIES",
+        "PRACTICE THEIR HOWLING FOR AMERICA'S GOT TALENT",
+        "HAVE PHILOSOPHICAL DISCUSSIONS WITH THE CAT",
+        "EAT ALL THE COOKIES",
+        "WATCH DOG TV",
+        "DIG THROUGH THE TRASH",
+        "HIDE THEIR TOYS",
+        "SLEEP IN YOUR BED",
+        "BARK AT NOTHING",
+        "CHASING INVISIBLE ENEMIES"
       ]
     },
     {
-      "prompt": "A great name for a fast food restaurant",
+      "prompt": "A GREAT NAME FOR A FAST FOOD RESTAURANT",
       "safetyQuips": [
-        "Grease Lightning Burgers",
-        "Fry Me to the Moon",
-        "Bite Me Burger Shack"
+        "GREASE LIGHTNING BURGERS",
+        "FRY ME TO THE MOON",
+        "BITE ME BURGER SHACK",
+        "FAST 'N' TASTY",
+        "SNACK ATTACK",
+        "BURGER BLAST",
+        "THE QUICK BITE",
+        "MEAL IN A MINUTE",
+        "THE FOOD FACTORY",
+        "GRAB AND GO GOURMET"
       ]
     },
     {
-      "prompt": "A weird thing for a bank to rob",
+      "prompt": "A WEIRD THING FOR A BANK TO ROB",
       "safetyQuips": [
-        "Piggy banks of all shapes and sizes",
-        "Tooth Fairy's vault of baby teeth",
-        "The Vault of Forgotten Dreams"
+        "PIGGY BANKS OF ALL SHAPES AND SIZES",
+        "TOOTH FAIRY'S VAULT OF BABY TEETH",
+        "THE VAULT OF FORGOTTEN DREAMS",
+        "CHILDREN'S TOYS",
+        "OLD SOCKS",
+        "MYSTERY BOXES",
+        "TREASURE CHESTS",
+        "CANDY STASHES",
+        "RARE STAMPS",
+        "LOST AND FOUND ITEMS"
       ]
     },
     {
-      "prompt": "A new traffic law you would like to see",
+      "prompt": "A NEW TRAFFIC LAW YOU WOULD LIKE TO SEE",
       "safetyQuips": [
-        "Honking is only allowed in Morse code",
-        "Drivers must take a nap break every hour",
-        "Bumper cars are now street legal"
+        "HONKING IS ONLY ALLOWED IN MORSE CODE",
+        "DRIVERS MUST TAKE A NAP BREAK EVERY HOUR",
+        "BUMPER CARS ARE NOW STREET LEGAL",
+        "FREE SNACKS AT EVERY STOP SIGN",
+        "MANDATORY CAR KARAOKE",
+        "NO LEFT TURNS ON MONDAYS",
+        "CARPOOLING IS MANDATORY",
+        "SPEED LIMITS DOUBLE ON WEEKENDS",
+        "NO HONKING AFTER MIDNIGHT",
+        "HEADLIGHT DANCE PARTY AT RED LIGHTS"
       ]
     },
     {
-      "prompt": "The best place to bury hidden treasure",
+      "prompt": "THE BEST PLACE TO BURY HIDDEN TREASURE",
       "safetyQuips": [
-        "Under the rainbow",
-        "In the world's largest ball pit",
-        "Inside a volcano"
+        "UNDER THE RAINBOW",
+        "IN THE WORLD'S LARGEST BALL PIT",
+        "INSIDE A VOLCANO",
+        "IN YOUR BACKYARD",
+        "AT THE BOTTOM OF A LAKE",
+        "IN A HAUNTED HOUSE",
+        "IN AN ANCIENT PYRAMID",
+        "UNDER THE OCEAN FLOOR",
+        "IN A GIANT MAZE",
+        "INSIDE A GIANT ICEBERG"
       ]
     },
     {
-      "prompt": "Something you shouldn't wear to a job interview",
+      "prompt": "SOMETHING YOU SHOULDN'T WEAR TO A JOB INTERVIEW",
       "safetyQuips": [
-        "Pajamas and a superhero cape",
-        "A swimsuit and flippers",
-        "A chicken suit"
+        "PAJAMAS AND A SUPERHERO CAPE",
+        "A SWIMSUIT AND FLIPPERS",
+        "A CHICKEN SUIT",
+        "A CLOWN OUTFIT",
+        "A WEDDING DRESS",
+        "YOUR FAVORITE HALLOWEEN COSTUME",
+        "FOOTBALL GEAR",
+        "A BATHROBE",
+        "A BALLERINA TUTU",
+        "A SPACESUIT"
       ]
     },
     {
-      "prompt": "The worst thing to paint on a new baby's nursery wall",
+      "prompt": "THE WORST THING TO PAINT ON A NEW BABY'S NURSERY WALL",
       "safetyQuips": [
-        "Giant spiders and creepy crawlies",
-        "Clowns with big red noses",
-        "Full-sized T-Rex"
+        "GIANT SPIDERS AND CREEPY CRAWLIES",
+        "CLOWNS WITH BIG RED NOSES",
+        "FULL-SIZED T-REX",
+        "SCARY MONSTERS",
+        "ZOMBIE APOCALYPSE",
+        "GHOSTS AND GHOULS",
+        "GRUMPY OLD MEN",
+        "HAUNTED HOUSE",
+        "SCREAMING FACES",
+        "DARK AND STORMY NIGHT"
       ]
     },
     {
-      "prompt": "What cats think when they see people naked",
+      "prompt": "WHAT CATS THINK WHEN THEY SEE PEOPLE NAKED",
       "safetyQuips": [
-        "Humans have really strange fur patterns",
-        "Why don't they have tails?",
-        "Where's their fur?"
+        "HUMANS HAVE REALLY STRANGE FUR PATTERNS",
+        "WHY DON'T THEY HAVE TAILS?",
+        "WHERE'S THEIR FUR?",
+        "THEY LOOK SO WEIRD",
+        "I HOPE THEY DON'T CATCH A COLD",
+        "WHY DO THEY KEEP SHEDDING?",
+        "THEY MUST BE SICK",
+        "MAYBE THEY'RE TRYING TO BE LIKE ME",
+        "THEY BETTER NOT BE NAKED ALL THE TIME",
+        "I BET THEY'RE COLD"
       ]
     },
     {
-      "prompt": "A bad name for a superhero",
+      "prompt": "A BAD NAME FOR A SUPERHERO",
       "safetyQuips": [
-        "Captain Clueless",
-        "The Forgetful Fly",
-        "The Invisible Ear"
+        "CAPTAIN CLUELESS",
+        "THE FORGETFUL FLY",
+        "THE INVISIBLE EAR",
+        "COWARDLY LION",
+        "SLOW MOTION MAN",
+        "DR. DULL",
+        "MR. SNEEZY",
+        "THE BUMBLER",
+        "CAPTAIN AWKWARD",
+        "THE FEEBLE FLYER"
       ]
     },
     {
-      "prompt": "The worst way to spend a weekend",
+      "prompt": "THE WORST WAY TO SPEND A WEEKEND",
       "safetyQuips": [
-        "Cleaning out the attic",
-        "Counting all the grains of sand at the beach",
-        "Listening to elevator music for 48 hours straight"
+        "CLEANING OUT THE ATTIC",
+        "COUNTING ALL THE GRAINS OF SAND AT THE BEACH",
+        "LISTENING TO ELEVATOR MUSIC FOR 48 HOURS STRAIGHT",
+        "DOING YOUR TAXES",
+        "WATCHING PAINT DRY",
+        "STUCK IN TRAFFIC",
+        "WAITING IN LINE",
+        "ATTENDING BORING MEETINGS",
+        "DOING HOUSE CHORES",
+        "SITTING IN A WINDOWLESS ROOM"
       ]
     },
     {
-      "prompt": "A better name for Canada",
+      "prompt": "A BETTER NAME FOR CANADA",
       "safetyQuips": [
-        "Moose Land",
-        "Maple Leaf Paradise",
-        "The Great White North"
+        "MOOSE LAND",
+        "MAPLE LEAF PARADISE",
+        "THE GREAT WHITE NORTH",
+        "HOCKEY HEAVEN",
+        "SNOWFLAKE CITY",
+        "FRIENDLY FROSTY LAND",
+        "EH-LAND",
+        "MAPLE SYRUP NATION",
+        "THE POLITE COUNTRY"
       ]
     },
     {
-      "prompt": "A great thing to yell before jumping out of an airplane",
+      "prompt": "A GREAT THING TO YELL BEFORE JUMPING OUT OF AN AIRPLANE",
       "safetyQuips": [
-        "Cowabunga!",
-        "For the potatoes!",
-        "Incoming!"
+        "COWABUNGA!",
+        "FOR THE POTATOES!",
+        "INCOMING!",
+        "SEE YOU ON THE GROUND!",
+        "GERONIMO!",
+        "YIPPEE-KI-YAY!",
+        "HERE GOES NOTHING!",
+        "I'M FLYING!",
+        "UP, UP AND AWAY!",
+        "WATCH ME SOAR!"
       ]
     },
     {
-      "prompt": "What Bigfoot does when he thinks nobody is watching",
+      "prompt": "WHAT BIGFOOT DOES WHEN HE THINKS NOBODY IS WATCHING",
       "safetyQuips": [
-        "Practices his dance moves",
-        "Hides all the hairbrushes",
-        "Starts his own YouTube channel"
+        "PRACTICES HIS DANCE MOVES",
+        "HIDES ALL THE HAIRBRUSHES",
+        "STARTS HIS OWN YOUTUBE CHANNEL",
+        "TRIES ON PEOPLE CLOTHES",
+        "MOONS AT THE CAMERA",
+        "PLAYS HIDE AND SEEK",
+        "MAKES SHADOW PUPPETS",
+        "SINGS IN THE SHOWER",
+        "JUGGLES ROCKS",
+        "HAS A PICNIC"
       ]
     }
   ],
   "FINAL_ROUND_SAFETY_QUIPS": [
-    "What does the fox say?",
-    "A weird excuse for being late:",
-    "What Liam does when no one is looking:",
-    "A weird thing to dream about:",
-    "If you could have any superpower, what would it be?",
-    "A strange talent you wish you had:",
-    "The last thing you Googled:",
-    "A food combination that shouldn't work but does:",
-    "What's the first thing you would buy if you won the lottery?",
-    "A hobby you secretly enjoy:",
-    "The weirdest thing you've ever seen someone do in public:",
-    "If you could live in any fictional world, where would it be?",
-    "The worst movie you've ever seen:",
-    "An unusual phobia you have:",
-    "A bizarre invention that should exist:",
-    "The strangest thing you've ever eaten:",
-    "A song that always gets stuck in your head:",
-    "What's the most embarrassing thing you've ever done?",
-    "A conspiracy theory you secretly believe in:"
+    "WHAT DOES THE FOX SAY?",
+    "A WEIRD EXCUSE FOR BEING LATE:",
+    "WHAT LIAM DOES WHEN NO ONE IS LOOKING:",
+    "A WEIRD THING TO DREAM ABOUT:",
+    "IF YOU COULD HAVE ANY SUPERPOWER, WHAT WOULD IT BE?",
+    "A STRANGE TALENT YOU WISH YOU HAD:",
+    "THE LAST THING YOU GOOGLED:",
+    "A FOOD COMBINATION THAT SHOULDN'T WORK BUT DOES:",
+    "WHAT'S THE FIRST THING YOU WOULD BUY IF YOU WON THE LOTTERY?",
+    "A HOBBY YOU SECRETLY ENJOY:",
+    "THE WEIRDEST THING YOU'VE EVER SEEN SOMEONE DO IN PUBLIC:",
+    "IF YOU COULD LIVE IN ANY FICTIONAL WORLD, WHERE WOULD IT BE?",
+    "THE WORST MOVIE YOU'VE EVER SEEN:",
+    "AN UNUSUAL PHOBIA YOU HAVE:",
+    "A BIZARRE INVENTION THAT SHOULD EXIST:",
+    "THE STRANGEST THING YOU'VE EVER EATEN:",
+    "A SONG THAT ALWAYS GETS STUCK IN YOUR HEAD:",
+    "WHAT'S THE MOST EMBARRASSING THING YOU'VE EVER DONE?",
+    "A CONSPIRACY THEORY YOU SECRETLY BELIEVE IN:"
   ]
 }
-

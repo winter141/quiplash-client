@@ -53,7 +53,7 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
     }
 
     const handleResponseChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setResponse(e.target.value)
+        setResponse((e.target.value as string).toUpperCase);
     }
 
     return (

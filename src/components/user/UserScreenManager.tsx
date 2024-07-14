@@ -63,6 +63,7 @@ const UserScreenManager = () => {
         socket.emit("vip_start_game", roomCode);
         localStorage.removeItem("VIP");
         setIsVIPReady(false);
+        setCurrentScene(UserScenes.WAITING);
     }
 
     const showUserScene = () => {
