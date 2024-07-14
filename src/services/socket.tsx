@@ -5,7 +5,7 @@ import {useEffect} from "react";
 const socketEndpoint = process.env.REACT_APP_SOCKET_SERVER || "http://localhost:3001";
 
 const getSocketConnection = () => {
-    return io("http://localhost:3001").connect();
+    return io(socketEndpoint).connect();
 }
 
 const useSocketOnHook = (
