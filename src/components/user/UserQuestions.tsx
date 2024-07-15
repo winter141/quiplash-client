@@ -1,4 +1,4 @@
-import {Button, Stack, TextField, Typography} from "@mui/material";
+import {Button, FormHelperText, Stack, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import {UserQuestionsProps} from "../../types/props/UserScreenProps";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
@@ -7,6 +7,8 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import SendIcon from '@mui/icons-material/Send';
 
 const socket = getSocketConnection();
+
+const MAX_RESPONSE_LENGTH = 80;
 
 const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageNum, questions, onDone}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -53,7 +55,7 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
     }
 
     const handleResponseChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setResponse((e.target.value as string).toUpperCase);
+        setResponse((e.target.value as string).toUpperCase());
     }
 
     return (
@@ -67,7 +69,10 @@ const UserQuestions: React.FC<UserQuestionsProps> = ({username, roomCode, imageN
                             label="Response"
                             onChange={handleResponseChange}
                             value={response}
+                            inputProps={{ maxLength: MAX_RESPONSE_LENGTH }}
                         />
+                        <FormHelperText>{response.length} / {MAX_RESPONSE_LENGTH}</FormHelperText>
+
                         <Typography sx={{color: "red"}}>{responseError}</Typography>
                         <Button variant="contained" color="inherit" onClick={() => {
                             submitQuestion(response, false)

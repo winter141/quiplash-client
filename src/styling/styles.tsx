@@ -1,4 +1,5 @@
 import CSS from "csstype";
+import {theme} from "./theme";
 
 const card: CSS.Properties = {
     padding: "10px",
@@ -8,7 +9,7 @@ const card: CSS.Properties = {
 const colorCard: CSS.Properties = {
     padding: "10px",
     margin: "20px",
-    backgroundColor: "#FBE590"
+    backgroundColor: theme.palette.secondary.main
 }
 
 const cardLobby: CSS.Properties = {
@@ -34,6 +35,11 @@ const votesContainer: CSS.Properties = {
 
 const padding: CSS.Properties = {
     padding: '20px'
+}
+
+const displayResponse: CSS.Properties = {
+    padding: '20px',
+    wordWrap: "break-word"
 }
 
 const animatedText: CSS.Properties = {
@@ -62,4 +68,4 @@ const smallTitleImage: CSS.Properties = {
 }
 
 export {card, colorCard,cardLobby, animatedText, paragraph, questionWrapper, votesContainer,
-    padding, characterImage, titleImage, smallTitleImage };
+    padding, displayResponse, characterImage, titleImage, smallTitleImage };

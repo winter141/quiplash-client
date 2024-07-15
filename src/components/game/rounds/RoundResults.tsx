@@ -120,12 +120,14 @@ const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messa
     }
 
     return (
-        <Paper elevation={3} style={card}>
-            {showAllResults()}
+        <>
+            <Paper elevation={3} style={card}>
+                {showAllResults()}
+            </Paper>
             {showPlayAgainBtn && (
                 <Button variant="contained" onClick={playAgain}>Back to menu</Button>
             )}
-        </Paper>
+        </>
     );
 }
 

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Grid, Typography} from '@mui/material';
 import {ThisOrThatProps} from "../../../types/props/RoundProps";
-import {card, padding, questionWrapper} from "../../../styling/styles";
+import {card, displayResponse, padding, questionWrapper} from "../../../styling/styles";
 import {AnimatedPaper} from "../../../styling/animations";
 import {addPlayerResponseToLocalStorage, getPlayersNotInGame} from "../../../gamelogic/answers";
 import RoundTimer from "../../subcomponents/RoundTimer";
@@ -11,9 +11,10 @@ import AnimateVotes from "../../subcomponents/AnimateVotes"
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import {useSpeechSynthesisHook} from "../../../services/speech";
 import { roundContext} from "./RoundManager";
+import LinearTimer from "../../subcomponents/LinearTimer";
 
 const socket = getSocketConnection();
-const COMPONENT_WAIT = 4000; // How long to wait before component is "done"
+const COMPONENT_WAIT = 4; // How long to wait before component is "done" in seconds
 
 const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime, maxScore }) => {
     const [gameState, setGameState] = useState<GameClass>(game);
@@ -21,7 +22,8 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     const [isThatResponseShown, setIsThatResponseShown] = useState(false);
     const [playerScoresFromRound, setPlayerScoresFromRound] = useState<PlayerScoreFromRound[]>([]);
     const [isResultsShown, setIsResultsShown] = useState(false);
-    const [showTimer, setShowTimer] = useState(false);
+    const [showRoundTimer, setShowRoundTimer] = useState(false);
+    const [showLinearTimer, setShowLinearTimer] = useState(false);
     const [receivedUserVotes, setReceivedUserVotes] = useState<string[]>([]);
     const playersVoted = useRef(0);
 
@@ -69,7 +71,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const onDoneSpeech = () => {
         socket.emit("begin_voting", { game: game, players: getPlayersNotInGame(responses, players) });
-        setShowTimer(true);
+        setShowRoundTimer(true);
     }
 
     useSpeechSynthesisHook(
@@ -82,15 +84,22 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         if (isResultsShown) return;
         socket.emit("time_end", localStorage.getItem("roomCode"));
 
-        setShowTimer(false);
+        setShowRoundTimer(false);
 
         const [newPlayers, playerScoresFromRound] = game.addScoreToPlayers(maxScore, players);
         localStorage.setItem("players", JSON.stringify(newPlayers));
         setPlayerScoresFromRound(playerScoresFromRound);
         setIsResultsShown(true);
+
         setTimeout(() => {
-            onDone();
-        }, COMPONENT_WAIT);
+            setShowRoundTimer(false);
+            setShowLinearTimer(true);
+        }, 1000)
+    }
+
+    const handleComponentDone = () => {
+        console.log("DONE");
+        onDone();
     }
 
     const animateVotes = (response: string) => {
@@ -109,32 +118,40 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     return (
         <div style={card}>
             <AnimatedPaper elevation={3} style={questionWrapper}>
-                <Typography variant="h5">{game.getQuestion()}</Typography>
+                <Typography variant="h4">{game.getQuestion()}</Typography>
             </AnimatedPaper>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
                     {isThisResponseShown && (
-                        <AnimatedPaper elevation={3} style={padding}>
-                            <Typography variant="body1">{responses[0].response}</Typography>
+                        <AnimatedPaper elevation={3} style={displayResponse}>
+                            <Typography variant="h3">{responses[0].response}</Typography>
                             {isResultsShown && animateVotes(responses[0].response)}
                         </AnimatedPaper>
                     )}
                 </Grid>
                 <Grid item xs={6}>
                     {isThatResponseShown && (
-                        <AnimatedPaper elevation={3} style={padding}>
-                            <Typography variant="body1">{responses[1].response}</Typography>
+                        <AnimatedPaper elevation={3} style={displayResponse}>
+                            <Typography variant="h3">{responses[1].response}</Typography>
                             {isResultsShown && animateVotes(responses[1].response)}
                         </AnimatedPaper>
                     )}
                 </Grid>
             </Grid>
 
-            {showTimer && (
+            {showRoundTimer && (
                 <RoundTimer
                     initialTime={votingTime}
                     onTimeEnd={handleTimeEnd}
                     sx={{top: 16}}
+                />
+            )}
+
+            {showLinearTimer && (
+                <LinearTimer
+                    initialTime={COMPONENT_WAIT}
+                    onTimeEnd={handleComponentDone}
+                    sx={{top: 40}}
                 />
             )}
         </div>

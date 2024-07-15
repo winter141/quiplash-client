@@ -14,6 +14,9 @@ import Round from './components/game/rounds/RoundManager';
 import RoundResults from "./components/game/rounds/RoundResults";
 import {convertJsonToGameClasses} from "./types/classes/GameClass";
 import IntroToScene from "./components/subcomponents/IntroToScene";
+import {ThemeProvider} from "@mui/material";
+import { theme } from './styling/theme';
+import UserQuestions from "./components/user/UserQuestions";
 
 const { PLAYERS, PLAYER_QUESTIONS, GAMES } = testingData;
 
@@ -22,57 +25,64 @@ const baseUrl = '/quiplash-client'
 function App() {
     return (
     <div className="App">
-        <Router basename={baseUrl}>
-            <Routes>
-                <Route path="/" element={<Navigate to="/join" />} />
-                <Route path="/join" element={<JoinRoom/>}/>
-                <Route path="/user" element={<UserScreen/>}/>
-                <Route path="/game/lobby" element={<Lobby/>}/>
-                <Route path="/game/menu" element={<GameMenu/>}/>
-                <Route path="/game/play" element={<GameManager/>}/>
+        <ThemeProvider theme={theme}>
+            <Router basename={baseUrl}>
+                <Routes>
+                    <Route path="/" element={<Navigate to="/join" />} />
+                    <Route path="/join" element={<JoinRoom/>}/>
+                    <Route path="/user" element={<UserScreen/>}/>
+                    <Route path="/game/lobby" element={<Lobby/>}/>
+                    <Route path="/game/menu" element={<GameMenu/>}/>
+                    <Route path="/game/play" element={<GameManager/>}/>
 
-                <Route path="/r1" element={<Round
-                    onDone={() => {}}
-                    players={PLAYERS}
-                    roundNumber={1}
-                />}
-                />
+                    <Route path="/r1" element={<Round
+                        onDone={() => {}}
+                        players={PLAYERS}
+                        roundNumber={1}
+                    />}
+                    />
 
-                <Route path="/ra" element={<RoundAnswers
-                    games={convertJsonToGameClasses(GAMES)}
-                    maxScore={1000}
-                    onDone={() => {}}
-                    players={PLAYERS}
-                    votingTime={3}/>}
-                />
+                    <Route path="/ra" element={<RoundAnswers
+                        games={convertJsonToGameClasses(GAMES)}
+                        maxScore={1000}
+                        onDone={() => {}}
+                        players={PLAYERS}
+                        votingTime={3}/>}
+                    />
 
-                <Route path="/tot" element={<ThisOrThat
-                 game={convertJsonToGameClasses(GAMES)[0]}
-                 onDone={() => {}}
-                 players={PLAYERS}
-                 votingTime={1}
-                 maxScore={1000}
-                />}/>
+                    <Route path="/tot" element={<ThisOrThat
+                        game={convertJsonToGameClasses(GAMES)[0]}
+                        onDone={() => {}}
+                        players={PLAYERS}
+                        votingTime={1}
+                        maxScore={1000}
+                    />}/>
 
-                <Route path="/rr" element={<RoundResults
-                    onDone={() => {}}
-                    players={PLAYERS}
-                    sceneTime={5}
-                    messages={[
-                        "", "Third", "Second", "", "First, Congrats Champ",
-                        "      and the rest of ya",
-                        "Thanks for playing!"]}
-                />}/>
+                    <Route path="/rr" element={<RoundResults
+                        onDone={() => {}}
+                        players={PLAYERS}
+                        sceneTime={5}
+                        messages={[
+                            "", "Third", "Second", "", "First, Congrats Champ",
+                            "      and the rest of ya",
+                            "Thanks for playing!"]}
+                    />}/>
 
-                <Route path="/intro" element={<IntroToScene
-                    onDone={() => {}}
-                    speechMessages={["YO yo", "Yo?"]}
-                    imageTitle={"round1"}
-                />}/>
+                    <Route path="/intro" element={<IntroToScene
+                        onDone={() => {}}
+                        speechMessages={["YO yo", "Yo?"]}
+                        imageTitle={"round1"}
+                    />}/>
 
-                <Route path="*" element={<NotFound/>}/>
-            </Routes>
-        </Router>
+                    <Route path="/user/q" element={<UserQuestions
+                        onDone={() => {}}
+                        imageNum={1}
+                     questions={["poop?"]} roomCode={"DSFD"} username={"JIMMY"}/>}/>
+
+                    <Route path="*" element={<NotFound/>}/>
+                </Routes>
+            </Router>
+        </ThemeProvider>
     </div>
     );
 }

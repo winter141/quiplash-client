@@ -16,10 +16,10 @@
   ],
   "GAMES": [
     {
-      "question": "favorite animal?",
+      "question": "FAVOURITE ANIMAL?",
       "responses": [
-        { "username": "Bob", "response": "Cats", "votes": [] },
-        { "username": "Charlie", "response": "Elephants", "votes": [] }
+        { "username": "Bob", "response": "CATS", "votes": [] },
+        { "username": "Charlie", "response": "WWWWWWWWWWWWWWWWWWWWWWWWWWWWW WWWWWWWWWWW WWWWWWWWWWWWW WWWWWWWWWWWW WWWWWWWW WWWWWWWW WWWW", "votes": [] }
       ],
       "votes": []
     },

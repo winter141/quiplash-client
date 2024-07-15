@@ -1,4 +1,4 @@
-import {Button, Paper, Stack, TextField, Typography} from "@mui/material";
+import {Button, FormHelperText, Paper, Stack, TextField, Typography, useFormControl} from "@mui/material";
 import React, {useState} from "react";
 import {card, smallTitleImage} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
@@ -6,6 +6,8 @@ import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 import TitleImage from "../subcomponents/TitleImage";
 
 const socket = getSocketConnection();
+
+const MAX_USERNAME_CHARACTERS = 12;
 
 const JoinRoom = () => {
     const [username, setUsername] = useState("");
@@ -64,7 +66,9 @@ const JoinRoom = () => {
                         label="Username"
                         value={username}
                         onChange={handleUsernameChange}
+                        inputProps={{ maxLength: MAX_USERNAME_CHARACTERS }}
                     />
+                    <FormHelperText>{username.length} / {MAX_USERNAME_CHARACTERS}</FormHelperText>
                     <Button variant="contained" onClick={joinGame}>Join</Button>
                 </Stack>
                 <Typography sx={{color: "red"}}>{errorMessage}</Typography>

@@ -106,7 +106,7 @@ const GameManager: React.FC = () => {
 
     return (
         <div>
-            <AppBar position="fixed" sx={{backgroundColor: "#FBE590"}}>
+            <AppBar position="fixed" color="secondary" >
 
                 <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
                     <CardMedia
