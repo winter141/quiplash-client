@@ -10,10 +10,10 @@ import {getBeforeQuestionsMessages} from "../../../gamelogic/questions";
 import {getBeforeResultsMessages, getRoundMultiplier} from "../../../gamelogic/answers";
 import {getResultMessages} from "../../../gamelogic/results";
 
-const QUESTION_TIME = 2;
+const QUESTION_TIME = 80;
 const QUESTION_AMOUNT = 2;
 const MAX_SCORE = 1000;
-const VOTING_TIME = 2;
+const VOTING_TIME = 20;
 const RESULTS_TIME = 5;
 const FINAL_ROUND_NUMBER = 4;
 

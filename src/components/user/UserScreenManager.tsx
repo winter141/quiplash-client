@@ -59,6 +59,10 @@ const UserScreenManager = () => {
         setCurrentScene(UserScenes.DONE);
     })
 
+    useSocketOnHook(socket, "vip_start_game", () => {
+        setCurrentScene(UserScenes.WAITING);
+    })
+
     const startGame = () => {
         socket.emit("vip_start_game", roomCode);
         localStorage.removeItem("VIP");
