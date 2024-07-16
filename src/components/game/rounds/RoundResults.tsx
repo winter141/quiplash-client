@@ -12,7 +12,7 @@ import {AnimatedDivGrow, AnimatedDivSwing} from "../../../styling/animations";
 
 const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messages}) => {
     const context = useContext(roundContext);
-    const isFinalRound = true; /*context && context.isFinalRound;*/
+    const isFinalRound = context && context.isFinalRound;
     const [podiumNumber, setPodiumNumber] = useState<number>(4);
     const [showPlayAgainBtn, setShowPlayAgainBtn] = useState(false);
     const navigate = useNavigate();
