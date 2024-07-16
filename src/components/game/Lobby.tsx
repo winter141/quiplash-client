@@ -23,7 +23,9 @@ const Lobby = () => {
     }, [players, roomCode]);
 
     useSocketOnHook(socket, "user_joined", (data) => {
-        setPlayers(players.concat([{name: data.username, score: 0, likes: 0, imageNum: data.imageNum, VIP: data.VIP}]));
+        if (!data.rejoin) {
+            setPlayers(players.concat([{name: data.username, score: 0, likes: 0, imageNum: data.imageNum, VIP: data.VIP}]));
+        }
     })
 
     useSocketOnHook(socket, "start_game", (data) => {

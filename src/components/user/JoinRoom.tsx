@@ -22,6 +22,8 @@ const JoinRoom = () => {
     useSocketOnHook(socket, "join_successful", (data) => {
         localStorage.setItem("VIP", data.VIP ? "true" : "false");
         localStorage.setItem("imageNum", data.imageNum);
+        localStorage.setItem("roomCode", data.room);
+        localStorage.setItem("username", data.username);
         navigate('/user');
     })
 
@@ -34,12 +36,14 @@ const JoinRoom = () => {
             setErrorMessage("Please enter a room code");
             return;
         }
-        localStorage.setItem("username", username);
-        localStorage.setItem("roomCode", room);
         if (room !== "") {
+            const imageNumString = localStorage.getItem("imageNum");
             socket.emit("join_room", {
                 room: room,
-                username: username
+                username: username,
+                storedRoom: localStorage.getItem("roomCode"),
+                storedUsername: localStorage.getItem("username"),
+                storedImageNum: imageNumString ? parseInt(imageNumString) : 0
             });
         }
     }

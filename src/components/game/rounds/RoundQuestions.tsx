@@ -94,7 +94,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
                             onTimeEnd={handleTimeEnd}
                         />
                     )}
-                    <Typography ml={5}>{timerText}</Typography>
+                    <Typography ml={5} variant="h5">{timerText}</Typography>
                 </div>
             </Paper>
             <Paper elevation={3} style={card}>

@@ -44,7 +44,7 @@ const RoundTimer: React.FC<RoundTimerProps> = ({ initialTime, onTimeEnd, sx }) =
                 alignItems="center"
                 justifyContent="center"
             >
-                <Typography variant="caption" component="div" color="textSecondary" sx={{fontWeight: 'bold', color: "black"}}>
+                <Typography component="div" color="textSecondary" sx={{fontWeight: 'bold', color: "black"}}>
                     {timeLeft}
                 </Typography>
             </Box>
