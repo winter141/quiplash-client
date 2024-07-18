@@ -8,29 +8,34 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const socket = getSocketConnection();
 
+const games = [
+    "partypack1",
+    "lashquip",
+    "media attack"
+]
+
 const StartGame = () => {
-    const [imageTitle, setImageTitle] = useState("partypack1");
-    const [gameSelected, setGameSelected] = useState(false);
+    const [gameSelectedIndex, setGameSelectedIndex] = useState(0);
     const navigate = useNavigate();
 
     useSocketOnHook(socket, "init_game_room_success", (roomCode) => {
+        localStorage.clear();
         localStorage.setItem("roomCode", roomCode);
-        navigate('/game/lobby');
+        const gameSelected = games[gameSelectedIndex].replace(" ", "");
+        localStorage.setItem("gameSelected", gameSelected)
+        navigate(`/game/lobby`);
     })
 
     const startGame = () => {
-        localStorage.clear();
         socket.emit("init_game_room");
     }
 
-    const onGameHoverOn = () => {
-        setImageTitle("lashquip");
-        setGameSelected(true);
+    const onGameHoverOn = (index: number) => {
+        setGameSelectedIndex(index);
     }
 
     const onGameHoverOff = () => {
-        setImageTitle("partypack1");
-        setGameSelected(false);
+        setGameSelectedIndex(0);
     }
 
     return (
@@ -39,21 +44,26 @@ const StartGame = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
                         <List sx={{marginLeft: "30px"}}>
-                            <ListItem key={1}>
-                                <Button
-                                    sx={{color: gameSelected ? "darkgrey" : "black"}}
-                                    onClick={startGame}
-                                    onMouseEnter={onGameHoverOn}
-                                    onMouseLeave={onGameHoverOff}
-                                >
-                                    <Typography variant="h4">LashQuip</Typography>
-                                    <PlayArrowIcon sx={{paddingLeft: "3px"}}/>
-                                </Button>
-                            </ListItem>
+                            {games.slice(1).map((game, index) => (
+                                <ListItem key={index}>
+                                    <Button
+                                        sx={{color: (index + 1) === gameSelectedIndex ? "darkgrey" : "black"}}
+                                        onClick={startGame}
+                                        onMouseEnter={() => {onGameHoverOn(index + 1)}}
+                                        onMouseLeave={onGameHoverOff}
+                                    >
+                                        <Typography variant="h4">{game}</Typography>
+                                        <PlayArrowIcon sx={{paddingLeft: "3px"}}/>
+                                    </Button>
+                                </ListItem>
+                            ))}
                         </List>
                     </Grid>
                     <Grid item xs={9}>
-                        <TitleImage titleName={imageTitle} sx={{marginLeft: "10rem", padding:"2.5rem"}} key={imageTitle}/>
+                        <TitleImage titleName={games[gameSelectedIndex].replace(" ", "")}
+                                    sx={{marginLeft: "10rem", padding:"2.5rem"}}
+                                    key={games[gameSelectedIndex].replace(" ", "")}
+                        />
                     </Grid>
                 </Grid>
             </Paper>

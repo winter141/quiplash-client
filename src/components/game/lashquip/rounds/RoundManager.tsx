@@ -1,14 +1,14 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {RoundManagerProps} from "../../../types/props/RoundProps";
-import {RoundScenes} from "../../../types/enums/Scenes";
+import {RoundManagerProps} from "../../../../types/props/RoundProps";
+import {RoundScenes} from "../../../../types/enums/Scenes";
 import RoundQuestions from "./RoundQuestions";
 import RoundAnswers from "./RoundAnswers";
 import RoundResults from "./RoundResults";
-import {convertJsonToGameClasses, GameClass} from "../../../types/classes/GameClass";
-import IntroToScene from "../../subcomponents/IntroToScene";
-import {getBeforeQuestionsMessages} from "../../../gamelogic/questions";
-import {getBeforeResultsMessages, getRoundMultiplier} from "../../../gamelogic/answers";
-import {getResultMessages} from "../../../gamelogic/results";
+import IntroToScene from "../../../subcomponents/IntroToScene";
+import {getBeforeQuestionsMessages} from "../../../../gamelogic/lashquip/questions";
+import {getBeforeResultsMessages, getRoundMultiplier} from "../../../../gamelogic/lashquip/answers";
+import {getResultMessages} from "../../../../gamelogic/lashquip/results";
+import {convertJsonToLashQuipGameClasses, LashQuipGame} from "../../../../gamelogic/gameClasses/LashQuipGame";
 
 const QUESTION_TIME = 80;
 const QUESTION_AMOUNT = 2;
@@ -21,7 +21,7 @@ export const roundContext = createContext<{ isFinalRound: boolean } | null>(null
 
 const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber}) => {
     const [currentScene, setCurrentScene] = useState<RoundScenes>(RoundScenes.BEFORE_QUESTIONS);
-    const [games, setGames] = useState<GameClass[]>([]);
+    const [games, setGames] = useState<LashQuipGame[]>([]);
     const isFinalRound = roundNumber === FINAL_ROUND_NUMBER;
 
     const roundMultiplier = getRoundMultiplier(roundNumber);
@@ -41,7 +41,7 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
                 break;
             case RoundScenes.QUESTIONS:
                 try {
-                    const storedGames: GameClass[] = getGames();
+                    const storedGames: LashQuipGame[] = getGames();
                     setGames(storedGames);
                     setCurrentScene(RoundScenes.ANSWERS);
                 } catch (e) {
@@ -64,12 +64,12 @@ const RoundManager: React.FC<RoundManagerProps> = ({players, onDone, roundNumber
         }
     }
 
-    const getGames = (): GameClass[] => {
+    const getGames = (): LashQuipGame[] => {
         const storedGames = localStorage.getItem('games');
         if (!storedGames) {
             throw new Error("NO GAMES");
         }
-        return convertJsonToGameClasses(JSON.parse(storedGames));
+        return convertJsonToLashQuipGameClasses(JSON.parse(storedGames));
     }
 
     const showScene = () => {

@@ -1,13 +1,14 @@
-import {Player, PlayerScoreFromRound} from "../../types/types/Player";
 import React, {useEffect, useState} from "react";
-import {votesContainer} from "../../styling/styles";
-import {AnimatedChip, AnimatedDiv, AnimatedTypography} from "../../styling/animations";
-import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
+import {votesContainer} from "../../../../styling/styles";
+import {AnimatedChip, AnimatedDiv, AnimatedTypography} from "../../../../styling/animations";
 import {Typography} from "@mui/material";
 import ConstructionIcon from '@mui/icons-material/Construction';
+import {LashQuipScoreFromRound} from "../../../../types/Responses";
+import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../../../gamelogic/general/imageColors";
+import {Player} from "../../../../types/Player";
 
 interface AnimateVotesProps {
-    playerScoreFromRound: PlayerScoreFromRound;
+    playerScoreFromRound: LashQuipScoreFromRound;
     players: Player[];
 }
 

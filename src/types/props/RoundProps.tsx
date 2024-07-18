@@ -1,5 +1,5 @@
-import {Player} from "../types/Player";
-import {GameClass} from "../classes/GameClass";
+import {Player} from "../Player";
+import {LashQuipGame} from "../../gamelogic/gameClasses/LashQuipGame";
 
 export interface RoundProps {
     players: Player[]
@@ -10,19 +10,19 @@ export interface RoundManagerProps extends RoundProps {
     roundNumber: number
 }
 
-export interface QuestionsProps extends RoundProps {
+export interface LashQuipQuestionsProps extends RoundProps {
     questionTime: number,
     questionAmount: number,
 }
 
-export interface AnswerProps extends RoundProps{
-    games: GameClass[],
+export interface LashQuipAnswerProps extends RoundProps{
+    games: LashQuipGame[],
     votingTime: number,
     maxScore: number,
 }
 
 export interface ThisOrThatProps extends RoundProps {
-    game: GameClass,
+    game: LashQuipGame,
     votingTime: number,
     maxScore: number
 }

@@ -1,24 +1,24 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Box, List, ListItem, Paper, Typography} from '@mui/material';
-import RoundTimer from "../../subcomponents/RoundTimer";
-import {QuestionsProps} from "../../../types/props/RoundProps";
+import RoundTimer from "../../../subcomponents/RoundTimer";
 import {
     generateQuestions,
-    generateMatchUps,
-    getAllResponsesCount, getFinalRoundPrompts, getBasicPrompts
-} from "../../../gamelogic/questions";
-import {PlayerQuestions} from "../../../types/types/Player";
-import {card} from "../../../styling/styles";
-import {GameClass} from "../../../types/classes/GameClass";
-import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
-import ImageCharacter from "../../subcomponents/ImageCharacter";
-import {useSpeechSynthesisHook} from "../../../services/speech";
+ getFinalRoundPrompts, getBasicPrompts
+} from "../../../../gamelogic/lashquip/questions";
+import {PlayerQuestions} from "../../../../types/Player";
+import {card} from "../../../../styling/styles";
+import {getSocketConnection, useSocketOnHook} from "../../../../services/socket";
+import ImageCharacter from "../../../subcomponents/ImageCharacter";
+import {useSpeechSynthesisHook} from "../../../../services/speech";
 import { roundContext } from "./RoundManager";
+import {generateMatchUps, getAllResponsesCount} from "../../../../gamelogic/general/general";
+import {LashQuipQuestionsProps} from "../../../../types/props/RoundProps";
+import {LashQuipGame} from "../../../../gamelogic/gameClasses/LashQuipGame";
 
 const socket = getSocketConnection();
 
-const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmount, questionTime}) => {
-    const [games, setGames] = useState<GameClass[]>([]);
+const RoundQuestions: React.FC<LashQuipQuestionsProps> = ({players, onDone, questionAmount, questionTime}) => {
+    const [games, setGames] = useState<LashQuipGame[]>([]);
     const [showTimer, setShowTimer] = useState(true);
     const [timerText, setTimerText] = useState("Answer the questions on your device");
     const [playerSubmittedResponseImageNums, setPlayerSubmittedResponseImageNums] = useState<number[]>([]);
@@ -41,7 +41,7 @@ const RoundQuestions: React.FC<QuestionsProps> = ({players, onDone, questionAmou
         const prompts = !(context && context.isFinalRound)
             ? getBasicPrompts() : getFinalRoundPrompts();
 
-        const [playerQuestionsArray, games]: [PlayerQuestions[], GameClass[]]
+        const [playerQuestionsArray, games]: [PlayerQuestions[], LashQuipGame[]]
             = generateQuestions(matches, players, prompts);
 
         allResponsesCount.current = getAllResponsesCount(games);

@@ -1,5 +1,5 @@
 /**
- * Used to help other types extend
+ * Used to help other types-interfaces extend
  */
 export interface UserProps {
     username: string,

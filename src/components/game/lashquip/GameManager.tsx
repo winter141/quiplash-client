@@ -3,11 +3,11 @@ import {animated} from '@react-spring/web';
 import {AppBar, Box, CardMedia, IconButton, Toolbar} from "@mui/material";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import {GameScenes} from "../../types/enums/Scenes";
+import {GameScenes} from "../../../types/enums/Scenes";
 import RoundManager from "./rounds/RoundManager";
-import IntroToScene from "../subcomponents/IntroToScene";
+import IntroToScene from "../../subcomponents/IntroToScene";
 import {useNavigate} from "react-router-dom";
-import {getSocketConnection} from "../../services/socket";
+import {getSocketConnection} from "../../../services/socket";
 
 const GAME_RULES_MESSAGES = ["Welcome to LashQuip!", "Toggle background music by clicking on the music icon in the top right"]
 
@@ -111,7 +111,7 @@ const GameManager: React.FC = () => {
                 <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
                     <CardMedia
                         component="img"
-                        src={require(`../../images/titles/lashquiptitle.png`)}
+                        src={require(`../../../images/titles/lashquiptitle.png`)}
                         alt="image not found"
                         sx={{width: "10rem"}}
                     />

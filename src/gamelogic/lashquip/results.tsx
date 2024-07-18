@@ -1,9 +1,5 @@
-import {Player} from "../types/types/Player";
-
-const getLastPlace = (players: Player[]): Player => {
-    return players.reduce((minPlayer, player) =>
-        player.score < minPlayer.score ? player : minPlayer, players[0]);
-}
+import {Player} from "../../types/Player";
+import {getLastPlace} from "../general/general";
 
 const getResultMessages = (players: Player[], roundNumber: number) => {
     const lastPlacePlayer = getLastPlace(players);

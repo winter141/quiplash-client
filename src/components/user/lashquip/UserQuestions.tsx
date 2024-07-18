@@ -1,8 +1,8 @@
 import {Button, FormHelperText, Stack, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import {UserQuestionsProps} from "../../types/props/UserScreenProps";
-import {getSocketConnection, useSocketOnHook} from "../../services/socket";
-import {getSafetyQuipResponse} from "../../gamelogic/answers";
+import {UserQuestionsProps} from "../../../types/props/UserScreenProps";
+import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
+import {getSafetyQuipResponse} from "../../../gamelogic/lashquip/answers";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import SendIcon from '@mui/icons-material/Send';
 

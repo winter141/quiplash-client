@@ -1,26 +1,27 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Grid, Typography} from '@mui/material';
-import {ThisOrThatProps} from "../../../types/props/RoundProps";
-import {card, displayResponse, padding, questionWrapper} from "../../../styling/styles";
-import {AnimatedPaper} from "../../../styling/animations";
-import {addPlayerResponseToLocalStorage, getPlayersNotInGame} from "../../../gamelogic/answers";
-import RoundTimer from "../../subcomponents/RoundTimer";
-import {GameClass} from "../../../types/classes/GameClass";
-import {PlayerScoreFromRound} from "../../../types/types/Player";
-import AnimateVotes from "../../subcomponents/AnimateVotes"
-import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
-import {useSpeechSynthesisHook} from "../../../services/speech";
+import {ThisOrThatProps} from "../../../../types/props/RoundProps";
+import {card, displayResponse, padding, questionWrapper} from "../../../../styling/styles";
+import {AnimatedPaper} from "../../../../styling/animations";
+import {addPlayerResponseToLocalStorage} from "../../../../gamelogic/lashquip/answers";
+import RoundTimer from "../../../subcomponents/RoundTimer";
+import AnimateVotes from "./AnimateVotes"
+import {getSocketConnection, useSocketOnHook} from "../../../../services/socket";
+import {useSpeechSynthesisHook} from "../../../../services/speech";
 import { roundContext} from "./RoundManager";
-import LinearTimer from "../../subcomponents/LinearTimer";
+import LinearTimer from "../../../subcomponents/LinearTimer";
+import {LashQuipGame} from "../../../../gamelogic/gameClasses/LashQuipGame";
+import {getPlayersNotInGame} from "../../../../gamelogic/general/general";
+import {LashQuipScoreFromRound} from "../../../../types/Responses";
 
 const socket = getSocketConnection();
 const COMPONENT_WAIT = 4; // How long to wait before component is "done" in seconds
 
 const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTime, maxScore }) => {
-    const [gameState, setGameState] = useState<GameClass>(game);
+    const [gameState, setGameState] = useState<LashQuipGame>(game);
     const [isThisResponseShown, setIsThisResponseShown] = useState(false);
     const [isThatResponseShown, setIsThatResponseShown] = useState(false);
-    const [playerScoresFromRound, setPlayerScoresFromRound] = useState<PlayerScoreFromRound[]>([]);
+    const [playerScoresFromRound, setPlayerScoresFromRound] = useState<LashQuipScoreFromRound[]>([]);
     const [isResultsShown, setIsResultsShown] = useState(false);
     const [showRoundTimer, setShowRoundTimer] = useState(false);
     const [showLinearTimer, setShowLinearTimer] = useState(false);
@@ -29,7 +30,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const context = useContext(roundContext);
 
-    const responses = game.getPlayerResponses();
+    const responses = game.getLashQuipResponses();
 
     const messages = [
         game.getQuestion(),
@@ -41,7 +42,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         socket.emit("join_specific_room", localStorage.getItem("roomCode"));
     }, []);
 
-    const addVoteToNewGameState = (initialGameState: GameClass, data: any) => {
+    const addVoteToNewGameState = (initialGameState: LashQuipGame, data: any) => {
         playersVoted.current++;
         initialGameState.addVote(data.voterUsername, data.response);
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
@@ -49,7 +50,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
         if (playersVoted.current >= getPlayersNotInGame(responses, players).length) {
             if (!(context && context.isFinalRound)) {
                 const winnerPlayerResponse = game.getWinnerPlayerResponse();
-                addPlayerResponseToLocalStorage(winnerPlayerResponse);
+                if (winnerPlayerResponse) addPlayerResponseToLocalStorage(winnerPlayerResponse);
             }
             handleTimeEnd();
         }

@@ -1,9 +1,9 @@
 import {Button, Paper, Stack} from "@mui/material";
 import React, {useEffect} from "react";
-import {card} from "../../styling/styles";
+import {card} from "../../../styling/styles";
 import {io} from "socket.io-client";
-import {UserVoteProps} from "../../types/props/UserScreenProps";
-import {getSocketConnection, useSocketOnHook} from "../../services/socket";
+import {UserVoteProps} from "../../../types/props/UserScreenProps";
+import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 
 const socket = getSocketConnection();
 

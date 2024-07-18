@@ -1,11 +1,6 @@
-import {Player, PlayerResponse} from "../types/types/Player";
-import questions from "../data/prompts.json";
+import questions from "../../data/prompts.json";
+import {PlayerResponse} from "../../types/Responses";
 const { PROMPTS, FINAL_ROUND_SAFETY_QUIPS } = questions;
-
-const getPlayersNotInGame = (playerResponses: PlayerResponse[], players: Player[]) : Player[] => {
-    const playersInResponse: string[]  = playerResponses.map(playerResponse => playerResponse.username);
-    return players.filter(player => (!playersInResponse.includes(player.name)));
-}
 
 /**
  * Add a Player Response to local storage.
@@ -34,5 +29,5 @@ const getRoundMultiplier = (roundNumber: number): number => {
     return roundNumber < 4 ? 2 : 3;
 }
 
-export { getPlayersNotInGame, addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse,
+export { addPlayerResponseToLocalStorage, getBeforeResultsMessages, getSafetyQuipResponse,
     getRoundMultiplier}

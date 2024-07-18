@@ -1,12 +1,12 @@
-import {Box, CardMedia, Grid, List, ListItem, Paper} from "@mui/material";
+import {Box, Grid, ListItem, Paper} from "@mui/material";
 import React, {useEffect, useRef, useState} from "react";
 import {card, cardLobby} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
-import {Player} from "../../types/types/Player";
+import {Player} from "../../types/Player";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
-import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
 import {AnimatedChip} from "../../styling/animations";
 import ImageCharacter from "../subcomponents/ImageCharacter";
+import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/general/imageColors";
 
 const socket = getSocketConnection();
 type PlayerWithVIP = Player & { VIP: boolean };
@@ -16,6 +16,7 @@ const Lobby = () => {
     const navigate = useNavigate();
     const playersRef = useRef(players); // Create a ref to store the latest players state
     const roomCode = localStorage.getItem("roomCode") || "";
+    const gameSelected = localStorage.getItem("gameSelected");
 
     useEffect(() => {
         playersRef.current = players;
@@ -30,7 +31,9 @@ const Lobby = () => {
 
     useSocketOnHook(socket, "start_game", (data) => {
         localStorage.setItem("players", JSON.stringify(playersRef.current));
-        navigate('/game/play');
+        if (gameSelected) {
+            navigate(`/game/play/${gameSelected}`);
+        }
     })
 
     const displayLobby = () => {

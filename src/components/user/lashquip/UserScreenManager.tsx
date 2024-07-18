@@ -1,14 +1,14 @@
 import {AppBar, Box, Button, Paper, Toolbar, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import {card} from "../../styling/styles";
-import {PlayerResponse} from "../../types/types/Player";
-import {UserScenes} from "../../types/enums/Scenes";
+import {card} from "../../../styling/styles";
+import {UserScenes} from "../../../types/enums/Scenes";
 import UserQuestions from "./UserQuestions";
 import UserVote from "./UserVote";
-import ImageCharacter from "../subcomponents/ImageCharacter";
-import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/characterImages";
-import {getSocketConnection, useSocketOnHook} from "../../services/socket";
+import ImageCharacter from "../../subcomponents/ImageCharacter";
+import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import {useNavigate} from "react-router-dom";
+import {LashQuipResponse} from "../../../types/Responses";
+import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../../gamelogic/general/imageColors";
 
 const socket = getSocketConnection();
 
@@ -51,7 +51,7 @@ const UserScreenManager = () => {
 
     useSocketOnHook(socket, "vote", (data) => {
         setQuestion(data.game.question);
-        setResponses(data.game.playerResponses.map((r: PlayerResponse) => r.response));
+        setResponses(data.game.playerResponses.map((r: LashQuipResponse) => r.response));
         setCurrentScene(UserScenes.VOTING);
     })
 

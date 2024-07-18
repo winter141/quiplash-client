@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
-import {ResultsProps} from "../../../types/props/RoundProps";
+import {ResultsProps} from "../../../../types/props/RoundProps";
 import {Button, Card, CardContent, Paper, Typography} from "@mui/material";
-import {card} from "../../../styling/styles";
-import {Player} from "../../../types/types/Player";
-import ImageCharacter from "../../subcomponents/ImageCharacter";
-import '../../../styling/podiumResults.css'
+import {card} from "../../../../styling/styles";
+import {Player} from "../../../../types/Player";
+import ImageCharacter from "../../../subcomponents/ImageCharacter";
+import '../../../../styling/podiumResults.css'
 import {roundContext} from "./RoundManager";
-import {useSpeechSynthesisHook} from "../../../services/speech";
+import {useSpeechSynthesisHook} from "../../../../services/speech";
 import {useNavigate} from "react-router-dom";
-import {AnimatedDivGrow, AnimatedDivSwing} from "../../../styling/animations";
+import {AnimatedDivGrow, AnimatedDivSwing} from "../../../../styling/animations";
 
 const RoundResults: React.FC<ResultsProps> = ({players, onDone, sceneTime, messages}) => {
     const context = useContext(roundContext);
