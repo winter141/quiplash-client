@@ -7,8 +7,8 @@ import UserVote from "./UserVote";
 import ImageCharacter from "../../subcomponents/ImageCharacter";
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
 import {useNavigate} from "react-router-dom";
-import {LashQuipResponse} from "../../../types/Responses";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../../gamelogic/general/imageColors";
+import {PlayerResponse} from "../../../types/Responses";
 
 const socket = getSocketConnection();
 
@@ -19,7 +19,7 @@ const UserScreenManager = () => {
     const [imageNum, setImageNum] = useState<number>(0);
     const [isVIPReady, setIsVIPReady] = useState<boolean>(false);
     const [question, setQuestion] = useState("");
-    const [responses, setResponses] = useState([]);
+    const [responses, setResponses] = useState<PlayerResponse[]>([]);
     const [currentScene, setCurrentScene] = useState<UserScenes>(UserScenes.INITIAL);
     const [errorFlag, setErrorFlag] = useState(false);
     const navigate = useNavigate();
@@ -50,8 +50,10 @@ const UserScreenManager = () => {
     })
 
     useSocketOnHook(socket, "vote", (data) => {
+        console.log("vote");
+        console.log(data);
         setQuestion(data.game.question);
-        setResponses(data.game.playerResponses.map((r: LashQuipResponse) => r.response));
+        setResponses(data.game.playerResponses);
         setCurrentScene(UserScenes.VOTING);
     })
 

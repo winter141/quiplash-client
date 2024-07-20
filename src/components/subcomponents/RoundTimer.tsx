@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Box, CircularProgress, LinearProgress, Paper, Typography} from "@mui/material";
+import {Box, CircularProgress, Typography} from "@mui/material";
 
 interface RoundTimerProps {
     initialTime: number;

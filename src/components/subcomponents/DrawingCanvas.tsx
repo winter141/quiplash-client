@@ -139,9 +139,6 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
                     onTouchMove={draw}
                 />
                 <Paper elevation={3} sx={{width: `${CANVAS_WIDTH}px`}}>
-                    {/*
-                    <Typography variant="h6" sx={{float: "left"}}>Tool Bar</Typography>
-*/}
                     <ColorToolBar canvas={canvasRef.current}/>
                 </Paper>
                 <Button variant="contained" color="inherit" onClick={handleSubmit} sx={{width: `${CANVAS_WIDTH}px`}}>

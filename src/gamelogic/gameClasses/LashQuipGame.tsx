@@ -1,30 +1,24 @@
 import {Game} from "./Game";
-import {LashQuipResponse, LashQuipScoreFromRound, PlayerResponse} from "../../types/Responses";
+import {LashQuipResponseData, PlayerResponse, PlayerScoreFromRound} from "../../types/Responses";
 import {Player} from "../../types/Player";
 
 class LashQuipGame extends Game {
-    private lashQuipResponses: LashQuipResponse[];
     private readonly DEFAULT_RESPONSE: string = "[NO ANSWER]";
     private readonly QUIPLASH_BONUS_PERCENT = 0.2;
     private readonly SAFETY_QUIP_PERCENT = 0.5;
     private readonly NO_ANSWER_PERCENT = 0.25;
 
-    constructor(question: string, players: string[], lashQuipResponses: LashQuipResponse[] = []) {
-        let playerResponses: PlayerResponse[];
-
-        if (lashQuipResponses.length > 0) {
-            playerResponses = lashQuipResponses;
-        } else {
-            playerResponses = players.map(player => ({
-                username: player,
-                votes: [],
+    constructor(question: string, players: string[], playerResponses: PlayerResponse[] = []) {
+        const initializedResponses = playerResponses.length > 0 ? playerResponses : players.map(player => ({
+            username: player,
+            votes: [],
+            responseData: {
                 response: "",
                 safetyQuip: false
-            }));
-        }
+            }
+        }));
 
-        super(question, playerResponses);
-        this.lashQuipResponses = playerResponses as LashQuipResponse[];
+        super(question, initializedResponses);
     }
 
     /**
@@ -33,17 +27,11 @@ class LashQuipGame extends Game {
      */
     static fromJson(json: any): LashQuipGame {
         if (json instanceof LashQuipGame) return json;
-        return new LashQuipGame(json.question, json.responses);
+        return new LashQuipGame(json.question, [], json.responses);
     }
 
     public cloneGame() {
-        return new LashQuipGame(this.getQuestion(), [], this.lashQuipResponses);
-    }
-
-    public getLashQuipResponses() {
-        return this.lashQuipResponses
-            .sort((a, b) =>
-                a.username.localeCompare(b.username));
+        return new LashQuipGame(this.getQuestion(), [], this.playerResponses);
     }
 
     /**
@@ -54,10 +42,12 @@ class LashQuipGame extends Game {
      */
     public addResponse(username: string, response: string, safetyQuip: boolean) {
         response = this.getUniqueResponse(response);
-        const foundPlayerResponse: LashQuipResponse | undefined = this.findLashQuipResponseByUsername(username);
+        const foundPlayerResponse: PlayerResponse | undefined = this.findPlayerResponseByUsername(username);
         if (foundPlayerResponse) {
-            foundPlayerResponse.response = response;
-            foundPlayerResponse.safetyQuip = safetyQuip;
+            foundPlayerResponse.responseData = {
+                response: response,
+                safetyQuip: safetyQuip
+            }
         }
     }
 
@@ -67,20 +57,22 @@ class LashQuipGame extends Game {
      * @param maxScore Max score for round
      * @param players Full list of all players
      */
-    public addScoreToPlayers(maxScore: number, players: Player[]): [Player[] , LashQuipScoreFromRound[]] {
+    public addScoreToPlayers(maxScore: number, players: Player[]): [Player[] , PlayerScoreFromRound[]] {
         const totalVotes = this.getTotalVotes();
 
-        let lashQuipScoresFromRound: LashQuipScoreFromRound[] = [];
+        let playerScoreFromRounds: PlayerScoreFromRound[] = [];
 
-        for (const lashQuipResponse of this.lashQuipResponses) {
-            const foundPlayer = players.find(player => player.name === lashQuipResponse.username);
+        for (const playerResponse of this.playerResponses) {
+            const foundPlayer = players.find(player => player.name === playerResponse.username);
             if (foundPlayer) {
+                const responseData = playerResponse.responseData as LashQuipResponseData;
+
                 let quiplashBonus = 0;
                 let scoreFromRound = 0;
-                const safetyQuipMultiplier = lashQuipResponse.safetyQuip ? this.SAFETY_QUIP_PERCENT : 1;
-                const noAnswerMultiplier = lashQuipResponse.response === this.DEFAULT_RESPONSE ? this.NO_ANSWER_PERCENT : 1;
+                const safetyQuipMultiplier = responseData.safetyQuip ? this.SAFETY_QUIP_PERCENT : 1;
+                const noAnswerMultiplier = responseData.response === this.DEFAULT_RESPONSE ? this.NO_ANSWER_PERCENT : 1;
 
-                const votesForPlayer = lashQuipResponse.votes.length;
+                const votesForPlayer = playerResponse.votes.length;
                 if (votesForPlayer > 0) {
                     scoreFromRound = Math.round((votesForPlayer / totalVotes) * maxScore * safetyQuipMultiplier * noAnswerMultiplier);
                 }
@@ -90,14 +82,14 @@ class LashQuipGame extends Game {
                 }
 
                 foundPlayer.score += scoreFromRound + quiplashBonus;
-                lashQuipScoresFromRound.push({
-                    playerResponse: lashQuipResponse,
+                playerScoreFromRounds.push({
+                    playerResponse: playerResponse,
                     quiplashBonus: quiplashBonus,
                     scoreFromRound: scoreFromRound
                 })
             }
         }
-        return [players, lashQuipScoresFromRound];
+        return [players, playerScoreFromRounds];
     }
 
     private getUniqueResponse(responseInput: string): string {
@@ -108,11 +100,13 @@ class LashQuipGame extends Game {
     }
 
     private findLashQuipResponseByResponse(responseInput: string) {
-        return this.lashQuipResponses.find(response => response.response === responseInput);
-    }
-
-    private findLashQuipResponseByUsername(username: string): LashQuipResponse | undefined {
-        return this.lashQuipResponses.find(response => response.username === username);
+        for (const playerResponse of this.playerResponses) {
+            const responseData = playerResponse.responseData as LashQuipResponseData;
+            if (responseData.response === responseInput) {
+                return playerResponse;
+            }
+        }
+        return;
     }
 }
 

@@ -9,6 +9,7 @@ import GameMenu from "./components/game/GameMenu";
 import GameManager from "./components/game/lashquip/GameManager";
 import {ThemeProvider} from "@mui/material";
 import { theme } from './styling/theme';
+import DrawingCanvas from "./components/subcomponents/DrawingCanvas";
 
 const baseUrl = '/quiplash-client'
 
@@ -25,6 +26,9 @@ function App() {
                     <Route path="/game/lobby" element={<Lobby/>}/>
 
                     <Route path="/game/play/lashquip" element={<GameManager/>}/>
+
+                    <Route path="/game/play/lashquip" element={<DrawingCanvas onDone={()=>{}}/>}/>
+
 
                     <Route path="*" element={<NotFound/>}/>
                 </Routes>

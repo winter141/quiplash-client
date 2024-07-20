@@ -37,7 +37,7 @@ class Game {
         return this.playerResponses.sort((a, b) => b.votes.length - a.votes.length)[0];
     }
 
-    private findPlayerResponseByUsername(username: string): PlayerResponse | undefined {
+    protected findPlayerResponseByUsername(username: string): PlayerResponse | undefined {
         return this.playerResponses.find(response => response.username === username);
     }
 

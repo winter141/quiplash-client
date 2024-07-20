@@ -1,7 +1,6 @@
 import React from "react";
-import {Paper, Typography} from "@mui/material";
+import {Typography} from "@mui/material";
 import {useSpeechSynthesisHook} from "../../services/speech";
-import {card, colorCard} from "../../styling/styles";
 import TitleImage from "./TitleImage";
 
 interface IntroToSceneProps {
@@ -18,7 +17,7 @@ const IntroToScene: React.FC<IntroToSceneProps> = ({speechMessages, imageTitle, 
                 <TitleImage titleName={imageTitle}/>
             ) : (
                 speechMessages.map((message, index) => (
-                    <Typography variant="h6" sx={{padding: "12px"}}>{message}</Typography>
+                    <Typography key={index} variant="h6" sx={{padding: "12px"}}>{message}</Typography>
                 ))
             )}
         </>

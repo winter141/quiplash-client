@@ -29,7 +29,7 @@ const Lobby = () => {
         }
     })
 
-    useSocketOnHook(socket, "start_game", (data) => {
+    useSocketOnHook(socket, "start_game", () => {
         localStorage.setItem("players", JSON.stringify(playersRef.current));
         if (gameSelected) {
             navigate(`/game/play/${gameSelected}`);

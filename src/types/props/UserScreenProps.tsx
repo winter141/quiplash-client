@@ -1,3 +1,5 @@
+import {PlayerResponse} from "../Responses";
+
 /**
  * Used to help other types-interfaces extend
  */
@@ -9,7 +11,7 @@ export interface UserProps {
 
 export interface UserVoteProps extends UserProps {
     question: string,
-    responses: string[]
+    responses: PlayerResponse[]
 }
 
 export interface UserQuestionsProps extends UserProps {

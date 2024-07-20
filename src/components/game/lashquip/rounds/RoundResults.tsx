@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useState} from "react";
 import {ResultsProps} from "../../../../types/props/RoundProps";
 import {Button, Card, CardContent, Paper, Typography} from "@mui/material";
 import {card} from "../../../../styling/styles";

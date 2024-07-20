@@ -3,12 +3,12 @@ import {votesContainer} from "../../../../styling/styles";
 import {AnimatedChip, AnimatedDiv, AnimatedTypography} from "../../../../styling/animations";
 import {Typography} from "@mui/material";
 import ConstructionIcon from '@mui/icons-material/Construction';
-import {LashQuipScoreFromRound} from "../../../../types/Responses";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../../../gamelogic/general/imageColors";
 import {Player} from "../../../../types/Player";
+import {LashQuipResponseData, PlayerScoreFromRound} from "../../../../types/Responses";
 
 interface AnimateVotesProps {
-    playerScoreFromRound: LashQuipScoreFromRound;
+    playerScoreFromRound: PlayerScoreFromRound;
     players: Player[];
 }
 
@@ -31,7 +31,7 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
             setShowRoundScore(true);
         }, SCORE_TIMEOUT);
 
-        if (playerScoreFromRound.quiplashBonus > 0) {
+        if (playerScoreFromRound.quiplashBonus && playerScoreFromRound.quiplashBonus > 0) {
             setTimeout(() => {
                 setShowQuiplashBonus(true);
             }, SCORE_TIMEOUT + QUIPLASH_TIMEOUT);
@@ -45,27 +45,36 @@ const AnimateVotes: React.FC<AnimateVotesProps> = ({ playerScoreFromRound, playe
                     <AnimatedChip key={index}
                                   label={username}
                                   size="medium"
-                                  sx={{color: getBlackOrWhiteFromImageNum(usernameImageNumMap[username]),
+                                  sx={{
+                                      color: getBlackOrWhiteFromImageNum(usernameImageNumMap[username]),
                                       backgroundColor: getHexColorFromImageNum(usernameImageNumMap[username]),
-                                      fontWeight: "bold"}}
+                                      fontWeight: "bold"
+                                  }}
                     />
                 ))}
             </div>
 
-            {playerScoreFromRound.playerResponse.safetyQuip && (
+            {(playerScoreFromRound.playerResponse.responseData as LashQuipResponseData).safetyQuip && (
                 <AnimatedDiv style={{fontWeight: "bold", color: "orange"}}>
                     <Typography>SAFETY QUIPPED</Typography>
                     <ConstructionIcon/>
                 </AnimatedDiv>
             )}
-            {playerScoreFromRound.scoreFromRound > 0 && showRoundScore && (
-                <AnimatedTypography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</AnimatedTypography>
+
+            {(playerScoreFromRound.scoreFromRound > 0 && showRoundScore) && (
+                <AnimatedTypography
+                    sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.scoreFromRound}</AnimatedTypography>
             )}
-            {playerScoreFromRound.quiplashBonus > 0 && showQuiplashBonus && (
-                <AnimatedTypography sx={{fontWeight: "bold"}}>+ {playerScoreFromRound.quiplashBonus} QUIPLASH BONUS</AnimatedTypography>
-            )}
+
+            {(playerScoreFromRound.quiplashBonus && playerScoreFromRound.quiplashBonus > 0 && showQuiplashBonus) ? (
+                <AnimatedTypography sx={{fontWeight: "bold"}}>
+                    + {playerScoreFromRound.quiplashBonus} QUIPLASH BONUS
+                </AnimatedTypography>
+            ) : (<></>)}
+
             <Typography
-                sx={{color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.playerResponse.username]),
+                sx={{
+                    color: getHexColorFromImageNum(usernameImageNumMap[playerScoreFromRound.playerResponse.username]),
                     fontWeight: "bold",
                     position: "absolute",
                     bottom: 3,

@@ -1,6 +1,4 @@
-import React, {useRef, useState} from 'react';
-import CSS from 'csstype';
-import {Paper} from "@mui/material";
+import React, {useState} from 'react';
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import ColorSelector from "./ColorSelector";
 

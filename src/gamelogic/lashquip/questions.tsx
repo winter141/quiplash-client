@@ -1,6 +1,6 @@
 import {Player, PlayerQuestions} from "../../types/Player";
 import questions from '../../data/prompts.json';
-import {LashQuipResponse, PlayerResponse} from "../../types/Responses";
+import {LashQuipResponseData, PlayerResponse} from "../../types/Responses";
 import {shuffleArray} from "../general/general";
 import {LashQuipGame} from "../gameClasses/LashQuipGame";
 const { PROMPTS } = questions;
@@ -39,9 +39,9 @@ function addQuestionToPlayers(playerQuestions: PlayerQuestions[], question: stri
 
 const getFinalRoundPrompts = (): string[] => {
     const storedResponses = localStorage.getItem("playerResponses");
-    const playerResponses: LashQuipResponse[] = storedResponses ? JSON.parse(storedResponses) : []
+    const playerResponses: PlayerResponse[] = storedResponses ? JSON.parse(storedResponses) : []
     return playerResponses.map((playerResponse) =>
-        playerResponse.response + " is the answer, what is the question?");
+        (playerResponse.responseData as LashQuipResponseData).response + " is the answer, what is the question?");
 }
 
 const getBasicPrompts = (): string[] => {

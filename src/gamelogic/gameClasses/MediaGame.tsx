@@ -1,39 +1,35 @@
-import {LashQuipResponse, MediaResponse, MediaScoreFromRound} from "../../types/Responses";
+import {PlayerResponse, PlayerScoreFromRound} from "../../types/Responses";
 import {Game} from "./Game";
 import {Player} from "../../types/Player";
 
 class MediaGame extends Game {
-    private mediaResponses: MediaResponse[];
 
-    constructor(question: string, players: string[], mediaResponses: MediaResponse[] = []) {
-        if (mediaResponses.length > 0) {
-            super(question, mediaResponses);
-            this.mediaResponses = mediaResponses;
-        } else {
-            for (const player of players) {
-                mediaResponses.push({
-                    username: player,
-                    votes: [],
-                    dataUrl: "",
-                    imageTitle: ""
-                })
+    constructor(question: string, players: string[], playerResponses: PlayerResponse[] = []) {
+        const initializedResponses = playerResponses.length > 0 ? playerResponses : players.map(player => ({
+            username: player,
+            votes: [],
+            responseData: {
+                dataUrl: "",
+                imageTitle: ""
             }
-            super(question, mediaResponses)
-            this.mediaResponses = mediaResponses;
-        }
+        }));
+
+        super(question, initializedResponses);
     }
 
     /**
      * Add response
      * @param username
-     * @param response
-     * @param safetyQuip if safety quip was used
+     * @param dataUrl
+     * @param imageTitle
      */
     public addResponse(username: string, dataUrl: string, imageTitle: string) {
-        const foundPlayerResponse = this.findMediaResponseByUsername(username);
+        const foundPlayerResponse = this.findPlayerResponseByUsername(username);
         if (foundPlayerResponse) {
-            foundPlayerResponse.dataUrl = dataUrl;
-            foundPlayerResponse.imageTitle = imageTitle;
+            foundPlayerResponse.responseData = {
+                dataUrl: dataUrl,
+                imageTitle: imageTitle
+            };
         }
     }
 
@@ -43,12 +39,12 @@ class MediaGame extends Game {
      * @param maxScore Max score for round
      * @param players Full list of all players
      */
-    public addScoreToPlayers(maxScore: number, players: Player[]): [Player[] , MediaScoreFromRound[]] {
+    public addScoreToPlayers(maxScore: number, players: Player[]): [Player[] , PlayerScoreFromRound[]] {
         const totalVotes = this.getTotalVotes();
 
-        let mediaScoresFromRound: MediaScoreFromRound[] = [];
+        let playerScoreFromRounds: PlayerScoreFromRound[] = [];
 
-        for (const mediaResponse of this.mediaResponses) {
+        for (const mediaResponse of this.playerResponses) {
             const foundPlayer = players.find(player => player.name === mediaResponse.username);
             if (foundPlayer) {
                 let scoreFromRound = 0;
@@ -59,20 +55,14 @@ class MediaGame extends Game {
                 }
                 foundPlayer.score += scoreFromRound;
 
-                mediaScoresFromRound.push({
+                playerScoreFromRounds.push({
                     playerResponse: mediaResponse,
                     scoreFromRound: scoreFromRound
                 })
             }
         }
-        return [players, mediaScoresFromRound];
+        return [players, playerScoreFromRounds];
     }
-
-
-    private findMediaResponseByUsername(username: string): MediaResponse | undefined {
-        return this.mediaResponses.find(response => response.username === username);
-    }
-
 }
 
 export { MediaGame }

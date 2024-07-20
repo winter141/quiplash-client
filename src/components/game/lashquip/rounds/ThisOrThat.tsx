@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import {Grid, Typography} from '@mui/material';
 import {ThisOrThatProps} from "../../../../types/props/RoundProps";
-import {card, displayResponse, padding, questionWrapper} from "../../../../styling/styles";
+import {card, displayResponse, questionWrapper} from "../../../../styling/styles";
 import {AnimatedPaper} from "../../../../styling/animations";
 import {addPlayerResponseToLocalStorage} from "../../../../gamelogic/lashquip/answers";
 import RoundTimer from "../../../subcomponents/RoundTimer";
@@ -12,7 +12,7 @@ import { roundContext} from "./RoundManager";
 import LinearTimer from "../../../subcomponents/LinearTimer";
 import {LashQuipGame} from "../../../../gamelogic/gameClasses/LashQuipGame";
 import {getPlayersNotInGame} from "../../../../gamelogic/general/general";
-import {LashQuipScoreFromRound} from "../../../../types/Responses";
+import {LashQuipResponseData, PlayerScoreFromRound} from "../../../../types/Responses";
 
 const socket = getSocketConnection();
 const COMPONENT_WAIT = 4; // How long to wait before component is "done" in seconds
@@ -21,7 +21,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     const [gameState, setGameState] = useState<LashQuipGame>(game);
     const [isThisResponseShown, setIsThisResponseShown] = useState(false);
     const [isThatResponseShown, setIsThatResponseShown] = useState(false);
-    const [playerScoresFromRound, setPlayerScoresFromRound] = useState<LashQuipScoreFromRound[]>([]);
+    const [playerScoresFromRound, setPlayerScoresFromRound] = useState<PlayerScoreFromRound[]>([]);
     const [isResultsShown, setIsResultsShown] = useState(false);
     const [showRoundTimer, setShowRoundTimer] = useState(false);
     const [showLinearTimer, setShowLinearTimer] = useState(false);
@@ -30,12 +30,14 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const context = useContext(roundContext);
 
-    const responses = game.getLashQuipResponses();
+    const responses = game.getPlayerResponses();
+    const response1 = (responses[0].responseData as LashQuipResponseData).response;
+    const response2 = (responses[1].responseData as LashQuipResponseData).response
 
     const messages = [
         game.getQuestion(),
-        responses[0].response,
-        responses[1].response
+        response1,
+        response2
     ];
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
 
     const addVoteToNewGameState = (initialGameState: LashQuipGame, data: any) => {
         playersVoted.current++;
-        initialGameState.addVote(data.voterUsername, data.response);
+        initialGameState.addVote(data.voterUsername, data.response.username);
         setReceivedUserVotes([...receivedUserVotes, data.voterUsername]);
 
         if (playersVoted.current >= getPlayersNotInGame(responses, players).length) {
@@ -99,17 +101,15 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
     }
 
     const handleComponentDone = () => {
-        console.log("DONE");
         onDone();
     }
 
     const animateVotes = (response: string) => {
         const foundPlayerScoreFromRound = playerScoresFromRound
-            .find(player => player.playerResponse.response === response);
+            .find(player =>
+                (player.playerResponse.responseData as LashQuipResponseData).response === response);
 
         if (!foundPlayerScoreFromRound) return null;
-
-        console.log(foundPlayerScoreFromRound);
 
         return (
             <AnimateVotes playerScoreFromRound={foundPlayerScoreFromRound} players={players}/>
@@ -125,16 +125,16 @@ const ThisOrThat: React.FC<ThisOrThatProps> = ({ players, onDone, game, votingTi
                 <Grid item xs={6}>
                     {isThisResponseShown && (
                         <AnimatedPaper elevation={3} style={displayResponse}>
-                            <Typography variant="h3">{responses[0].response}</Typography>
-                            {isResultsShown && animateVotes(responses[0].response)}
+                            <Typography variant="h3">{response1}</Typography>
+                            {isResultsShown && animateVotes(response1)}
                         </AnimatedPaper>
                     )}
                 </Grid>
                 <Grid item xs={6}>
                     {isThatResponseShown && (
                         <AnimatedPaper elevation={3} style={displayResponse}>
-                            <Typography variant="h3">{responses[1].response}</Typography>
-                            {isResultsShown && animateVotes(responses[1].response)}
+                            <Typography variant="h3">{response2}</Typography>
+                            {isResultsShown && animateVotes(response2)}
                         </AnimatedPaper>
                     )}
                 </Grid>

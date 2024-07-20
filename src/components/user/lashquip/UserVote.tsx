@@ -1,9 +1,9 @@
 import {Button, Paper, Stack} from "@mui/material";
 import React, {useEffect} from "react";
 import {card} from "../../../styling/styles";
-import {io} from "socket.io-client";
-import {UserVoteProps} from "../../../types/props/UserScreenProps";
 import {getSocketConnection, useSocketOnHook} from "../../../services/socket";
+import {UserVoteProps} from "../../../types/props/UserScreenProps";
+import {LashQuipResponseData, PlayerResponse} from "../../../types/Responses";
 
 const socket = getSocketConnection();
 
@@ -16,7 +16,7 @@ const UserVote: React.FC<UserVoteProps> = ({username, roomCode, question, respon
         onDone();
     });
 
-    const submitResponse = (response: string) => {
+    const submitResponse = (response: PlayerResponse) => {
         socket.emit("cast_vote", {response: response, voterUsername: username, room: roomCode});
         onDone();
     }
@@ -25,8 +25,10 @@ const UserVote: React.FC<UserVoteProps> = ({username, roomCode, question, respon
         <Paper elevation={0} style={card}>
             <h1>{question}</h1>
             <Stack spacing={2} sx={{ p: 2 }}>
-                {responses.map((response) => (
-                    <Button variant="contained" onClick={() => {submitResponse(response)}}>{response}</Button>
+                {responses.map((response: PlayerResponse) => (
+                    <Button variant="contained" onClick={() => {submitResponse(response)}}>
+                        {(response.responseData as LashQuipResponseData).response}
+                    </Button>
                 ))}
             </Stack>
         </Paper>

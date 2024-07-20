@@ -32,12 +32,12 @@ const LinearTimer: React.FC<LinearTimerProps> = ({ initialTime, onTimeEnd, sx })
         >
             <Box
 
-                sx={{ width: '20rem', height: '3rem' }} // Styling for the overlay Box
+                sx={{ width: '20rem', height: '3rem' }}
             >
                 <LinearProgress
                     variant="determinate"
                     value={100 - (timeLeft / initialTime) * 100}
-                    sx={{ height: '100%', borderRadius: '2rem' }} // Styling for the LinearProgress
+                    sx={{ height: '100%', borderRadius: '2rem' }}
                 />
             </Box>
         </Box>

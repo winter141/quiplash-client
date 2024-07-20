@@ -1,27 +1,23 @@
 interface PlayerResponse  {
     username: string;
     votes: string[]; // List of usernames of the votes for this response,
+    responseData: LashQuipResponseData | MediaResponseData;
 }
 
-interface LashQuipResponse extends PlayerResponse  {
+interface LashQuipResponseData  {
     response: string;
     safetyQuip: boolean;
 }
 
-interface MediaResponse extends PlayerResponse {
+interface MediaResponseData {
     imageTitle: string;
     dataUrl: string | null;
 }
 
-interface LashQuipScoreFromRound {
-    playerResponse: LashQuipResponse;
-    quiplashBonus: number;
+interface PlayerScoreFromRound {
+    playerResponse: PlayerResponse;
     scoreFromRound: number;
+    quiplashBonus?: number;
 }
 
-interface MediaScoreFromRound {
-    playerResponse: MediaResponse;
-    scoreFromRound: number;
-}
-
-export type { PlayerResponse, LashQuipResponse, MediaResponse, LashQuipScoreFromRound, MediaScoreFromRound }
+export type { PlayerResponse, LashQuipResponseData, MediaResponseData, PlayerScoreFromRound };
