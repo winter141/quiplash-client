@@ -27,7 +27,7 @@ function App() {
 
                     <Route path="/game/play/lashquip" element={<GameManager/>}/>
 
-                    <Route path="/game/play/lashquip" element={<DrawingCanvas onDone={()=>{}}/>}/>
+                    <Route path="/canvas" element={<DrawingCanvas onDone={()=>{}}/>}/>
 
 
                     <Route path="*" element={<NotFound/>}/>
