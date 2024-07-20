@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import {Button, Paper, Stack, Typography} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import ColorToolBar from "./ColorToolBar";
+import ColorToolBar from "../../subcomponents/DrawingToolbar";
 
 interface DrawingCanvasProp {
     onDone: (dataUrl: string) => void;
@@ -9,6 +9,7 @@ interface DrawingCanvasProp {
 
 const CANVAS_WIDTH = 350;
 const CANVAS_HEIGHT = 400;
+export const INITIAL_LINE_WIDTH = 8;
 
 const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -27,7 +28,7 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
             if (context) {
                 context.lineCap = 'round';
                 context.strokeStyle = 'black';
-                context.lineWidth = 5;
+                context.lineWidth = INITIAL_LINE_WIDTH;
                 contextRef.current = context;
             }
         }
@@ -38,6 +39,18 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
                 canvas.height = window.innerHeight * 0.6;
             }
         };
+
+        window.addEventListener('resize', handleResize);
+
+        // Prevent default touch behavior
+        const preventDefaultTouch = (event: TouchEvent) => {
+            event.preventDefault();
+        };
+
+        canvas?.addEventListener('touchstart', preventDefaultTouch, { passive: false });
+        canvas?.addEventListener('touchmove', preventDefaultTouch, { passive: false });
+        canvas?.addEventListener('touchend', preventDefaultTouch, { passive: false });
+        canvas?.addEventListener('touchcancel', preventDefaultTouch, { passive: false });
 
         window.addEventListener('resize', handleResize);
 
@@ -128,7 +141,8 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
                         backgroundColor: "white",
                         width: `${CANVAS_WIDTH}px`,
                         boxShadow: "3px 3px 3px 3px #888888",
-                        margin: "5px"
+                        margin: "5px",
+                        touchAction: "none"
                     }}
                     ref={canvasRef}
                     onMouseDown={startDrawing}

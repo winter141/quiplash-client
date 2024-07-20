@@ -1,16 +1,26 @@
 import React from "react";
 import {Paper, Stack, Typography} from '@mui/material';
 import {card} from "../../../../styling/styles";
+import {MediaGame} from "../../../../gamelogic/gameClasses/MediaGame";
+import {MediaResponseData} from "../../../../types/Responses";
+import LinearTimer from "../../../subcomponents/LinearTimer";
 
 
 interface DisplayDrawingProps {
-    dataUrl: string;
-    imageTitle: string;
+    responseData: MediaResponseData;
     onDone: () => void;
     sx?: any;
 }
 
-const DisplayDrawings: React.FC<DisplayDrawingProps> = ({ dataUrl, imageTitle, onDone, sx}) => {
+const TIME_PER_DRAWING = 3;
+
+const DisplayDrawing: React.FC<DisplayDrawingProps> = ({ responseData, onDone, sx}) => {
+    let {dataUrl, imageTitle} = responseData;
+
+    const handleDrawingDone = () => {
+        onDone();
+    }
+
     return (
         <div style={sx}>
             <Stack
@@ -23,17 +33,22 @@ const DisplayDrawings: React.FC<DisplayDrawingProps> = ({ dataUrl, imageTitle, o
                     <Paper
                         elevation={2}
                         component="img"
-                        src={dataUrl}
-                        alt="image not found"
+                        src={dataUrl ? dataUrl : ""}
+                        alt="Image Not Submitted :("
                         sx={{ maxWidth: '100%', height: 'auto' }}
                     />
                     <Paper elevation={2}>
                         <Typography sx={{fontSize: "100%"}}>{imageTitle}</Typography>
                     </Paper>
                 </Paper>
+                <LinearTimer
+                    initialTime={TIME_PER_DRAWING}
+                    onTimeEnd={handleDrawingDone}
+                    sx={{top: 40}}
+                />
             </Stack>
         </div>
     )
 }
 
-export default DisplayDrawings;
+export default DisplayDrawing;

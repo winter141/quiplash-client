@@ -8,7 +8,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const socket = getSocketConnection();
 
-const games = [
+const GAME_MODES = [
     "partypack1",
     "lashquip",
     "media attack"
@@ -21,7 +21,7 @@ const StartGame = () => {
     useSocketOnHook(socket, "init_game_room_success", (roomCode) => {
         localStorage.clear();
         localStorage.setItem("roomCode", roomCode);
-        const gameSelected = games[gameSelectedIndex].replace(" ", "");
+        const gameSelected = GAME_MODES[gameSelectedIndex].replace(" ", "");
         localStorage.setItem("gameSelected", gameSelected)
         navigate(`/game/lobby`);
     })
@@ -44,7 +44,7 @@ const StartGame = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
                         <List sx={{marginLeft: "30px"}}>
-                            {games.slice(1).map((game, index) => (
+                            {GAME_MODES.slice(1).map((game, index) => (
                                 <ListItem key={index}>
                                     <Button
                                         sx={{color: (index + 1) === gameSelectedIndex ? "darkgrey" : "black"}}
@@ -60,9 +60,9 @@ const StartGame = () => {
                         </List>
                     </Grid>
                     <Grid item xs={9}>
-                        <TitleImage titleName={games[gameSelectedIndex].replace(" ", "")}
+                        <TitleImage titleName={GAME_MODES[gameSelectedIndex].replace(" ", "")}
                                     sx={{marginLeft: "10rem", padding:"2.5rem"}}
-                                    key={games[gameSelectedIndex].replace(" ", "")}
+                                    key={GAME_MODES[gameSelectedIndex].replace(" ", "")}
                         />
                     </Grid>
                 </Grid>

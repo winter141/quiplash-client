@@ -1,6 +1,7 @@
 import {PlayerResponse, PlayerScoreFromRound} from "../../types/Responses";
 import {Game} from "./Game";
 import {Player} from "../../types/Player";
+import {LashQuipGame} from "./LashQuipGame";
 
 class MediaGame extends Game {
 
@@ -15,6 +16,19 @@ class MediaGame extends Game {
         }));
 
         super(question, initializedResponses);
+    }
+
+    /**
+     * Used for deserializing data received from localstorage into GameClass Objects
+     * @param json List of gameClasses in JSON
+     */
+    static fromJson(json: any): MediaGame {
+        if (json instanceof MediaGame) return json;
+        return new MediaGame(json.question, [], json.responses);
+    }
+
+    public cloneGame() {
+        return new MediaGame(this.getQuestion(), [], this.playerResponses);
     }
 
     /**
@@ -65,4 +79,8 @@ class MediaGame extends Game {
     }
 }
 
-export { MediaGame }
+const convertJsonToMediaGameClasses = (jsonArray: any[]): MediaGame[]  => {
+    return jsonArray.map(json => MediaGame.fromJson(json));
+};
+
+export { MediaGame, convertJsonToMediaGameClasses }
