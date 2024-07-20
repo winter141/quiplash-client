@@ -48,7 +48,6 @@ const RoundQuestionsMedia: React.FC<LashQuipQuestionsProps> = ({players, onDone,
         console.log("RECEIVED RESPONSE");
         console.log(data);
 
-
         if (data.allSubmitted) {
             setPlayerSubmittedResponseImageNums([...playerSubmittedResponseImageNums, data.imageNum]);
             setPlayerUnSubmittedResponseImageNums(playerUnSubmittedResponseImageNums

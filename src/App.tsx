@@ -32,7 +32,10 @@ function App() {
                     <Route path="/game/play/mediaattack" element={<GameManagerMedia/>}/>
                     <Route path="/user/mediaattack" element={<UserScreenMedia/>}/>
 
-                    <Route path="/canvas" element={<DrawingCanvas onDone={()=>{}}/>}/>
+                    <Route path="/canvas" element={<DrawingCanvas
+                        onDone={()=>{}}
+                        question="Yo?"
+                    />}/>
 
 
                     <Route path="*" element={<NotFound/>}/>

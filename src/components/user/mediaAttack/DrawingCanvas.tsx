@@ -1,20 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {Button, Paper, Stack, Typography} from "@mui/material";
+import {Button, FormHelperText, Paper, Stack, TextField, Typography} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import ColorToolBar from "../../subcomponents/DrawingToolbar";
 
 interface DrawingCanvasProp {
-    onDone: (dataUrl: string) => void;
+    question: string;
+    onDone: (dataUrl: string, imageTitle: string) => void;
 }
 
 const CANVAS_WIDTH = 350;
 const CANVAS_HEIGHT = 400;
 export const INITIAL_LINE_WIDTH = 8;
+const MAX_RESPONSE_LENGTH = 15;
 
-const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
+const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ question, onDone }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const contextRef = useRef<CanvasRenderingContext2D | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
+    const [imageTitle, setImageTitle] = useState("");
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -121,10 +124,14 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
         context.stroke();
     };
 
+    const handleImageTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setImageTitle((e.target.value as string).toUpperCase());
+    }
+
     const handleSubmit = () => {
         const canvas = canvasRef.current;
         if (canvas) {
-            onDone(canvas.toDataURL());
+            onDone(canvas.toDataURL(), imageTitle);
         }
     };
 
@@ -135,6 +142,14 @@ const UserDrawingCanvas: React.FC<DrawingCanvasProp> = ({ onDone }) => {
                 justifyContent="center"
                 spacing={2}
             >
+                <p>{question}</p>
+                <TextField
+                    label="Name"
+                    onChange={handleImageTitleChange}
+                    value={imageTitle}
+                    inputProps={{maxLength: MAX_RESPONSE_LENGTH}}
+                />
+                <FormHelperText>{imageTitle.length} / {MAX_RESPONSE_LENGTH}</FormHelperText>
                 <canvas
                     style={{
                         display: "block",

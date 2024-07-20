@@ -7,7 +7,6 @@ const socket = getSocketConnection();
 
 const UserQuestionsMedia: React.FC<UserQuestionsProps> = ({username, roomCode, imageNum, questions, onDone}) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const imageTitle = "bla bla";
 
     useEffect(() => {
         socket.emit("join_specific_rooms", [username, roomCode + "users"]);
@@ -17,7 +16,7 @@ const UserQuestionsMedia: React.FC<UserQuestionsProps> = ({username, roomCode, i
         onDone();
     });
 
-    const submitDrawing = (dataUrl: string) => {
+    const submitDrawing = (dataUrl: string, imageTitle: string) => {
         let allSubmitted = false;
         if (currentQuestionIndex >= questions.length - 1) allSubmitted = true;
 
@@ -44,6 +43,7 @@ const UserQuestionsMedia: React.FC<UserQuestionsProps> = ({username, roomCode, i
                 <div style={{marginBottom: '10px' }}>
                     <DrawingCanvas
                         onDone={submitDrawing}
+                        question={questions[currentQuestionIndex]}
                     />
                 </div>
             )}
