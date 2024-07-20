@@ -1,16 +1,24 @@
 {
   "files": {
     "main.css": "/quiplash-client/static/css/main.2c438408.css",
-    "main.js": "/quiplash-client/static/js/main.d73344d6.js",
+    "main.js": "/quiplash-client/static/js/main.2bd9ed61.js",
     "static/js/453.4507ac20.chunk.js": "/quiplash-client/static/js/453.4507ac20.chunk.js",
     "static/media/partypack1.png": "/quiplash-client/static/media/partypack1.38529f786a87d63d4533.png",
     "static/media/lashquip.png": "/quiplash-client/static/media/lashquip.35897928ce727d9f324e.png",
+    "static/media/13.png": "/quiplash-client/static/media/13.db3d7432c4e21a00fc94.png",
     "static/media/round2.png": "/quiplash-client/static/media/round2.243a6be674b65e8722ec.png",
     "static/media/round4.png": "/quiplash-client/static/media/round4.c90ed81f32522f955d50.png",
     "static/media/round3.png": "/quiplash-client/static/media/round3.7fa4019dda26d373e40a.png",
+    "static/media/18.png": "/quiplash-client/static/media/18.52b0211205e0ebd6eac4.png",
+    "static/media/14.png": "/quiplash-client/static/media/14.da7a3422a8e70068f16f.png",
     "static/media/round1.png": "/quiplash-client/static/media/round1.3cc5c779f0a27a604fda.png",
+    "static/media/16.png": "/quiplash-client/static/media/16.a4fdc7ff402b29b66f79.png",
     "static/media/4.png": "/quiplash-client/static/media/4.f4f9f3d01c3babb0c7b2.png",
+    "static/media/11.png": "/quiplash-client/static/media/11.53c67b4ea2244674566d.png",
+    "static/media/15.png": "/quiplash-client/static/media/15.f91fd4a4ee812a443ca7.png",
+    "static/media/17.png": "/quiplash-client/static/media/17.029ca11d6a5add3eb628.png",
     "static/media/6.png": "/quiplash-client/static/media/6.53b59404a557e845a717.png",
+    "static/media/12.png": "/quiplash-client/static/media/12.7bfac3c374a01a8f197c.png",
     "static/media/10.png": "/quiplash-client/static/media/10.d5a215ffd584557577c4.png",
     "static/media/2.png": "/quiplash-client/static/media/2.49d90ad07b78313414b1.png",
     "static/media/9.png": "/quiplash-client/static/media/9.981f1d7b9e17b18103d3.png",
@@ -18,13 +26,14 @@
     "static/media/3.png": "/quiplash-client/static/media/3.97233df2af65a2e683e8.png",
     "static/media/5.png": "/quiplash-client/static/media/5.89efa577c1e08d7189e6.png",
     "static/media/7.png": "/quiplash-client/static/media/7.c3fddda0a9311b71a1cd.png",
+    "static/media/mediaattack.png": "/quiplash-client/static/media/mediaattack.a0490e3e84b04c8ed89c.png",
     "index.html": "/quiplash-client/index.html",
     "main.2c438408.css.map": "/quiplash-client/static/css/main.2c438408.css.map",
-    "main.d73344d6.js.map": "/quiplash-client/static/js/main.d73344d6.js.map",
+    "main.2bd9ed61.js.map": "/quiplash-client/static/js/main.2bd9ed61.js.map",
     "453.4507ac20.chunk.js.map": "/quiplash-client/static/js/453.4507ac20.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2c438408.css",
-    "static/js/main.d73344d6.js"
+    "static/js/main.2bd9ed61.js"
   ]
 }
