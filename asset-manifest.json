@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/quiplash-client/static/css/main.2c438408.css",
-    "main.js": "/quiplash-client/static/js/main.feb878ea.js",
+    "main.js": "/quiplash-client/static/js/main.728d5c41.js",
     "static/js/453.4507ac20.chunk.js": "/quiplash-client/static/js/453.4507ac20.chunk.js",
     "static/media/partypack1.png": "/quiplash-client/static/media/partypack1.38529f786a87d63d4533.png",
     "static/media/lashquip.png": "/quiplash-client/static/media/lashquip.35897928ce727d9f324e.png",
@@ -29,11 +29,11 @@
     "static/media/mediaattack.png": "/quiplash-client/static/media/mediaattack.a0490e3e84b04c8ed89c.png",
     "index.html": "/quiplash-client/index.html",
     "main.2c438408.css.map": "/quiplash-client/static/css/main.2c438408.css.map",
-    "main.feb878ea.js.map": "/quiplash-client/static/js/main.feb878ea.js.map",
+    "main.728d5c41.js.map": "/quiplash-client/static/js/main.728d5c41.js.map",
     "453.4507ac20.chunk.js.map": "/quiplash-client/static/js/453.4507ac20.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2c438408.css",
-    "static/js/main.feb878ea.js"
+    "static/js/main.728d5c41.js"
   ]
 }
