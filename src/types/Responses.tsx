@@ -1,6 +1,7 @@
 interface PlayerResponse  {
     username: string;
     votes: string[]; // List of usernames of the votes for this response,
+    partner?: string;
     responseData: LashQuipResponseData | MediaResponseData;
 }
 
@@ -10,7 +11,7 @@ interface LashQuipResponseData  {
 }
 
 interface MediaResponseData {
-    imageTitle: string;
+    imageTitle?: string;
     dataUrl: string | null;
 }
 

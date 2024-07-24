@@ -107,10 +107,10 @@ const GameManagerMedia: React.FC = () => {
         <div>
             <AppBar position="fixed" color="secondary" >
 
-                <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Toolbar sx={{ display: "flex", justifyContent: "space-between", backgroundColor: "#FFBD59" }} >
                     <CardMedia
                         component="img"
-                        src={require(`../../../images/titles/lashquiptitle.png`)}
+                        src={require(`../../../images/titles/mediaattacktitle.png`)}
                         alt="image not found"
                         sx={{width: "10rem"}}
                     />
@@ -125,7 +125,7 @@ const GameManagerMedia: React.FC = () => {
                 {showScene()}
             </Box>
             <audio ref={audioRef} loop>
-                <source src={`${process.env.PUBLIC_URL}/background_music.mp3`} type="audio/mpeg"/>
+                <source src={`${process.env.PUBLIC_URL}/background_music2.mp3`} type="audio/mpeg"/>
                 Your browser does not support the audio element.
             </audio>
         </div>

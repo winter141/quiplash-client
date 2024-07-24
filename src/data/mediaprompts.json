@@ -1,15 +1,28 @@
 {
   "PROFILE_PICTURE_PROMPTS": [
-    "Draw an historical figure.",
+    "Draw an historical figure",
     "Draw your favorite cartoon character",
     "Draw your best friend",
     "Draw a president or prime minister",
-    "Draw a famous celebrity.",
-    "Create an alien avatar.",
+    "Draw a famous celebrity",
+    "Create an alien avatar",
     "Design a futuristic character",
-    "Draw a mythical creature.",
-    "Create a portrait of your best friend.",
-    "Draw a well-known musician or band member.",
-    "Sketch a character from a video game."
+    "Draw a mythical creature",
+    "Create a portrait of your best friend",
+    "Draw a well-known musician or band member",
+    "Sketch a character from a video game"
+  ],
+  "POST_PICTURE_PROMPTS": [
+    "Draw a day in the life of [user]",
+    "Draw [user] on an epic adventure",
+    "Sketch [user] as a superhero saving the day",
+    "Illustrate a funny moment from [user]'s life",
+    "Draw [user] in their dream job",
+    "Create a holiday card featuring [user]",
+    "Draw a hobby that [user] would do",
+    "Draw [user]'s favourite place",
+    "Draw [user] in a different historical era",
+    "Illustrate [user] in a bizarre or surreal situation",
+    "Create a meme featuring [user]"
   ]
 }

@@ -24,7 +24,7 @@ const JoinRoom = () => {
         localStorage.setItem("imageNum", data.imageNum);
         localStorage.setItem("roomCode", data.room);
         localStorage.setItem("username", data.username);
-        navigate('/user/mediaattack');
+        navigate(`/user/${data.gameMode}`);
     })
 
     const joinGame = () => {

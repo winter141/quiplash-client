@@ -18,16 +18,19 @@ const StartGame = () => {
     const [gameSelectedIndex, setGameSelectedIndex] = useState(0);
     const navigate = useNavigate();
 
+    const getGameSelected = () => {
+        return GAME_MODES[gameSelectedIndex].replace(" ", "");
+    }
+
     useSocketOnHook(socket, "init_game_room_success", (roomCode) => {
         localStorage.clear();
         localStorage.setItem("roomCode", roomCode);
-        const gameSelected = GAME_MODES[gameSelectedIndex].replace(" ", "");
-        localStorage.setItem("gameSelected", gameSelected)
+        localStorage.setItem("gameSelected", getGameSelected())
         navigate(`/game/lobby`);
     })
 
     const startGame = () => {
-        socket.emit("init_game_room");
+        socket.emit("init_game_room", getGameSelected());
     }
 
     const onGameHoverOn = (index: number) => {

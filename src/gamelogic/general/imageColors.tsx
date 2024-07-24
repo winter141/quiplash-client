@@ -1,3 +1,6 @@
+const MIN_IMAGE_COUNT = 2;
+const MAX_IMAGE_COUNT = 18
+
 const imageColoursHex = [
     "FF914D",
     "00BF63",
@@ -7,21 +10,30 @@ const imageColoursHex = [
     "545454",
     "5CE1E6",
     "FF66C4",
-    "8C52FF"
+    "8C52FF",
+
+    "F68641",
+    "004AAD",
+    "FF3131",
+    "3498DB",
+    "FF66C4",
+    "FFBD59",
+    "7ED957",
+    "FFFFFF"
 ]
 
 const getHexColorFromImageNum = (imageNum: number): string => {
-    if (!imageNum || imageNum < 2 || imageNum > 10) {
+    if (!imageNum || imageNum < MIN_IMAGE_COUNT || imageNum > MAX_IMAGE_COUNT) {
         return "black";
     }
-    return "#" + imageColoursHex[imageNum - 2]
+    return "#" + imageColoursHex[imageNum - MIN_IMAGE_COUNT]
 }
 
 const getBlackOrWhiteFromImageNum = (imageNum: number): string => {
-    if (!imageNum || imageNum < 2 || imageNum > 10) {
+    if (!imageNum || imageNum < MIN_IMAGE_COUNT || imageNum > MAX_IMAGE_COUNT) {
         return "black";
     }
-    const luminance = getLuminance(imageColoursHex[imageNum - 2]);
+    const luminance = getLuminance(imageColoursHex[imageNum - MIN_IMAGE_COUNT]);
     return luminance > 0.25 ? 'black' : 'white';
 }
 

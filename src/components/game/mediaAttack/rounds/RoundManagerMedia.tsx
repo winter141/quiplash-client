@@ -3,14 +3,11 @@ import {RoundManagerProps} from "../../../../types/props/RoundProps";
 import {RoundScenes} from "../../../../types/enums/Scenes";
 import {getBeforeResultsMessages, getRoundMultiplier} from "../../../../gamelogic/lashquip/answers";
 import {convertJsonToMediaGameClasses, MediaGame} from "../../../../gamelogic/gameClasses/MediaGame";
-import {convertJsonToLashQuipGameClasses, LashQuipGame} from "../../../../gamelogic/gameClasses/LashQuipGame";
 import IntroToScene from "../../../subcomponents/IntroToScene";
-import RoundQuestions from "../../lashquip/rounds/RoundQuestions";
-import RoundAnswers from "../../lashquip/rounds/RoundAnswers";
 import RoundResults from "../../lashquip/rounds/RoundResults";
 import {getResultMessages} from "../../../../gamelogic/lashquip/results";
 import { getBeforeQuestionsMessages } from '../../../../gamelogic/lashquip/questions';
-import DisplayAllDrawings from './DisplayAllDrawings';
+import DisplayEachDrawing from './DisplayEachDrawing';
 import RoundQuestionsMedia from "./RoundQuestionsMedia";
 
 const QUESTION_TIME = 80;
@@ -82,7 +79,7 @@ const RoundManagerMedia: React.FC<RoundManagerProps> = ({players, onDone, roundN
                 return (
                     <IntroToScene
                         speechMessages={getBeforeQuestionsMessages(roundNumber)}
-                        imageTitle={"round" + roundNumber}
+                        imageTitle={"round" + roundNumber + "mediaattack"}
                         onDone={handleChangeScene}
                     />
                 )
@@ -97,7 +94,7 @@ const RoundManagerMedia: React.FC<RoundManagerProps> = ({players, onDone, roundN
                 )
             case RoundScenes.ANSWERS:
                 return (
-                    <DisplayAllDrawings
+                    <DisplayEachDrawing
                         game={games[0]}
                         onDone={handleChangeScene}
                     />

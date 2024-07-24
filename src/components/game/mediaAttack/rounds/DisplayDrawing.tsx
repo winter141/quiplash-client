@@ -10,11 +10,12 @@ interface DisplayDrawingProps {
     responseData: MediaResponseData;
     onDone: () => void;
     sx?: any;
+    hideTimer?: boolean;
 }
 
 const TIME_PER_DRAWING = 3;
 
-const DisplayDrawing: React.FC<DisplayDrawingProps> = ({ responseData, onDone, sx}) => {
+const DisplayDrawing: React.FC<DisplayDrawingProps> = ({ responseData, onDone, sx, hideTimer}) => {
     let {dataUrl, imageTitle} = responseData;
 
     const handleDrawingDone = () => {
@@ -41,11 +42,12 @@ const DisplayDrawing: React.FC<DisplayDrawingProps> = ({ responseData, onDone, s
                         <Typography sx={{fontSize: "100%"}}>{imageTitle}</Typography>
                     </Paper>
                 </Paper>
-                <LinearTimer
+                {!hideTimer && (
+                    <LinearTimer
                     initialTime={TIME_PER_DRAWING}
                     onTimeEnd={handleDrawingDone}
                     sx={{top: 40}}
-                />
+                />)}
             </Stack>
         </div>
     )

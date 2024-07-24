@@ -12,6 +12,8 @@ import GameManagerMedia from "./components/game/mediaAttack/GameManagerMedia";
 import {ThemeProvider} from "@mui/material";
 import { theme } from './styling/theme';
 import DrawingCanvas from "./components/user/mediaAttack/DrawingCanvas";
+import DisplayAllDrawings from "./components/game/mediaAttack/rounds/DisplayAllDrawings";
+import {MediaGame} from "./gamelogic/gameClasses/MediaGame";
 
 const baseUrl = '/quiplash-client'
 
@@ -35,6 +37,11 @@ function App() {
                     <Route path="/canvas" element={<DrawingCanvas
                         onDone={()=>{}}
                         question="Yo?"
+                    />}/>
+
+                    <Route path="/dr" element={<DisplayAllDrawings
+                        onDone={()=>{}}
+                        game={new MediaGame("a", [])}
                     />}/>
 
 

@@ -1,12 +1,14 @@
-import {Box, Grid, ListItem, Paper} from "@mui/material";
+import {Box, Button, Grid, ListItem, Paper, Typography} from "@mui/material";
 import React, {useEffect, useRef, useState} from "react";
-import {card, cardLobby} from "../../styling/styles";
+import {card, cardLobby, smallTitleImage} from "../../styling/styles";
 import {useNavigate} from "react-router-dom";
 import {Player} from "../../types/Player";
 import {getSocketConnection, useSocketOnHook} from "../../services/socket";
 import {AnimatedChip} from "../../styling/animations";
 import ImageCharacter from "../subcomponents/ImageCharacter";
 import {getBlackOrWhiteFromImageNum, getHexColorFromImageNum} from "../../gamelogic/general/imageColors";
+import TitleImage from "../subcomponents/TitleImage";
+import SendIcon from "@mui/icons-material/Send";
 
 const socket = getSocketConnection();
 type PlayerWithVIP = Player & { VIP: boolean };
@@ -69,13 +71,30 @@ const Lobby = () => {
         );
     }
 
+    const handleBack = () => {
+        navigate('/game/menu');
+    }
+
     return (
         <Paper elevation={3} style={card}>
-            <h1>LashQuip Lobby</h1>
-            <h2>Code: {roomCode}</h2>
-            <Grid item xs={3}>
-                <Box style={cardLobby}>{displayLobby()}</Box>
-            </Grid>
+            {gameSelected ? (
+                <>
+                    <h1>Lobby</h1>
+                    <h2>Code: {roomCode}</h2>
+                    <Grid item xs={3}>
+                        <Box style={cardLobby}>{displayLobby()}</Box>
+                    </Grid>
+                    <TitleImage
+                        titleName={gameSelected}
+                        style={smallTitleImage}
+                    />
+                </>
+            ) : (
+                <>
+                    <h1>Womp Womp. No game is selected :(</h1>
+                    <Button variant="contained" onClick={handleBack}>Back to Game Menu</Button>
+                </>
+            )}
         </Paper>
     );
 }
